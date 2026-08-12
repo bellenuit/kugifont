@@ -124,8 +124,17 @@ Use it exensively in SQL Notebook, create sample layouts. These are reusable as 
 
 Writing TrueType directly seemed to complicated. I decided to export to SVG fonts and then use a converter to get TrueType font.
 
-I used JavaScript in the SQL Notebook to create a downloadable SVG font. The SQL Notebook **pt3-to-svg-simple.json** is in the source folder.
+I used JavaScript in the SQL Notebook to create a downloadable SVG font. The SQL Notebook **pt3-to-svg-simple.json** is in the source folder. Note that the canvas is now 2048 instead as 1000 units because that is usage for TrueType fonts.
 
+Then I used https://cloudconvert.com/svg-to-ttf to convert the SVG to TrueType. This seems to be the best solution. I tried also to import into FontForge directly, but the program has problems to read the paths that we created.
+
+However, we still need to postprocess the TrueType font. As I explained earlier, the outlines are overlapping particularly with the circles at the end of each segment. This works as long as the font is only used to fill. But if you try to outline it, making a border for subitles for example, you would see the overlapping path.
+
+So we make a roundtrip with **FontForge**. We open the Truetype font, select all glyphs, then we call the menu **Element/Overlap/Remove Overlap**, save the font and then generate the TrueType font, ignoring the warnings.
+
+## State of the project
+
+This is the first version of the TrueType fonts. The glyphs are not perfect yet, but the font technically works. I will now use it with programs, identify the flaws and correct then the glyphs.
 
 
 
