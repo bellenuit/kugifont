@@ -85,9 +85,7 @@ end
     end
 end
 } def
- 
 /UniqueID 99 def
 end
 /KugiRegular exch definefont pop
-
 </code>
