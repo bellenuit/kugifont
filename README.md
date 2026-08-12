@@ -89,3 +89,48 @@ end
 end
 /KugiRegular exch definefont pop
 </code>
+
+## Character design
+
+Define the canvas. I use 1000 em as usual in PostScript I choose 500 for x-height (height of lowercase characters), 700 for ascender (cap height) and -200 for descenders.
+
+I kept proportions simple: Most characters like n have the width 500, some smaller like i down to 200, some wider like w, m, M. The width includes thje white space between characters. I decided to left align the characters and not to use the last 100 units on the right. So a 500 width character uses 400 units for the paths.
+
+Start with typical characters like h and g, then design the complicated characters with small inside whitespace (a, e, s). You will spend more time on lowercase characters that define the font than on capitals. This done, design the numbers which are tricky (small whitespace or strange curves in quite all of them). Then move to the accented characters. For caps with accents, you will probably need to design some slightly smaller space. 
+
+Sometimes it is difficult to get it right. Make variants but don't stay too much time on a character. Move to another one and come back later. Always render the characters in different sizes and in context. The design challange is to make characters unique enough that you can recognize them but similar enough that you consider them to be familiar to each other. So the harmony in a text context is essantial.
+
+## Style variation
+
+For **italic**, I first created only oblique fonts. For this, I defined **currentslanted** which the tranpose operator uses to create the deformation. But then, I decided to create a real cursive, so I addded conditional code in some characters (like a, v, w, y) and added swashes to some other lowercase characters (a, b, i, l...). However I did not touch the uppercase characters. The swashes made some character largers. This is something I may change in a next step.
+
+For **smallcaps** I created a separate font that has smaller capital variants for lowercase characters. It has also lowercase numbers.
+
+For **monospace** I created variants for characters that are not 500 width. It helps if there are not too many to do this.
+
+I created also a **stroke** variant for a plotter font. For this, we modify the line, curve and dot operators, so that the stroke a line instead creating an outline.
+
+## Autokern
+
+If you make kerning tables automatically, this is a lot of work. I created operators that analyze the paths of a character and define extrema left and right on top, center and bottom. Using this extrema, you can slide the second character to the first using the maximal white space available for both.
+
+You want to do the kerning only for alphabetical characters. 
+
+## Testing the font
+
+Use it exensively in SQL Notebook, create sample layouts. These are reusable as you redesign the font.
+
+## Epxorting the font
+
+Writing TrueType directly seemed to complicated. I decided to export to SVG fonts and then use a converter to get TrueType font.
+
+I used JavaScript in the SQL Notebook to create a downloadable SVG font. The SQL Notebook **pt3-to-svg-simple.json** is in the source folder.
+
+
+
+
+
+
+
+
+
