@@ -132,11 +132,16 @@ However, we still need to postprocess the TrueType font. As I explained earlier,
 
 So we make a roundtrip with **FontForge**. We open the Truetype font, select all glyphs, then we call the menu **Element/Overlap/Remove Overlap**, save the font and then generate the TrueType font, ignoring the warnings.
 
+## Sample page
+
+https://bellenuit.github.io/kugifont.html
+
 ## State of the project
 
 Version 0.1
 
 This is the first version of the TrueType fonts. The glyphs are not perfect yet, but the font technically works. I will now use it with programs, identify the flaws and correct then the glyphs.
+
 
 
 
