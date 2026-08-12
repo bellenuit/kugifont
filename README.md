@@ -39,7 +39,6 @@ A Type 3 font is essentially a dictionary
 /FontType 3 def
 /FontMatrix [.001 0 0 .001 0 0] def
 /FontBBox [0 0 1100 800] def
-
 /Encoding 256 array def
 0 1 255 { Encoding exch /.notdef put } for
 Encoding
@@ -48,7 +47,6 @@ dup (!) 0 get /exclam put
 ...
 dup 255 /caron put
 pop
-
 /Metrics 512 dict def Metrics begin
 /.notdef 0 def
 /space 500 def
@@ -56,14 +54,12 @@ pop
 ...
 /caron 500 def
 end
-
 /BBox 512 dict def BBox begin
 /.notdef [0 0 0 0] def
 /space [0 0 0 0] def
 ...
 /caron [0 0 400 700] def
 end
-
 /CharacterDefs 512 dict def CharacterDefs begin
 /.notdef { } def
 /space { } def
@@ -71,30 +67,26 @@ end
 ...
 /caron { 100 700 move 200 650 line 300 700 line fill } def
 end
-
 % private operators
 /move { ... } def
 /transpose { ... } def
 /line { ... } def
 /curve { ... } def
 /turn { ... } def
-
 /BuildChar { 5 dict begin
- /char exch def /fontdict exch def 
- /charname fontdict /Encoding get char get def 
-   
- fontdict begin 
-	 /characterwidth Metrics charname get def  
-	 /characterweight 85 def
-     Metrics charname get 0 BBox charname get aload pop 
-     setcachedevice 
-     characterweight 0 eq { /fill { stroke } def } if
-     CharacterDefs charname get exec 
- end
- end
- } def
+    /char exch def /fontdict exch def 
+    /charname fontdict /Encoding get char get def 
+    fontdict begin 
+	    /characterwidth Metrics charname get def  
+	    /characterweight 85 def
+        Metrics charname get 0 BBox charname get aload pop 
+        setcachedevice 
+        CharacterDefs charname get exec 
+    end
+end
+} def
  
- /UniqueID 99 def
+/UniqueID 99 def
 end
 /KugiRegular exch definefont pop
 
