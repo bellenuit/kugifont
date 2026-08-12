@@ -134,6 +134,8 @@ So we make a roundtrip with **FontForge**. We open the Truetype font, select all
 
 ## State of the project
 
+Version 0.1
+
 This is the first version of the TrueType fonts. The glyphs are not perfect yet, but the font technically works. I will now use it with programs, identify the flaws and correct then the glyphs.
 
 
