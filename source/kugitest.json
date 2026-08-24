@@ -1,0 +1,200 @@
+[
+    {
+        "type": "wiki",
+        "id": "622268",
+        "hash": "1616588659",
+        "source": "==Kugitest==\n\nshow2 does not work on composite characters (already filled...)\n- should we move fill to BuildChar?"
+    },
+    {
+        "type": "ps",
+        "id": "336018",
+        "hash": "2012849143",
+        "source": "kugifont /s (d) def\n0.2 0.2 scale\n\n/show2 { 10 dict begin\n/fill { gsave pathbbox /y2 exch def /x2 exch def /y1 exch def /x1 exch def x1 y1 moveto x2 y1 lineto x2 y2 lineto x1 y2 lineto closepath 1 0 0 setrgbcolor [5] 0 setdash stroke x1 round cvs ( ) concat x2 round cvs concat print grestore\nstroke } def\ndup stringwidth pop /w exch def currentpoint gsave newpath moveto  w 0 rlineto 0 700 rlineto w neg 0 rlineto closepath 0 0 1 setrgbcolor 3 setlinewidth stroke grestore\nshow\n end } def\n30 1000 moveto \n /KugiRegular 1000 selectfont s show2 \n\n /KugiSerif 1000 selectfont s show2\n /KugiSerifCaps 1000 selectfont s show2\n%  /KugiSerifItalic 1000 selectfont s show2\n /KugiSans 1000 selectfont s show2\n/KugiSansOblique 1000 selectfont s show2\n30 700 350 0.7 mul add moveto 2500 0 rlineto stroke\n30 700 350 0.5 mul add moveto 2500 0 rlineto stroke\n30 700 moveto 2500 0 rlineto stroke\n30 700 moveto \n /KugiLight 350 selectfont s show\n /KugiRegular 350 selectfont s show\n /KugiBold 350 selectfont s show\n /KugiBlack 350 selectfont s show\n /KugiLightOblique 350 selectfont s show\n /KugiOblique 350 selectfont s show\n /KugiBoldOblique 350 selectfont s show\n /KugiBlackOblique 350 selectfont s show ( ) show\n% /KugiCaps 350 selectfont s show ( ) show\n% /KugiMono 350 selectfont s show\n30 400 350 0.7 mul add moveto 2500 0 rlineto stroke\n30 400 350 0.5 mul add moveto 2500 0 rlineto stroke\n30 400 moveto 2500 0 rlineto stroke\n30 400 moveto\n /KugiSansLight 350 selectfont s show\n /KugiSans 350 selectfont s show \n /KugiSansBold 350 selectfont s show\n /KugiSansBlack 350 selectfont s show\n /KugiSansLightOblique 350 selectfont s show\n /KugiSansOblique 350 selectfont s show\n /KugiSansBoldOblique 350 selectfont s show\n /KugiSansBlackOblique 350 selectfont s show ( ) show\n /KugiSansCaps 350 selectfont s show\n  0.5 setgray\n% /NimbusSansRegular 350 selectfont s show\n /NimbusSansBold 350 selectfont s show\n /NimbusSansItalic 350 selectfont s show\n /NimbusSansBoldItalic 350 selectfont s show\n30 100 350 0.7 mul add moveto 2500 0 rlineto stroke\n30 100 350 0.5 mul add moveto 2500 0 rlineto stroke\n30 100 moveto 2500 0 rlineto stroke\n30 100 moveto\n 0 setgray\n /KugiSerif 350 selectfont s show\n /KugiSerifBold 350 selectfont s show\n /KugiSerifItalic 350 selectfont s show\n /KugiSerifBoldItalic 350 selectfont s show ( ) show\n /KugiSerifCaps 350 selectfont s show ( ) show\n 0.5 setgray\n /NimbusRomanRegular 350 selectfont s show\n /NimbusRomanBold 350 selectfont s show\n /NimbusRomanItalic 350 selectfont s show\n /NimbusRomanBoldItalic 350 selectfont s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "970108",
+        "hash": "254349843",
+        "source": "% prologue\n% support procedures\n% n1 n2 max result\n/max { 2 copy gt { pop } { exch pop } ifelse } def\n\n% text countblanks n\n/countblanks { 10 dict begin /c 0 def { ( ) search { /c c 1 add def pop pop } { pop c end exit } ifelse } loop } def\n\n% text width justifyshow -\n/justifyshow { exch dup stringwidth pop 3 -1 roll exch sub exch dup countblanks 1 max 3 -1 roll exch div 0 32 4 -1 roll widthshow } def\n\n% text width wraptext post width pre \n/wraptext { 10 dict begin /maxwidth exch def /text exch def\n/linewidth 0 def\n/linelength 0 def\n/spaces 0 def\n/spacewidth 0 0 moveto ( ) stringwidth pop def\ntext\n{\n% search leaves the post on the stack, so we assign it to currenttext\ndup /currenttext exch def\n( ) search { \n% add word width and check if linewidth is still not bigger than max\ndup stringwidth pop linewidth add dup spaces add maxwidth le \n% add space and count characters\n{ /linewidth exch def \nlength 1 add linelength add /linelength exch def\n/spaces spaces spacewidth add def\npop } \n% check if half space ok\n{ \nspaces 2 div add maxwidth le\n{ length 1 add linelength add /linelength exch def exit}\n{ pop pop pop exit }\nifelse\n\n} ifelse\n} \n% no space found we are at the last word\n{ pop text length /linelength exch def /currenttext () def exit } ifelse } loop\n% remove trailing space character if not empty text\ncurrenttext length { /linelength linelength 1 sub def } if \n% set text if only one word\nlinelength 0 le { /linelength currenttext length def } if \n% output \ncurrenttext maxwidth text 0 linelength getinterval end\n} def\n\n% text x y w l showjustifyblock y\n/showjustifyblock { \n/l exch def\n/w exch def\n/y exch def\n/x exch def w\n{ wraptext 3 -1 roll dup 4 1 roll length { newpath x y moveto w justifyshow y l sub /y exch def } { x y moveto { autokern } exch  kshow pop pop exit } ifelse } loop y } def\n/para { LM nextline linewidth linespace showjustifyblock\n/nextline exch linespace 2 mul sub def } def\n% parameter\n/bodystart 330 def\n/linespace 24 def\n/LM 20 def \n/RM 620 def\nkugifont\n/KugiSerif findfont 20 scalefont setfont\n\n% main\n/linewidth RM LM sub def\n/nextline bodystart def\n(Considérant que la reconnaissance de la dignité inhérente à tous les membres de la famille humaine et de leurs droits égaux et inaliénables constitue le fondement de la liberté, de la justice et de la paix dans le monde.) para (Considérant que la méconnaissance et le mépris des droits de l'homme ont conduit à des actes de barbarie qui révoltent la conscience de l'humanité et que l'avènement d'un monde où les êtres humains seront libres de parler et de croire, libérés de la terreur et de la misère, a été proclamé comme la plus haute aspiration de l'homme.) para\n(Considérant qu'il est essentiel que les droits de l'homme soient protégés par un régime de droit pour que l'homme ne soit pas contraint, en suprême recours, à la révolte contre la tyrannie et l'oppression.) para \nshowpage\n"
+    },
+    {
+        "type": "ps",
+        "id": "576565",
+        "hash": "2009584707",
+        "source": "% prologue\n% support procedures\n% n1 n2 max result\n/max { 2 copy gt { pop } { exch pop } ifelse } def\n\n% text countblanks n\n/countblanks { 10 dict begin /c 0 def { ( ) search { /c c 1 add def pop pop } { pop c end exit } ifelse } loop } def\n\n% text width justifyshow -\n/justifyshow { exch dup stringwidth pop 3 -1 roll exch sub exch dup countblanks 1 max 3 -1 roll exch div 0 32 4 -1 roll widthshow } def\n\n% text width wraptext post width pre \n/wraptext { 10 dict begin /maxwidth exch def /text exch def\n/linewidth 0 def\n/linelength 0 def\n/spaces 0 def\n/spacewidth 0 0 moveto ( ) stringwidth pop def\ntext\n{\n% search leaves the post on the stack, so we assign it to currenttext\ndup /currenttext exch def\n( ) search { \n% add word width and check if linewidth is still not bigger than max\ndup stringwidth pop linewidth add dup spaces add maxwidth le \n% add space and count characters\n{ /linewidth exch def \nlength 1 add linelength add /linelength exch def\n/spaces spaces spacewidth add def\npop } \n% check if half space ok\n{ \nspaces 2 div add maxwidth le\n{ length 1 add linelength add /linelength exch def exit}\n{ pop pop pop exit }\nifelse\n\n} ifelse\n} \n% no space found we are at the last word\n{ pop text length /linelength exch def /currenttext () def exit } ifelse } loop\n% remove trailing space character if not empty text\ncurrenttext length { /linelength linelength 1 sub def } if \n% set text if only one word\nlinelength 0 le { /linelength currenttext length def } if \n% output \ncurrenttext maxwidth text 0 linelength getinterval end\n} def\n\n% text x y w l showjustifyblock y\n/showjustifyblock { \n/l exch def\n/w exch def\n/y exch def\n/x exch def w\n{ wraptext 3 -1 roll dup 4 1 roll length { newpath x y moveto w justifyshow y l sub /y exch def } { x y moveto { autokern } exch  kshow pop pop exit } ifelse } loop y } def\n/para { LM nextline linewidth linespace showjustifyblock\n/nextline exch linespace 2 mul sub def } def\n% parameter\n/bodystart 330 def\n/linespace 24 def\n/LM 20 def \n/RM 620 def\nkugifont\n/KugiSerifItalic findfont 20 scalefont setfont\n\n% main\n/linewidth RM LM sub def\n/nextline bodystart def\n(Considérant que la reconnaissance de la dignité inhérente à tous les membres de la famille humaine et de leurs droits égaux et inaliénables constitue le fondement de la liberté, de la justice et de la paix dans le monde.) para (Considérant que la méconnaissance et le mépris des droits de l'homme ont conduit à des actes de barbarie qui révoltent la conscience de l'humanité et que l'avènement d'un monde où les êtres humains seront libres de parler et de croire, libérés de la terreur et de la misère, a été proclamé comme la plus haute aspiration de l'homme.) para\n(Considérant qu'il est essentiel que les droits de l'homme soient protégés par un régime de droit pour que l'homme ne soit pas contraint, en suprême recours, à la révolte contre la tyrannie et l'oppression.) para \nshowpage\n"
+    },
+    {
+        "type": "ps",
+        "id": "555096",
+        "hash": "204345810",
+        "source": "% prologue\n% support procedures\n% n1 n2 max result\n/max { 2 copy gt { pop } { exch pop } ifelse } def\n\n% text countblanks n\n/countblanks { 10 dict begin /c 0 def { ( ) search { /c c 1 add def pop pop } { pop c end exit } ifelse } loop } def\n\n% text width justifyshow -\n/justifyshow { exch dup stringwidth pop 3 -1 roll exch sub exch dup countblanks 1 max 3 -1 roll exch div 0 32 4 -1 roll widthshow } def\n\n% text width wraptext post width pre \n/wraptext { 10 dict begin /maxwidth exch def /text exch def\n/linewidth 0 def\n/linelength 0 def\n/spaces 0 def\n/spacewidth 0 0 moveto ( ) stringwidth pop def\ntext\n{\n% search leaves the post on the stack, so we assign it to currenttext\ndup /currenttext exch def\n( ) search { \n% add word width and check if linewidth is still not bigger than max\ndup stringwidth pop linewidth add dup spaces add maxwidth le \n% add space and count characters\n{ /linewidth exch def \nlength 1 add linelength add /linelength exch def\n/spaces spaces spacewidth add def\npop } \n% check if half space ok\n{ \nspaces 2 div add maxwidth le\n{ length 1 add linelength add /linelength exch def exit}\n{ pop pop pop exit }\nifelse\n\n} ifelse\n} \n% no space found we are at the last word\n{ pop text length /linelength exch def /currenttext () def exit } ifelse } loop\n% remove trailing space character if not empty text\ncurrenttext length { /linelength linelength 1 sub def } if \n% set text if only one word\nlinelength 0 le { /linelength currenttext length def } if \n% output \ncurrenttext maxwidth text 0 linelength getinterval end\n} def\n\n% text x y w l showjustifyblock y\n/showjustifyblock { \n/l exch def\n/w exch def\n/y exch def\n/x exch def w\n{ wraptext 3 -1 roll dup 4 1 roll length { newpath x y moveto w justifyshow y l sub /y exch def } { x y moveto show pop pop exit } ifelse } loop y } def\n/para { LM nextline linewidth linespace showjustifyblock\n/nextline exch linespace 2 mul sub def } def\n% parameter\n/bodystart 330 def\n/linespace 24 def\n/LM 20 def \n/RM 620 def\nkugifont\n/KugiRegular findfont 20 scalefont setfont\n\n% main\n/linewidth RM LM sub def\n/nextline bodystart def\n(Considérant que la reconnaissance de la dignité inhérente à tous les membres de la famille humaine et de leurs droits égaux et inaliénables constitue le fondement de la liberté, de la justice et de la paix dans le monde.) para (Considérant que la méconnaissance et le mépris des droits de l'homme ont conduit à des actes de barbarie qui révoltent la conscience de l'humanité et que l'avènement d'un monde où les êtres humains seront libres de parler et de croire, libérés de la terreur et de la misère, a été proclamé comme la plus haute aspiration de l'homme.) para\n(Considérant qu'il est essentiel que les droits de l'homme soient protégés par un régime de droit pour que l'homme ne soit pas contraint, en suprême recours, à la révolte contre la tyrannie et l'oppression.) para \nshowpage\n"
+    },
+    {
+        "type": "ps",
+        "id": "108814",
+        "hash": "1205069438",
+        "source": "% prologue\n% support procedures\n% n1 n2 max result\n/max { 2 copy gt { pop } { exch pop } ifelse } def\n\n% text countblanks n\n/countblanks { 10 dict begin /c 0 def { ( ) search { /c c 1 add def pop pop } { pop c end exit } ifelse } loop } def\n\n% text width justifyshow -\n/justifyshow { exch dup stringwidth pop 3 -1 roll exch sub exch dup countblanks 1 max 3 -1 roll exch div 0 32 4 -1 roll widthshow } def\n\n% text width wraptext post width pre \n/wraptext { 10 dict begin /maxwidth exch def /text exch def\n/linewidth 0 def\n/linelength 0 def\n/spaces 0 def\n/spacewidth 0 0 moveto ( ) stringwidth pop def\ntext\n{\n% search leaves the post on the stack, so we assign it to currenttext\ndup /currenttext exch def\n( ) search { \n% add word width and check if linewidth is still not bigger than max\ndup stringwidth pop linewidth add dup spaces add maxwidth le \n% add space and count characters\n{ /linewidth exch def \nlength 1 add linelength add /linelength exch def\n/spaces spaces spacewidth add def\npop } \n% check if half space ok\n{ \nspaces 2 div add maxwidth le\n{ length 1 add linelength add /linelength exch def exit}\n{ pop pop pop exit }\nifelse\n\n} ifelse\n} \n% no space found we are at the last word\n{ pop text length /linelength exch def /currenttext () def exit } ifelse } loop\n% remove trailing space character if not empty text\ncurrenttext length { /linelength linelength 1 sub def } if \n% set text if only one word\nlinelength 0 le { /linelength currenttext length def } if \n% output \ncurrenttext maxwidth text 0 linelength getinterval end\n} def\n\n% text x y w l showjustifyblock y\n/showjustifyblock { \n/l exch def\n/w exch def\n/y exch def\n/x exch def w\n{ wraptext 3 -1 roll dup 4 1 roll length { newpath x y moveto w justifyshow y l sub /y exch def } { x y moveto show pop pop exit } ifelse } loop y } def\n/para { LM nextline linewidth linespace showjustifyblock\n/nextline exch linespace 2 mul sub def } def\n% parameter\n/bodystart 330 def\n/linespace 24 def\n/LM 20 def \n/RM 620 def\n/NimbusRomanRegular findfont 20 scalefont setfont\n\n% main\n/linewidth RM LM sub def\n/nextline bodystart def\n(Considérant que la reconnaissance de la dignité inhérente à tous les membres de la famille humaine et de leurs droits égaux et inaliénables constitue le fondement de la liberté, de la justice et de la paix dans le monde.) para (Considérant que la méconnaissance et le mépris des droits de l'homme ont conduit à des actes de barbarie qui révoltent la conscience de l'humanité et que l'avènement d'un monde où les êtres humains seront libres de parler et de croire, libérés de la terreur et de la misère, a été proclamé comme la plus haute aspiration de l'homme.) para\n(Considérant qu'il est essentiel que les droits de l'homme soient protégés par un régime de droit pour que l'homme ne soit pas contraint, en suprême recours, à la révolte contre la tyrannie et l'oppression.) para \nshowpage\n"
+    },
+    {
+        "type": "ps",
+        "id": "88210",
+        "hash": "443910597",
+        "source": "kugifont\n/s (ﬁﬂ‡∙‚„‰) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "695010",
+        "hash": "1164222438",
+        "source": "kugifont\n/s (“”‘’÷◊⁄€‹›) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "91871",
+        "hash": "16219235",
+        "source": "kugifont\n/s (¬√ƒ≈∆«»…–—) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "350184",
+        "hash": "222111355",
+        "source": "kugifont\n/s (∂∑∏π∫ªºΩ?¿¡) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "924350",
+        "hash": "343897886",
+        "source": "kugifont\n/s (´¨≠∞±≤≥¥µ) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "208297",
+        "hash": "1692014773",
+        "source": "kugifont\n/s (§•¶ß®©™) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "349921",
+        "hash": "2088318753",
+        "source": "kugifont\n/s ({|}~ †°¢£) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "433598",
+        "hash": "17485044",
+        "source": "kugifont\n/s (?@ [\\]^_`) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "971453",
+        "hash": "706184251",
+        "source": "kugifont\n/s (+,-./ :;<=>) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "396602",
+        "hash": "614948339",
+        "source": "kugifont\n/s (!\"#$ %&'()*) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "847157",
+        "hash": "745287679",
+        "source": "kugifont\n/s (ÅÆåæØŒøœ) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "657653",
+        "hash": "512192152",
+        "source": "kugifont\n/s (ÃÑÕãñõÇç) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "53466",
+        "hash": "1990277928",
+        "source": "kugifont\n/s (ÂÊÎÔÛâêîôû) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "34007",
+        "hash": "399792616",
+        "source": "kugifont\n/s (ÀÈÌÒÙàèìòù) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "223996",
+        "hash": "1694805520",
+        "source": "kugifont\n/s (ÁÉÍÓÚáéíóú) def\n/s (ÁÉÍÓÚáéíóú) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "949356",
+        "hash": "1569392871",
+        "source": "kugifont\n/s (äëïöüÿ) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "209162",
+        "hash": "797306446",
+        "source": "kugifont\n/s (ÄËÏÖÜŸ) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "685610",
+        "hash": "432782637",
+        "source": "kugifont\n/s (0123456789 ) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "829002",
+        "hash": "493664695",
+        "source": "kugifont\n/s (tuvwxyz) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "576573",
+        "hash": "1561291565",
+        "source": "kugifont\n/s (jklmnopqrs) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "721390",
+        "hash": "1157653043",
+        "source": "kugifont\n/s (Zabcdefghi) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "929091",
+        "hash": "1974954668",
+        "source": "kugifont\n/s (RSTUVWXY) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "772090",
+        "hash": "1106712916",
+        "source": "kugifont\n/s (JKLMNOPQ) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "117207",
+        "hash": "30867447",
+        "source": "kugifont\n/s (ABCDEFGHI) def\n/KugiRegular 60 selectfont 10 310 moveto s show\n/KugiItalic 60 selectfont 10 250 moveto s show\n/KugiBold 60 selectfont 10 190 moveto s show\n/KugiBlack 60 selectfont 10 130 moveto s show\n/KugiLight 60 selectfont 10 70 moveto s show\n/KugiCaps 60 selectfont 10 19 moveto s show\n/KugiSerif 60 selectfont 330 310 moveto s show\n/KugiSerifItalic 60 selectfont 330 250 moveto s show\n/KugiSerifBold 60 selectfont 330 190 moveto s show\n/KugiSerifBoldItalic 60 selectfont 330 130 moveto s show\n/KugiSerifCaps 60 selectfont 330 70 moveto s show\n/KugiMono 60 selectfont 330 10 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "475376",
+        "hash": "888507474",
+        "source": "/s (àéîñ) def\n/NimbusRomanRegular 45 selectfont 10 315 moveto s show\n/NimbusRomanItalic 45 selectfont 10 270 moveto s show\n/NimbusRomanBold 45 selectfont 10 225 moveto s show\n/NimbusRomanBoldItalic 45 selectfont 10 180 moveto s show\n/NimbusSansRegular 45 selectfont 10 135 moveto s show\n/NimbusSansItalic 45 selectfont 10 90 moveto s show\n/NimbusSansBold 45 selectfont 10 45 moveto s show\n/DIN1451 30 selectfont 10 5 moveto s show\nshowpage"
+    },
+    {
+        "type": "ps",
+        "id": "399567",
+        "hash": "1359920373",
+        "source": "% prologue\n% support procedures\n% n1 n2 max result\n/max { 2 copy gt { pop } { exch pop } ifelse } def\n\n% text countblanks n\n/countblanks { 10 dict begin /c 0 def { ( ) search { /c c 1 add def pop pop } { pop c end exit } ifelse } loop } def\n\n% text width justifyshow -\n/justifyshow { exch dup stringwidth pop 3 -1 roll exch sub exch dup countblanks 1 max 3 -1 roll exch div 0 32 4 -1 roll widthshow } def\n\n% text width wraptext post width pre \n/wraptext { 10 dict begin /maxwidth exch def /text exch def\n/linewidth 0 def\n/linelength 0 def\n/spaces 0 def\n/spacewidth 0 0 moveto ( ) stringwidth pop def\ntext\n{\n% search leaves the post on the stack, so we assign it to currenttext\ndup /currenttext exch def\n( ) search { \n% add word width and check if linewidth is still not bigger than max\ndup stringwidth pop linewidth add dup spaces add maxwidth le \n% add space and count characters\n{ /linewidth exch def \nlength 1 add linelength add /linelength exch def\n/spaces spaces spacewidth add def\npop } \n% check if half space ok\n{ \nspaces 2 div add maxwidth le\n{ length 1 add linelength add /linelength exch def exit}\n{ pop pop pop exit }\nifelse\n\n} ifelse\n} \n% no space found we are at the last word\n{ pop text length /linelength exch def /currenttext () def exit } ifelse } loop\n% remove trailing space character if not empty text\ncurrenttext length { /linelength linelength 1 sub def } if \n% set text if only one word\nlinelength 0 le { /linelength currenttext length def } if \n% output \ncurrenttext maxwidth text 0 linelength getinterval end\n} def\n\n% text x y w l showjustifyblock y\n/showjustifyblock { \n/l exch def\n/w exch def\n/y exch def\n/x exch def w\n{ wraptext 3 -1 roll dup 4 1 roll length { newpath x y moveto w justifyshow y l sub /y exch def } { x y moveto show pop pop exit } ifelse } loop y } def\n\n% parameter\n/bodystart 300 def\n/linespace 33 def\n/LM 20 def \n/RM 570 def\nkugifont\n/KugiRegular findfont 33 scalefont setfont\n\n% main\n/linewidth RM LM sub def\n/nextline bodystart def\n(Acme Widgets was founded in 1952 by Dippy and Daffy Acme to produce high technology widgets for the growing aerospace market. Acme was quickly recognized as being the best widget works in the country. Continued investment in new technology and manufacturing methods has kept Acme Widgets in the forefront of this industry.)\nLM nextline linewidth linespace showjustifyblock pop\n\nshowpage\n"
+    },
+    {
+        "type": "ps",
+        "id": "377407",
+        "hash": "1909233557",
+        "source": "% prologue\n% support procedures\n% n1 n2 max result\n/max { 2 copy gt { pop } { exch pop } ifelse } def\n\n% text countblanks n\n/countblanks { 10 dict begin /c 0 def { ( ) search { /c c 1 add def pop pop } { pop c end exit } ifelse } loop } def\n\n% text width justifyshow -\n/justifyshow { exch dup stringwidth pop 3 -1 roll exch sub exch dup countblanks 1 max 3 -1 roll exch div 0 32 4 -1 roll widthshow } def\n\n% text width wraptext post width pre \n/wraptext { 10 dict begin /maxwidth exch def /text exch def\n/linewidth 0 def\n/linelength 0 def\n/spaces 0 def\n/spacewidth 0 0 moveto ( ) stringwidth pop def\ntext\n{\n% search leaves the post on the stack, so we assign it to currenttext\ndup /currenttext exch def\n( ) search { \n% add word width and check if linewidth is still not bigger than max\ndup stringwidth pop linewidth add dup spaces add maxwidth le \n% add space and count characters\n{ /linewidth exch def \nlength 1 add linelength add /linelength exch def\n/spaces spaces spacewidth add def\npop } \n% check if half space ok\n{ \nspaces 2 div add maxwidth le\n{ length 1 add linelength add /linelength exch def exit}\n{ pop pop pop exit }\nifelse\n\n} ifelse\n} \n% no space found we are at the last word\n{ pop text length /linelength exch def /currenttext () def exit } ifelse } loop\n% remove trailing space character if not empty text\ncurrenttext length { /linelength linelength 1 sub def } if \n% set text if only one word\nlinelength 0 le { /linelength currenttext length def } if \n% output \ncurrenttext maxwidth text 0 linelength getinterval end\n} def\n\n% text x y w l showjustifyblock y\n/showjustifyblock { \n/l exch def\n/w exch def\n/y exch def\n/x exch def w\n{ wraptext 3 -1 roll dup 4 1 roll length { newpath x y moveto w justifyshow y l sub /y exch def } { x y moveto show pop pop exit } ifelse } loop y } def\n\n% parameter\n/bodystart 300 def\n/linespace 33 def\n/LM 20 def \n/RM 570 def\n/NimbusSansRegular findfont 33 scalefont setfont\n\n% main\n/linewidth RM LM sub def\n/nextline bodystart def\n(Acme Widgets was founded in 1952 by Dippy and Daffy Acme to produce high technology widgets for the growing aerospace market. Acme was quickly recognized as being the best widget works in the country. Continued investment in new technology and manufacturing methods has kept Acme Widgets in the forefront of this industry.)\nLM nextline linewidth linespace showjustifyblock pop\n\nshowpage\n"
+    }
+]

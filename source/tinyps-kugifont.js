@@ -1,15 +1,17 @@
-rpnOperators.kugifont = function(context) {
+rpnOperators.kugifont = function(context) {  
 
 // complete set
 
-var fontvariants = [["Light", 60, 0,0,0,1],["Regular",85,0,0,0,2],["Bold",110,0,0,0,3],["Black",135,0,0,0,4],["LightItalic", 60, 0.2,0,0,5],["Italic",85,0.2,0,0,6],["BoldItalic",110,0.2,0,0,7],["BlackItalic",135,0.2,0,0,8],["Caps",85,0,1,0,9],["Mono",85,0,0,1,10],["Stroke",0,0,0,0,11]];
+var fontvariants = [["Light", 65,0,0,0,0,0,0,1],["Regular",85,0,0,0,0,0,0,2],["Bold",105,0,0,0,0,0,0,3],["Black",125,0,0,0,0,0,0,4],["LightOblique", 65, 0.2,0,0,0,0,0,5],["Oblique",85,0.2,0,0,0,0,0,6],["BoldOblique",105,0.2,0,0,0,0,0,7],["BlackOblique",125,0.2,0,0,0,0,0,8],["Caps",85,0,1,0,0,0,0,9],["Mono",85,0,0,1,0,0,0,10],["Stroke",0,0,0,0,0,0,0,11],["Serif",100,0,0,0,1,0,0,12],["SerifItalic",100,0.2,0,0,1,1,0,13],["SerifBold",140,0,0,0,1,0,0,14],["SerifBoldItalic",140,0.2,0,0,1,1,0,15], ["SerifCaps",100,0,1,0,1,0,0,16],["SansLight",80,0,0,0,0,0,1,17],["Sans",100,0,0,0,0,0,1,18],["SansBold",120,0,0,0,0,0,1,19],["SansBlack",140,0,0,0,0,0,1,20],["SansLightOblique",80,0.2,0,0,0,0,1,21],["SansOblique",100,0.2,0,0,0,0,1,22],["SansBoldOblique",120,0.2,0,0,0,0,1,23],["SansBlackOblique",140,0.2,0,0,0,0,1,24],["SansCaps",100,0,1,0,0,0,1,25]];
 
 // fonts that are not yet Truetype
 
-fontvariants = [["LightItalic", 60, 0.2,0,0,5],["BoldItalic",110,0.2,0,0,7],["BlackItalic",135,0.2,0,0,8],["Caps",85,0,1,0,9],["Mono",85,0,0,1,10],["Stroke",0,0,0,0,11]];
+/* fontvariants = [["LightItalic", 60, 0.2,0,0,5],["BoldItalic",110,0.2,0,0,7],["BlackItalic",135,0.2,0,0,8],["Caps",85,0,1,0,9],["Mono",85,0,0,1,10],["Stroke",0,0,0,0,11]]; */
 
-for(let v of fontvariants) {	
-	let [kugivariant, kugiweight, kugislant, kugicaps, kugimono, uniqueid] = v;
+for(let v of fontvariants) {
+	if (v.length !=  9 ) console.log(v);
+		
+	let [kugivariant, kugiweight, kugislant, kugicaps, kugimono, kugiserif, kugiitalic, kugisans, uniqueid] = v;
 	
 	let code = `11 dict dup begin
 
@@ -20,8 +22,13 @@ for(let v of fontvariants) {
 /FontBBox [0 0 1138 1027] def
 /smallcapsfont ${kugicaps} def
 /monofont ${kugimono} def
-/chracterweight ${kugiweight} def
+/thick ${kugiweight} def
+/thin 50 def
+/mediumthick thick thin add 2 div def
 /currentslanted ${kugislant} def
+/currentserif ${kugiserif} def
+/currentitalic ${kugiitalic} def
+/currentsans ${kugisans} def
 
 /Encoding 256 array def
 0 1 255 { Encoding exch /.notdef put } for
@@ -92,7 +99,7 @@ dup (^) 0 get /asciicircum  put
 dup (_) 0 get /underscore   put
 dup 96 /grave put
 dup (a) 0 get /a put
-dup (b) 0 get /b  put
+dup (b) 0 get /b put
 dup (c) 0 get /c  put
 dup (d) 0 get /d  put
 dup (e) 0 get /e  put
@@ -133,7 +140,7 @@ dup 136 /agrave  put
 dup 137 /acircumflex  put
 dup 138 /adieresis put
 dup 139 /atilde  put
-dup 140 /minAoe put
+dup 140 /aring put
 dup 141 /ccedilla put
 dup 142 /eacute put
 dup 143 /egrave put
@@ -239,7 +246,7 @@ dup 242 /Uacute put
 dup 243 /Ucircumflex  put
 dup 244 /Ugrave put
 dup 245 /dotlessi put
-dup 246 /circumlfex put
+dup 246 /circumflex put
 dup 247 /tilde put
 dup 248 /macron put
 dup 249 /breve put
@@ -250,313 +257,144 @@ dup 253 /hungarumlaut put
 dup 254 /ogonek put
 dup 255 /caron put
 
-smallcapsfont {
-dup (0) 0 get /num0smallcaps put
-dup (1) 0 get /num1smallcaps put
-dup (2) 0 get /num2smallcaps put
-dup (3) 0 get /num3smallcaps put
-dup (4) 0 get /num4smallcaps put
-dup (5) 0 get /num5smallcaps put
-dup (6) 0 get /num6smallcaps put
-dup (7) 0 get /num7smallcaps put
-dup (8) 0 get /num8smallcaps put
-dup (9) 0 get /num9smallcaps put
-dup (a) 0 get /minAsmallcaps put
-dup (b) 0 get /minBsmallcaps put
-dup (c) 0 get /minCsmallcaps put
-dup (d) 0 get /minDsmallcaps put
-dup (e) 0 get /minEsmallcaps put
-dup (f) 0 get /minFsmallcaps put
-dup (g) 0 get /minGsmallcaps put
-dup (h) 0 get /minHsmallcaps put
-dup (i) 0 get /minIsmallcaps put
-dup (j) 0 get /minJsmallcaps put
-dup (k) 0 get /minKsmallcaps put
-dup (l) 0 get /minLsmallcaps put
-dup (m) 0 get /minMsmallcaps put
-dup (n) 0 get /minNsmallcaps put
-dup (o) 0 get /minOsmallcaps put
-dup (p) 0 get /minPsmallcaps put
-dup (q) 0 get /minQsmallcaps put
-dup (r) 0 get /minRsmallcaps put
-dup (s) 0 get /minSsmallcaps put
-dup (t) 0 get /minTsmallcaps put
-dup (u) 0 get /minUsmallcaps put
-dup (v) 0 get /minVsmallcaps put
-dup (w) 0 get /minWsmallcaps put
-dup (x) 0 get /minXsmallcaps put
-dup (y) 0 get /minYsmallcaps put
-dup (z) 0 get /minZsmallcaps put
-
-dup 135 /aacutesmallcaps put
-dup 136 /minAgravesmallcaps put
-dup 137 /minAcircsmallcaps put
-dup 138 /minAumlautsmallcaps put
-dup 139 /minAtildesmallcaps put
-dup 140 /minAoesmallcaps put
-dup 141 /ccedillasmallcaps put
-dup 142 /eacutesmallcaps put
-dup 143 /minEgravesmallcaps put
-dup 144 /minEcircsmallcaps put
-dup 145 /minEumlautsmallcaps put
-dup 146 /iacutesmallcaps put
-dup 147 /minIgravesmallcaps put
-dup 148 /minIcircsmallcaps put
-dup 149 /minIumlautsmallcaps put
-dup 150 /minNtildesmallcaps put
-dup 151 /minOacutesmallcaps put
-dup 152 /minOgravesmallcaps put
-dup 153 /minOcircsmallcaps put
-dup 154 /minOumlautsmallcaps put
-dup 155 /minOtildesmallcaps put
-dup 156 /uacutesmallcaps put
-dup 157 /minUgravesmallcaps put
-dup 158 /minUcircsmallcaps put
-dup 159 /minUumlautsmallcaps put
-
-dup 190 /minAEsmallcaps put
-
-dup 207 /minOEsmallcaps put
-
-dup 216 /minYumlautsmallcaps put
-
-
-} if
-
-monofont {
-	dup (!) 0 get /exclamationmono put
-	dup (") 0 get /quotemono put
-	dup (%) 0 get /percent put
-	dup (%) 0 get /percent put
-dup (&) 0 get /ampersandmono put
-dup (') 0 get /singlequotemono put
-dup 40 /openparanthesismono put
-dup 41 /closeparanthesismono put
-dup (@) 0 get /atmono put
-dup (,) 0 get /commamono put
-dup (.) 0 get /pointmono put
-dup (0) 0 get /num0mono put
-dup (1) 0 get /num1mono put
-dup (:) 0 get /colonmono put
-dup (;) 0 get /semicolonmono put
-dup (A) 0 get /capAmono put
-dup (B) 0 get /capBmono put
-dup (C) 0 get /capCmono put
-dup (D) 0 get /capDmono put
-dup (E) 0 get /capEmono put
-dup (F) 0 get /capFmono put
-dup (G) 0 get /capGmono put
-dup (H) 0 get /capHmono put
-dup (I) 0 get /capImono put
-
-dup (K) 0 get /capKmono put
-dup (L) 0 get /capLmono put
-dup (M) 0 get /capMmono put
-dup (N) 0 get /capNmono put
-dup (O) 0 get /capOmono put
-dup (P) 0 get /capPmono put
-dup (Q) 0 get /capQmono put
-dup (R) 0 get /capRmono put
-dup (S) 0 get /capSmono put
-dup (T) 0 get /capTmono put
-dup (U) 0 get /capUmono put
-dup (V) 0 get /capVmono put
-dup (W) 0 get /capWmono put
-dup (X) 0 get /capXmono put
-dup (Y) 0 get /capYmono put
-dup (Z) 0 get /capZmono put
-dup (:) 0 get /colonmono put
-dup (;) 0 get /semicolonmono put
-dup ([) 0 get /openbracketmono put
-dup (]) 0 get /closebracketmono put
-dup (_) 0 get /underlinemono put
-dup (^) 0 get /circmono put
-dup (f) 0 get /minFmono put
-dup (i) 0 get /minImono put
-dup (j) 0 get /minJmono put
-dup (l) 0 get /minLmono put
-dup (m) 0 get /minMmono put
-dup (r) 0 get /minRmono put
-dup (t) 0 get /minTmono put
-dup (w) 0 get /minWmono put
-dup ({) 0 get /opencurlymono put
-dup (|) 0 get /pipemono put
-dup (}) 0 get /closecurlymono put
-
-dup 128 /capAumlautmono put
-dup 129 /capAodanishmono put
-dup 130 /Ccedillamono put
-dup 131 /capEacutemono put
-dup 132 /capNtildemono put
-dup 133 /capOumlautmono put
-dup 134 /capUumlautmono put
-dup 146 /iacutemono put
-dup 147 /minIgravemono put
-dup 148 /minIcircmono put
-dup 149 /minIumlautmono put
-
-dup 174 /capAEmono put
-dup 175 /capOslashmono put
-
-dup 190 /minAEmono put
-
-dup 203 /capAgravemono put
-dup 204 /Atildemono put
-dup 217 /capYumlautmono put
-
-dup 228 /permillemono put
-dup 229 /capAcircmono put
-dup 230 /capEcircmono put
-dup 231 /capAacutemono put
-dup 232 /capEumlautmono put
-dup 233 /capEgravemono put
-dup 234 /Iacutemono put
-dup 235 /capIcircmono put
-dup 236 /capIumlautmono put
-dup 237 /capIgravemono put
-dup 238 /capOacutemono put
-dup 239 /capOcircmono put
-
-dup 241 /capOgravemono put
-dup 242 /Uacutemono put
-dup 243 /capUcircmono put
-dup 244 /capUgravemono put
-
-
-
-} if
-
 pop
 
 /Metrics 512 dict def Metrics begin
 /.notdef 0 def
 /space 500 def
-/exclam 200 def /exclamationmono 500 def
-/quotedbl 300 def /quotemono 500 def
+/exclam monofont { 500 } { 200 } ifelse def
+/quotedbl monofont { 500 } { 300 } ifelse def
 /numbersign 500 def
 /dollar 500 def
-/percent 700 def /percentmono 500 def
-/ampersand 600 def /ampersandmono 500 def
-/quotesingle 200 def /singlequotemono 500 def
-/parenleft  300 def /openparanthesismono 500 def
-/parenright 300 def /closeparanthesismono 500 def
+/percent monofont { 500 } { 700 } ifelse def
+/ampersand monofont { 500 } { 600 } ifelse def
+/quotesingle monofont { 500 } { 200 } ifelse def
+/parenleft  monofont { 500 } { 300 } ifelse def
+/parenright monofont { 500 } { 300 } ifelse def
 /asterisk 500 def
 /plus 500 def
-/comma 200 def /commamono 500 def
+/comma monofont { 500 } { 299 } ifelse def
 /hyphen 500 def
-/period 200 def /pointmono 500 def
+/period monofont { 500 } { 200 } ifelse def
 /slash 500 def
-/at 800 def /atmono 500 def
-/zero  500 def /num0smallcaps 500 def /num0mono 500 def
-/one  500 def /num1smallcaps 500 def /num1mono 500 def
-/two  500 def /num2smallcaps 500 def
-/three  500 def /num3smallcaps 500 def
-/four 500 def /num4smallcaps 500 def
-/five 500 def /num5smallcaps 500 def
-/six 500 def /num6smallcaps 500 def
-/seven 500 def /num7smallcaps 500 def
-/eight 500 def /num8smallcaps 500 def
-/nine 500 def /num9smallcaps 500 def
-/colon 200 def /colonmono 500 def
-/semicolon 200 def /semicolonmono 500 def
+/at monofont { 500 } { 800 }  ifelse def
+
+/zero  500 def 
+/one  500 def 
+/two  500 def 
+/three  500 def 
+/four 500 def 
+/five 500 def 
+/six 500 def 
+/seven 500 def 
+/eight 500 def 
+/nine 500 def 
+
+/colon monofont { 500 } { 200 } ifelse def
+/semicolon monofont { 500 } { 200 } ifelse def
 /less 500 def
 /equal 500 def
 /greater 500 def
 /question 500 def
-/A 600 def /minAsmallcaps 600 def /capAmono 500 def
-/B 600 def /minBsmallcaps 600 def /capBmono 500 def
-/C 600 def /minCsmallcaps 600 def /capCmono 500 def
-/D 600 def /minDsmallcaps 600 def /capDmono 500 def
-/E 600 def /minEsmallcaps 600 def /capEmono 500 def
-/F 600 def /minFsmallcaps 600 def /capFmono 500 def
-/G 600 def /minGsmallcaps 600 def /capGmono 500 def
-/H 600 def /minHsmallcaps 600 def /capHmono 500 def
-/I 200 def /minIsmallcaps 200 def /capImono 500 def
-/J 500 def /minJsmallcaps 500 def 
-/K 600 def /minKsmallcaps 600 def /capKmono 500 def
-/L 600 def /minLsmallcaps 600 def /capLmono 500 def
-/M 700 def /minMsmallcaps 700 def /capMmono 500 def
-/N 600 def /minNsmallcaps 600 def /capNmono 500 def
-/O  700 def /minOsmallcaps 700 def /capOmono 500 def
-/P  600 def /minPsmallcaps 600 def /capPmono 500 def
-/Q  700 def /minQsmallcaps 700 def /capQmono 500 def
-/R  600 def /minRsmallcaps 600 def /capRmono 500 def
-/S  600 def /minSsmallcaps 600 def /capSmono 500 def
-/T 600 def /minTsmallcaps 600 def /capTmono 500 def
-/U 600 def /minUsmallcaps 600 def /capUmono 500 def
-/V 600 def /minVsmallcaps 600 def /capVmono 500 def
-/W 800 def /minWsmallcaps 800 def /capWmono 500 def
-/X 600 def /minXsmallcaps 600 def /capXmono 500 def
-/Y 600 def /minYsmallcaps 600 def /capYmono 500 def
-/Z 600 def /minZsmallcaps 600 def /capZmono 500 def
-/bracketleft 300 def /openbracketmono 500 def
+
+/A monofont { 500 } { 600 } ifelse def 
+/B monofont { 500 } { 600 } ifelse def 
+/C monofont { 500 } { 600 } ifelse def 
+/D monofont { 500 } { 600 } ifelse def 
+/E monofont { 500 } { 600 } ifelse def 
+/F monofont { 500 } { 600 } ifelse def 
+/G monofont { 500 } { 600 } ifelse def 
+/H monofont { 500 } { 600 } ifelse def 
+/I monofont { 500 } { 300 } ifelse def 
+/J 500 def 
+/K monofont { 500 } { 600 } ifelse def 
+/L 500 def
+/M monofont { 500 } { 700 } ifelse def
+/N monofont { 500 } { 600 } ifelse def
+/O monofont { 500 } { 700 } ifelse def
+/P monofont { 500 } { 600 } ifelse def
+
+/Q monofont { 500 } { 700 } ifelse def
+/R monofont { 500 } { 600 } ifelse def
+/S monofont { 500 } { 600 } ifelse def
+/T monofont { 500 } { 600 } ifelse def
+/U monofont { 500 } { 600 } ifelse def
+/V monofont { 500 } { 600 } ifelse def
+
+/W monofont { 500 } { 800 } ifelse def
+/X monofont { 500 } { 600 } ifelse def
+/Y monofont { 500 } { 600 } ifelse def
+/Z monofont { 500 } { 600 } ifelse def
+
+/bracketleft monofont { 500 } { 300 } ifelse def 
 /backslash 500 def 
-/bracketright 300 def /closebracketmono 500 def
-/asciicircum  300 def /circmono 500 def
-/underscore   500 def /underlinemono 500 def
+/bracketright monofont { 500 } { 300 } ifelse def 
+/asciicircum monofont { 500 } { 300 } ifelse def 
+/underscore  500 def
 /grave 500 def
-/a ${kugislant?600:500} def
+/a  500 def
 /b  500 def
 /c  500 def
-/d ${kugislant?600:500} def
+/d  500 def
 /e  500 def
-/f 400 def /minFmono 500 def
+/f 500 def 
 /g 500 def
-/h ${kugislant?600:500} def
-/i ${kugislant?300:200} def /minImono 500 def
-/j ${kugislant?300:200} def /minJmono 500 def
+/h 500 def
+/i monofont { 500 } { 300 } ifelse def
+/j monofont { 500 } { smallcapsfont { 400 } { 300 } ifelse  } ifelse def
 /k 500 def
-/l ${kugislant?300:200} def /minLmono 500 def
-/m ${kugislant?800:700} def /minMmono 500 def
-/n ${kugislant?600:500} def
+/l monofont { 500 } { smallcapsfont { 400 } { 300 } ifelse  } ifelse def
+/m monofont { 500 } { smallcapsfont { 600 } { 700 } ifelse  } ifelse def
+/n 500 def
 /o 500 def
 /p 500 def
 /q 500 def
-/r 400 def /minRmono 500 def
+/r smallcapsfont { 500 } { 400 } ifelse def 
 /s 500 def
-/t 500 def /minTmono 500 def
-/u ${kugislant?600:500} def
+/t 500 def 
+/u 500 def
 /v 500 def
-/w 700 def /minWmono 500 def
+/w 700 def 
 /x 500 def
 /y 500 def
 /z 500 def
-/braceleft 400 def /opencurlymono 500 def
-/bar 200 def /pipemono 500 def
-/braceright 400 def /closecurlymono 500 def
+/braceleft monofont { 500 } { 400 } ifelse def 
+/bar monofont { 500 } { 200 } ifelse def 
+/braceright monofont { 500 } { 400 } ifelse def 
 /asciitilde 500 def
- /Adieresis 600 def  /capAumlautmono 500 def
- /Aring 600 def /capAodanishautmono 500 def
- /Ccedilla 600 def  /Ccedillamono 500 def
- /Eacute 600 def  /capEacutemono 500 def
- /Ntilde 600 def  /capNtildemono 500 def
- /Odieresis 700 def  /capOumlautmono 500 def
- /Udieresis 600 def  /capUumlautmono 500 def
- /aacute 500 def /aacutesmallcaps 600 def 
- /agrave  ${kugislant?600:500} def /minAgravesmallcaps 600 def 
- /acircumflex  500 def /minAcircsmallcaps 600 def 
- /adieresis ${kugislant?600:500} def /minAumlautsmallcaps 600 def 
- /atilde  ${kugislant?600:500} def /minAtildesmallcaps 600 def 
- /minAoe 500 def /minAoesmallcaps 600 def 
- /ccedilla 500 def /ccedillasmallcaps 600 def 
- /eacute 500 def /eacutesmallcaps 600 def 
- /egrave 500 def /minEgravesmallcaps 600 def 
- /ecircumflex 500 def /minEcircsmallcaps 600 def 
- /edieresis 500 def /minEumlautsmallcaps 600 def 
- /iacute ${kugislant?300:200} def /iacutesmallcaps 200 def /iacutemono 500 def 
- /igrave ${kugislant?300:200} def /minIgravesmallcaps 200 def /minIgravemono 500 def
- /icircumflex  ${kugislant?300:200} def /minIcircsmallcaps 200 def /minIcircmono 500 def
- /idieresis ${kugislant?300:200} def /minIumlautsmallcaps 200 def /miniUmlautmono 500 def
- /ntilde ${kugislant?600:500} def /minNtildesmallcaps 600 def 
- /oacute 500 def /minOacutesmallcaps 700 def 
- /ograve  500 def /minOgravesmallcaps 700 def 
- /ocircumflex   500 def /minOcircsmallcaps 700 def 
- /odieresis 500 def /minOumlautsmallcaps 700 def 
- /otilde 500 def /minOtildesmallcaps 700 def 
- /uacute ${kugislant?600:500} def /uacutesmallcaps 600 def 
- /ugrave ${kugislant?600:500} def /minUgravesmallcaps 600 def 
- /ucircumflex ${kugislant?600:500} def /minUcircsmallcaps 600 def 
- /udieresis ${kugislant?600:500} def /minUumlautsmallcaps 600 def 
+ /Adieresis monofont { 500 } { 600 } ifelse def 
+ /Aring monofont { 500 } { 600 } ifelse def 
+ /Ccedilla monofont { 500 } { 600 } ifelse def
+ /Eacute monofont { 500 } { 600 } ifelse def
+ /Ntilde monofont { 500 } { 600 } ifelse def
+ /Odieresis monofont { 500 } { 700 } ifelse def
+ /Udieresis monofont { 500 } { 600 } ifelse def
+ /aacute 500  def
+ /agrave 500  def
+ /acircumflex 500 def
+ /adieresis 500 def  
+ /atilde 500 def 
+ /aring 500 def  
+ /ccedilla 500 def  
+ /eacute 500 def 
+ /egrave 500 def 
+ /ecircumflex 500 def 
+ /edieresis 500 def
+ /iacute monofont { 500 } { 300 } ifelse def 
+ /igrave monofont { 500 } { 300 } ifelse def 
+ /icircumflex monofont { 500 } { 300 } ifelse def
+ /idieresis monofont { 500 } { 300 } ifelse def
+ /ntilde 500 def
+ /oacute 500 def
+ /ograve 500 def 
+ /ocircumflex 500 def 
+ /odieresis 500 def 
+ /otilde 500 def 
+ /uacute 500 def  
+ /ugrave 500 def 
+ /ucircumflex 500 def 
+ /udieresis 500 def 
+ 
  /dagger 500 def
  /degree 500 def
  /cent 500 def
@@ -565,14 +403,14 @@ pop
  /bullet 500 def
  /paragraph 500 def
  /germandbls 500 def
- /copyright 800 def /copyrightmono 500 def
- /registered 800 def /registeredmono 500 def
- /trademark 700 def /trademark 500 def
+ /copyright monofont { 500 } { 800 } ifelse  def
+ /registered monofont { 500 } { 800 } ifelse  def
+ /trademark monofont { 500 } { 700 } ifelse  def
  /acute 500 def
  /dieresis 500 def
  /notequal 500 def
- /AE 800 def  /capAEmono 500 def
- /Oslash  700 def /Oslashsmallcaps 700 def /Oslashmono 500 def
+ /AE monofont { 500 } { 800 } ifelse   def
+ /Oslash monofont { 500 } { 700 } ifelse  def
  /infinity 500 def
  /plusminus 500 def
  /lessequal 500 def
@@ -580,17 +418,17 @@ pop
  /yen 500 def
  /mu 500 def
  /partialdiff 500 def
- /summation 600 def /capSigmamono 500 def
+ /summation monofont { 500 } { 600 } ifelse  def
  /product  500 def
  /pi  500 def
  /integral 500 def
  /ordfeminine 500 def
  /ordmasculine 500 def
- /uni03A9 700 def /capOmegamono 500 def
- /ae 700 def /minAEsmallcaps 800 def /minAEmono 500 def
- /oslash  500 def
+ /uni03A9 monofont { 500 } { 700 } ifelse def 
+ /ae monofont { 500 } { 700 } ifelse def 
+ /oslash 500 def
  /questiondown 500 def
-  /exclamdown 200 def /exclamationspanishmono 500 def
+  /exclamdown monofont { 500 } { 200 } ifelse def 
  /logicalnot 500 def
  /radical 500 def
  /florin 500 def
@@ -600,49 +438,61 @@ pop
  /guillemotright 500 def
  /elipsis 500 def
  /uni00A0 500 def
- /Agrave 600 def   /capAgravemono 500 def
- /Atilde 600 def   /Atildemono 500 def
- /Otilde 700 def   /capOtildemono 500 def
- /OE 800 def  /capOEmono 500 def
- /oe 700 def  /minOEsmallcaps 800 def /minOEmono 500 def
- /endash 500 def /ndashmono 500 def
- /emdash 700 def /mdashmono 500 def
+ 
+ /Agrave monofont { 500 } { 600 } ifelse def 
+ /Atilde monofont { 500 } { 600 } ifelse def 
+ /Otilde monofont { 500 } { 700 } ifelse def 
+ 
+ /OE monofont { 500 } { 800 } ifelse def 
+ /oe monofont { 500 } { 700 } ifelse def 
+ 
+ /endash 500 def
+ /emdash monofont { 500 } { 700 } ifelse def 
  /quotedblleft 500 def
  /quotedblright 500 def
- /quoteleft 500 def  /singleopentopquotemono 500 def
- /quoteright 500 def /singleclosetopquotemono 500 def
+ /quoteleft 500 def 
+ /quoteright 500 def
  /divide 500 def
  /lozenge 500 def
- /ydieresis 500 def /minYumlautsmallcaps 600 def
- /Ydieresis 600 def  /capYumlautmono 500 def
+ 
+ /ydieresis 500 def 
+ /Ydieresis monofont { 500 } { 600 } ifelse def 
+ 
  /fraction 500 def
- /euro 600 def /euromono 500 def
- /quilsinglleft 200 def /singleoopenquotemono 500 def
- /quilsinglright  200 def /singleclosequotemono 500 def
+ /euro monofont { 500 } { 600 } ifelse def 
+ /quilsinglleft monofont { 500 } { 200 } ifelse def 
+ /quilsinglright monofont { 500 } { 200 } ifelse def 
  /uniFB01 500 def
  /uniFB02 500 def
  /daggerdbl 500 def
- /periodcentered 500 def
- /quotesinglbase 200 def /singleopenbottomquotemono 500 def
- /quotedblbase 200 def /openbottomquotemono 500 def
- /perthousand 1100 def /permillemono 500 def
- /Acircumflex  600 def  /capAcircmono 500 def
- /Ecircumflex 600 def  /capEcircmono 500 def
- /Aacute 600 def  /capAacutemono 500 def
- /Edieresis 600 def  /capEumlautmono 500 def
- /Egrave  600 def  /capEgravemono 500 def
- /Iacute 200 def  /Iacutemono 500 def
- /Icircumflex 200 def /capIcircmono 500 def
- /Idieresis 200 def  /capIumlautmono 500 def
- /Igrave  200 def  /capIgravemono 500 def
- /Oacute 700 def  /capOacutemono 500 def
- /Ocircumflex 700 def  /capOcircmono 500 def
+ /periodcentered monofont { 500 } { 300 } ifelse  def
+ /quotesinglbase monofont { 500 } { 300 } ifelse def 
+ /quotedblbase monofont { 500 } { 400 } ifelse def 
+ /perthousand monofont { 500 } { 1100 } ifelse def 
+ 
+ /Acircumflex monofont { 500 } { 600 } ifelse def 
+ /Ecircumflex monofont { 500 } { 600 } ifelse def 
+ /Aacute monofont { 500 } { 600 } ifelse def 
+ 
+ /Edieresis monofont { 500 } { 600 } ifelse def 
+ /Egrave monofont { 500 } { 600 } ifelse def 
+ 
+ /Iacute monofont { 500 } { 300 } ifelse def 
+ /Icircumflex monofont { 500 } { 300 } ifelse def 
+ /Idieresis monofont { 500 } { 300 } ifelse def 
+ /Igrave monofont { 500 } { 300 } ifelse def 
+ 
+ /Oacute monofont { 500 } { 700 } ifelse def 
+ /Ocircumflex monofont { 500 } { 700 } ifelse def 
  /uniF8FF 500 def
- /Ograve  700 def  /capOgravemono 500 def
- /Uacute 600 def  /Uacutemono 500 def
- /Ucircumflex  600 def /minUcircsmallcaps 600 def /capUcircmono 500 def
- /Ugrave 600 def /minUgravesmallcaps 600 def /capUgravemono 500 def
- /dotlessi 200 def /capIturkishmono 500 def
+ 
+ /Ograve monofont  { 500 } { 700 } ifelse def 
+ 
+ /Uacute monofont { 500 } { 600 } ifelse def 
+ /Ucircumflex monofont  { 500 } { 600 } ifelse def 
+ /Ugrave monofont { 500 } { 600 } ifelse def 
+ 
+ /dotlessi monofont { 500 } { 300 } ifelse def 
  /circumlfex 500 def
  /tilde 500 def
  /macron 500 def
@@ -654,1632 +504,1449 @@ pop
  /ogonek 500 def
  /caron 500 def
 
-
-
 end
 
 /BBox 512 dict def BBox begin
-/.notdef [0 0 0 0] def
-/space [0 0 0 0] def
-/exclam [0 0 200 700] def /exclamationmono [0 0 500 700] def
-/quotedbl [0 0 300 700] def /quotemono [0 0 500 700] def
-/numbersign [0 0 500 700] def
-/dollar [0 0 500 700] def
-/percent [0 0 500 700] def /percentmono [0 0 500 700] def
-/ampersand [0 0 500 700] def /ampersandmono [0 0 500 700] def
-/quotesingle [0 0 500 700] def /singlequotemono [0 0 500 700] def
-/parenleft  [0 0 500 700] def /openparanthesismono [0 0 500 700] def
-/parenright [0 0 500 700] def /closeparanthesismono [0 0 500 700] def
-/asterisk [0 0 500 700] def
-/plus [0 0 500 700] def
-/comma [0 0 500 700] def /commamono [0 0 500 700] def
-/hyphen [0 0 500 700] def
-/period [0 0 500 700] def /pointmono [0 0 500 700] def
-/slash [0 0 500 700] def
-/at [0 0 500 700] def /atmono [0 0 500 700] def
-/zero  [0 0 500 700] def /num0smallcaps [0 0 500 700] def /num0mono [0 0 500 700] def 
-/one  [0 0 500 700] def /num1smallcaps [0 0 500 700] def /num1mono [0 0 500 700] def
-/two  [0 0 500 700] def /num2smallcaps [0 0 500 700] def
-/three  [0 0 500 700] def /num3smallcaps [0 0 500 700] def
-/four [0 0 500 700] def /num4smallcaps [0 0 500 700] def
-/five [0 0 500 700] def /num5smallcaps [0 0 500 700] def
-/six [0 0 500 700] def /num6smallcaps [0 0 500 700] def
-/seven [0 0 500 700] def /num7smallcaps [0 0 500 700] def
-/eight [0 0 500 700] def /num8smallcaps [0 0 500 700] def
-/nine [0 0 500 700] def /num9smallcaps [0 0 500 700] def
-/colon [0 0 500 700] def /colonmono [0 0 500 700] def
-/semicolon [0 0 500 700] def /semicolonmono [0 0 500 700] def
-/less [0 0 500 700] def
-/equal [0 0 500 700] def
-/greater [0 0 500 700] def
-/question [0 0 500 700] def
-/A [0 0 500 700] def /minAsmallcaps [0 0 500 700] def /capAmono [0 0 500 700] def 
-/B [0 0 500 700] def /minBsmallcaps [0 0 500 700] def /capBmono [0 0 500 700] def 
-/C [0 0 500 700] def /minCsmallcaps [0 0 500 700] def /capCmono [0 0 500 700] def 
-/D [0 0 500 700] def /minDsmallcaps [0 0 500 700] def /capDmono [0 0 500 700] def 
-/E [0 0 500 700] def /minEsmallcaps [0 0 500 700] def /capEmono [0 0 500 700] def 
-/F [0 0 500 700] def /minFsmallcaps [0 0 500 700] def /capFmono [0 0 500 700] def 
-/G [0 0 500 700] def /minGsmallcaps [0 0 500 700] def /capGmono [0 0 500 700] def 
-/H [0 0 500 700] def /minHsmallcaps [0 0 500 700] def /capHmono [0 0 500 700] def 
-/I [0 0 100 700] def /minIsmallcaps [0 0 500 700] def /capImono [0 0 500 700] def 
-/J [0 0 500 700] def /minJsmallcaps [0 0 500 700] def /capJmono [0 0 500 700] def 
-/K [0 0 500 700] def /minKsmallcaps [0 0 500 700] def /capKmono [0 0 500 700] def 
-/L [0 0 500 700] def /minLsmallcaps [0 0 500 700] def /capLmono [0 0 500 700] def 
-/M [0 0 700 700] def /minMsmallcaps [0 0 500 700] def /capMmono [0 0 500 700] def 
-/N [0 0 500 700] def /minNsmallcaps [0 0 500 700] def /capNmono [0 0 500 700] def 
-/O  [0 0 600 700] def /minOsmallcaps [0 0 500 700] def /capOmono [0 0 500 700] def 
-/P  [0 0 500 700] def /minPsmallcaps [0 0 500 700] def /capPmono [0 0 500 700] def 
-/Q  [0 0 600 700] def /minQsmallcaps [0 0 500 700] def /capQmono [0 0 500 700] def 
-/R  [0 0 500 700] def /minRsmallcaps [0 0 500 700] def /capRmono [0 0 500 700] def 
-/S  [0 0 500 700] def /minSsmallcaps [0 0 500 700] def /capSmono [0 0 500 700] def 
-/T [0 0 500 700] def /minTsmallcaps [0 0 500 700] def /capTmono [0 0 500 700] def 
-/U [0 0 500 700] def /minUsmallcaps [0 0 500 700] def /capUmono [0 0 500 700] def 
-/V [0 0 500 700] def /minVsmallcaps [0 0 500 700] def /capVmono [0 0 500 700] def 
-/W [0 0 700 700] def /minWsmallcaps [0 0 500 700] def /capWmono [0 0 500 700] def 
-/X [0 0 500 700] def /minXsmallcaps [0 0 500 700] def /capXmono [0 0 500 700] def 
-/Y [0 0 500 700] def /minYsmallcaps [0 0 500 700] def /capYmono [0 0 500 700] def 
-/Z [0 0 500 700] def /minZsmallcaps [0 0 500 700] def /capZmono [0 0 500 700] def 
-/bracketleft [0 0 400 700] def /openbracketmono [0 0 400 700] def 
-/backslash [0 0 400 700] def
-/bracketright [0 0 400 700] def /closebracketmono [0 0 400 700] def
-/asciicircum  [0 0 400 700] def /circmono [0 0 400 700] def
-/underscore   [0 0 500 700] def /underlinemono [0 0 500 700] def
-/grave [0 0 400 700] def
-/Z [0 0 400 700] def
-/a [0 0 500 700] def
-/b  [0 0 400 700] def
-/c  [0 0 400 700] def
-/d  [0 0 400 700] def
-/e  [0 0 400 700] def
-/f [0 0 400 700] def /minFmono [0 0 500 700] def
-/g [0 0 500 700] def
-/h [0 0 400 700] def
-/i [0 0 200 700] def /minImono [0 0 400 700] def
-/j [0 0 400 700] def /minJmono [0 0 400 700] def
-/k [0 0 400 700] def
-/l [0 0 200 700] def /minLmono [0 0 400 700] def
-/m [0 0 400 700] def /minMmono [0 0 400 700] def
-/n [0 0 400 700] def
-/o [0 0 500 700] def
-/p [0 0 400 700] def
-/q [0 0 400 700] def
-/r [0 0 400 700] def /minRmono [0 0 400 700] def
-/s [0 0 400 700] def
-/t [0 0 400 700] def /minTmono [0 0 400 700] def
-/u [0 0 400 700] def
-/v [0 0 500 700] def
-/w [0 0 400 700] def /minWmono [0 0 400 700] def
-/x [0 0 400 700] def
-/y [0 0 400 700] def
-/z [0 0 400 700] def
-/braceleft [0 0 400 700] def /opencurlymono [0 0 400 700] def
-/bar [0 0 400 700] def /pipemono [0 0 400 700] def
-/braceright [0 0 400 700] def /closecurlymono [0 0 400 700] def
-/asciitilde [0 0 400 700] def
- /Adieresis [0 0 400 700] def  /minAumlautsmallcaps [0 0 400 700] def  /capAumlautmono [0 0 400 700] def
- /Aring [0 0 400 700] def /minAodanishsmallcaps [0 0 400 700] def  /capAodanishmono [0 0 400 700] def
- /Ccedilla [0 0 400 700] def /ccedillamallcaps [0 0 400 700] def  /Ccedillamono [0 0 400 700] def
- /Eacute [0 0 400 700] def /eacutesmallcaps [0 0 400 700] def  /capEacutemono [0 0 400 700] def
- /Ntilde [0 0 400 700] def /minNtildesmallcaps [0 0 400 700] def  /capNtildemono [0 0 400 700] def
- /Odieresis [0 0 400 700] def /minOumlautsmallcaps [0 0 400 700] def  /capOumlautmono [0 0 400 700] def
- /Udieresis [0 0 400 700] def /minUumlautsmallcaps [0 0 400 700] def  /capUumlautmono [0 0 400 700] def
- /aacute [0 0 400 700] def  /aacutemono [0 0 400 700] def
- /agrave  [0 0 400 700] def  /minAgravemono [0 0 400 700] def
- /acircumflex  [0 0 400 700] def  /minAcircmono [0 0 400 700] def
- /adieresis [0 0 400 700] def /minAumlautmono [0 0 400 700] def
- /atilde  [0 0 400 700] def  /minAtildemono [0 0 400 700] def
- /minAoe [0 0 400 700] def  /minAoemono [0 0 400 700] def
- /ccedilla [0 0 400 700] def /ccedillamono [0 0 400 700] def
- /eacute [0 0 400 700] def /eacutemono [0 0 400 700] def
- /egrave [0 0 400 700] def  /minEgravemono [0 0 400 700] def
- /ecircumflex [0 0 400 700] def  /minEcircmono [0 0 400 700] def
- /edieresis [0 0 400 700] def  /minEumlautmono [0 0 400 700] def
- /iacute [0 0 400 700] def  /iacutemono [0 0 400 700] def
- /igrave [0 0 400 700] def  /minIgravemono [0 0 400 700] def
- /icircumflex  [0 0 400 700] def /minIcircmono [0 0 400 700] def
- /idieresis [0 0 400 700] def  /minIumlautmono [0 0 400 700] def
- /ntilde [0 0 400 700] def /minNtildemono [0 0 400 700] def
- /oacute [0 0 400 700] def /minOacutemono [0 0 400 700] def
- /ograve  [0 0 400 700] def  /minOgravemono [0 0 400 700] def
- /ocircumflex   [0 0 400 700] def  /ocircumflex   [0 0 400 700] def
- /odieresis [0 0 400 700] def /minOumlautmono [0 0 400 700] def
- /otilde [0 0 400 700] def /minOtildemono [0 0 400 700] def
- /uacute [0 0 400 700] def /uacutemono [0 0 400 700] def
- /ugrave [0 0 400 700] def /minUgravemono [0 0 400 700] def
- /ucircumflex [0 0 400 700] def /minUcircmono [0 0 400 700] def
- /udieresis  [0 0 400 700] def /minUumlautmono [0 0 400 700] def
- /dagger [0 0 400 700] def
- /degree [0 0 400 700] def
- /cent [0 0 400 700] def
- /sterling [0 0 400 700] def
- /section [0 0 400 700] def
- /bullet [0 0 400 700] def
- /paragraph [0 0 400 700] def
- /germandbls [0 0 400 700] def
- /copyright [0 0 400 700] def  /copyrightmono [0 0 400 700] def
- /registered [0 0 400 700] def  /registeredmono [0 0 400 700] def
- /trademark [0 0 400 700] def  /trademarkmono [0 0 400 700] def
- /acute [0 0 400 700] def
- /dieresis [0 0 400 700] def
- /notequal [0 0 400 700] def
- /AE [0 0 400 700] def  /capAEmono [0 0 400 700] def
- /Oslash  [0 0 400 700] def  /Oslash  [0 0 400 700] def
- /infinity [0 0 400 700] def
- /plusminus [0 0 400 700] def
- /lessequal [0 0 400 700] def
- /greaterequal [0 0 400 700] def
- /yen [0 0 400 700] def
- /mu [0 0 400 700] def
- /partialdiff [0 0 400 700] def
- /summation [0 0 400 700] def  /capSimgamono [0 0 400 700] def
- /product  [0 0 400 700] def
- /pi  [0 0 400 700] def
- /integral [0 0 400 700] def
- /ordfeminine [0 0 400 700] def
- /ordmasculine [0 0 400 700] def
- /uni03A9 [0 0 400 700] def /capOmegamono [0 0 400 700] def
- /ae [0 0 400 700] def /minAEsmallcaps [0 0 400 700] def /minAEmono [0 0 400 700] def
- /oslash  [0 0 400 700] def
- /questiondown [0 0 400 700] def
-  /exclamdown [0 0 400 700] def
- /logicalnot [0 0 400 700] def
- /radical [0 0 400 700] def
- /florin [0 0 400 700] def
- /approxequal [0 0 400 700] def
- /Delta [0 0 400 700] def
- /guillemotleft [0 0 400 700] def
- /guillemotright [0 0 400 700] def
- /elipsis [0 0 400 700] def
- /uni00A0 [0 0 400 700] def
- /Agrave [0 0 400 700] def /minAgravesmallcaps [0 0 400 700] def  /capAgravemono [0 0 400 700] def
- /Atilde [0 0 400 700] def /minAtildesmallcaps [0 0 400 700] def  /Atildemono [0 0 400 700] def
- /Otilde [0 0 400 700] def /minOtildesmallcaps [0 0 400 700] def  /capOtildemono [0 0 400 700] def
- /OE [0 0 400 700] def /capOEsmallcaps [0 0 400 700] def  /capOEmono [0 0 400 700] def
- /oe [0 0 400 700] def /minOEsmallcaps [0 0 400 700] def  /minOEmono [0 0 400 700] def
- /endash [0 0 400 700] def /ndashmono [0 0 400 700] def 
- /emdash [0 0 400 700] def  /mdashmono [0 0 400 700] def
- /quotedbl [0 0 400 700] def
- /quotedblleft [0 0 400 700] def
- /quotedblright [0 0 400 700] def
- /quoteleft [0 0 400 700] def  /singleopentopquotemono [0 0 400 700] def
- /quoteright [0 0 400 700] def  /singleclosetopquotemono [0 0 400 700] def
- /divide [0 0 400 700] def
- /lozenge [0 0 400 700] def
- /ydieresis [0 0 400 700] def /minYumlautmono [0 0 400 700] def  
- /Ydieresis [0 0 400 700] def /minYumlautsmallcaps [0 0 400 700] def  /capYumlautmono [0 0 400 700] def
- /fraction [0 0 400 700] def
- /euro [0 0 400 700] def /euromono [0 0 400 700] def 
- /quilsinglleft [0 0 400 700] def /singleopenquotemono [0 0 400 700] def
- /quilsinglright  [0 0 400 700] def /singleclosequotemono [0 0 400 700] def
- /uniFB01 [0 0 400 700] def
- /uniFB02 [0 0 400 700] def
- /daggerdbl [0 0 400 700] def
- /periodcentered [0 0 400 700] def
- /quotesinglbase [0 0 400 700] def /singleopenbottomquotemono [0 0 400 700] def
- /quotedblbase [0 0 400 700] def /openbottomquotemono [0 0 400 700] def
- /perthousand [0 0 400 700] def /permillemono [0 0 400 700] def
- /Acircumflex  [0 0 400 700] def /minAcircsmallcaps [0 0 400 700] def  /capAcircmono [0 0 400 700] def
- /Ecircumflex [0 0 400 700] def /minEcircsmallcaps [0 0 400 700] def  /capEcircmono [0 0 400 700] def
- /Aacute [0 0 400 700] def /aacutesmallcaps [0 0 400 700] def  /capAacutemono [0 0 400 700] def
- /Edieresis [0 0 400 700] def /minEumlautsmallcaps [0 0 400 700] def  /capEumlautmono [0 0 400 700] def
- /Egrave  [0 0 400 700] def /minEgravesmallcaps [0 0 400 700] def  /capEgravemono [0 0 400 700] def
- /Iacute [0 0 400 700] def /iacutesmallcaps [0 0 400 700] def  /capIcautemono [0 0 400 700] def
- /Icircumflex [0 0 400 700] def /minIcircsmallcaps [0 0 400 700] def  /capIcircmono [0 0 400 700] def
- /Idieresis [0 0 400 700] def /minIumlautsmallcaps [0 0 400 700] def  /capIumlautmono [0 0 400 700] def
- /Igrave  [0 0 400 700] def /minIgravesmallcaps [0 0 400 700] def  /capIgravemono [0 0 400 700] def
- /Oacute [0 0 400 700] def /minOcautesmallcaps [0 0 400 700] def  /capOacutemono [0 0 400 700] def
- /Ocircumflex [0 0 400 700] def /minOcircsmallcaps [0 0 400 700] def  /capOcircmono [0 0 400 700] def
- /uniF8FF [0 0 400 700] def 
- /Ograve  [0 0 400 700] def /minOgravesmallcaps [0 0 400 700] def  /capOgravemono [0 0 400 700] def
- /Uacute [0 0 400 700] def /minOacutesmallcaps [0 0 400 700] def  /capOacutemono [0 0 400 700] def
- /Ucircumflex  [0 0 400 700] def /minUcircsmallcaps [0 0 400 700] def  /capUcircmono [0 0 400 700] def
- /Ugrave [0 0 400 700] def /minUgravesmallcaps [0 0 400 700] def  /capUgravemono [0 0 400 700] def
- /dotlessi [0 0 400 700] def 
- /circumlfex [0 0 400 700] def
- /tilde [0 0 400 700] def
- /macron [0 0 400 700] def
- /breve [0 0 400 700] def
- /dotaccent [0 0 400 700] def
- /ring [0 0 400 700] def
- /cedilla [0 0 400 700] def
- /hungarumlaut [0 0 400 700] def
- /ogonek [0 0 400 700] def
- /caron [0 0 400 700] def
-
+% use only default BBox
 
 end
 
 /CharacterDefs 512 dict def CharacterDefs begin
 /.notdef { } def
+
 /space { } def
-/exclam { 0 700 move 0 200 line 0 0 dot fill }  def
-/exclamationmono { 200 700 move 200 200 line 200 0 dot fill }  def
-/quotedbl { 0 700 move 0 550 line 200 700 move 200 550 line fill }  def
-/quotemono { 100 700 move 100 550 line 300 700 move 300 550 line fill }  def
-/numbersign { 0 500 move 400 500 line 0 200 move 400 200 line
-100 700 move 100 0 line 300 700 move 300 0 line
-fill } def
-/dollar { 200 700 move 200 0 line 
- 400 500 move 90 180 200 600 turn 180 270 0 500  turn
- 270 315 200 350 turn 315 270 400 200 turn 
- 270 180 200 100 turn 180 90 0 200 turn
-fill }  def
-/percent { 600 700 move 0 0 line
-250 575 move 90 180 125 700 turn 180 270 0 575 turn
-270 0 125 450 turn 0 90 250 575 turn
-350 125 move 90 0 475 250 turn 0 270 600 125 turn
-270 180 475 0 turn 180 90 350 125 turn
-fill}  def
-/percentmono { 400 700 move 0 0 line
-160 575 move 90 180 80 700 turn 180 270 0 575 turn
-270 0 80 425 turn 0 90 160 575 turn
-240 125 move 90 0 320 250 turn 0 270 400 125 turn
-270 180 320 0 turn 180 90 240 125 turn
-fill}  def
-/ampersand { 500 200 move 225 180 250 0 turn
-180 90 0 200 turn 90 45 200 400 turn 
-45 90 325 550 turn
-90 180 200 700 turn
-180 270 100 550  turn
+/exclam { 0 700 move 270 270 0 200 turnsend 0 700 dot  
+0 0 dot
+}  def
+/quotedbl { 0 700 move 270 270 0 550 turnsend 200 700 move 270 270 200 550 turnsend 
+0 700 transpose thick 2 div 0 360 arc
+200 700 transpose thick 2 div 0 360 arc
+}  def
+/numbersign { 10 dict begin /thin mediumthick def
+25 450 move 425 450 lines 0 200 move 400 200 lines
+150 650 move 050 0 lines 350 650 move 250 0 lines
+end } def
+/dollar { 10 dict begin 
+200 700 move 200 0 lines 
+400 500 move 90 180 200 600 turns 180 270 0 500 turnsstart
+ 270 0 200 350 turn 0 270 400 200 turn
+ 270 180 200 100 turnsend 180 90 0 200 turns
+end }  def
+
+/percent { 10 dict begin monofont { 400 600 div 700 700 div compscale } if
+600 700 move 0 0 lines
+250 575 move 90 180 125 700 turnsend 180 270 0 575 turnsstart
+270 0 125 450 turnsend 0 90 250 575 turnsstart
+350 125 move 90 0 475 250 turnsend 0 270 600 125 turnsstart
+270 180 475 0 turnsend 180 90 350 125 turnsstart
+end }  def
+/ampersand { 10 dict begin monofont { 500 600 div 700 700 div compscale } if
+500 200 move 225 180 250 0 turns
+180 90 0 200 turnsstart 90 45 200 400 turnsend 
+45 90 325 550 turnsstart
+90 180 200 700 turnsend
+180 270 100 550  turnsstart
 270 315 250 250 turn 500 0 line
+end}  def
+/quotesingle { 0 700 move 270 270 0 550 turnsend 
+0 700 transpose thick 2 div 0 360 arc
 fill}  def
-/ampersandmono { 400 200 move 225 180 200 0 turn
-180 90 0 200 turn 90 45 160 400 turn 
-45 90 260 550 turn
-90 180 160 700 turn
-180 270 80 550  turn
-270 315 200 250 turn 500 0 line
-fill}  def
-/quotesingle { 0 700 move 0 550 line fill}  def
-/singlequotemono { 200 700 move 200 550 line fill}  def
-/parenleft  { 200 700 move 210 270 0 300 turn 270 330 200 -100 turn fill } def
-/openparanthesismono { 300 800 move 210 270 100 350 turn 270 330 300 -100 turn fill } def
-/parenright { 0 700 move 330 270 200 300 turn 270 210 0 -100 turn fill } def
-/closeparanthesismono { 100 800 move 330 270 300 350 turn 270 210 100 -100 turn fill } def
-/asterisk { 0 300 move 400 300 line 
-100 472 move 300 128 line
-300 472 move 100 128 line
-fill}  def
-/plus { 0 350 move 400 350 line 200 550 move 200 150 line fill }  def
-/comma { 0 0 move 270 240 -100 -150 turn fill }  def
-/commamono { 200 0 move 270 240 100 -150 turn fill }  def
-/hyphen { 0 350 move 200 350 line fill } def
-/hyphenmono { 100 350 move 300 350 line fill } def
-/period { 0 0 dot fill } def
-/pointmono { 200 0 dot fill } def
-/slash { 0 0 move 400 700 line fill } def
-/at { 
-500 350 move 
-90 180 325 550 turn
-180 270 150 350 turn
-270 0 325 150 turn
-0 90 500 350 turn
-500 500 move 
-500 300 line
-270 0 600 150 turn
-0 90 700 300 turn
-90 180 350 720 turn
-180 270 0 350 turn
-270 0 350 -20 turn
-0 30 500 25 turn 
-fill}  def
-/atmono { 
-500 7 div 4 mul  350 move 
-90 180 325 7 div 4 mul 550 turn
-180 270 150 7 div 4 mul 350 turn
-270 0 325 7 div 4 mul 150 turn
-0 90 500 7 div 4 mul 350 turn
-500 7 div 4 mul 500 move 
-500 7 div 4 mul 300 line
-270 0 600 7 div 4 mul 150 turn
-0 90 700 7 div 4 mul 300 turn
-90 180 350 7 div 4 mul 720 turn
-180 270 0 7 div 4 mul 350 turn
-270 0 350 7 div 4 mul -20 turn
-0 30 500 7 div 4 mul 25 turn 
-fill}  def
-/zero  {  200 720 move 
-180 270 0 350 turn 
-270 0 200 -20 turn
-0 90 400 350 turn
-90 180 200 720 turn
-fill } def
-/num0mono {  200 720 move 
-180 270 0 350 turn 
-270 0 200 -20 turn
-0 90 400 350 turn
-90 180 200 720 turn
-200 350 dot
-fill } def
-/num0smallcaps {  200 500 move 
-180 270 0 250 turn 
-270 0 200 0 turn
-0 90 400 250 turn
-90 180 200 500 turn
-fill } def
-/one  {  100 500 move
-400 700 line
-400 0 line
-fill } def
-/num1mono {  0 500 move
-300 700 line
-300 0 line
+/parenleft  { 200 700 move 210 270 0 300 turnsstart 270 330 200 -100 turnsend } def
+/parenright { 0 700 move 330 270 200 300 turnsstart 270 210 0 -100 turnsend } def
+/asterisk { 10 dict begin /thin mediumthick def 
+0 300 move 400 300 lines
+100 472 move 300 128 lines
+300 472 move 100 128 lines
+end }  def
+
+/plus { 10 dict begin /thin mediumthick def 
+0 350 move 400 350 lines 200 550 move 200 150 lines fill
+end }  def
+/comma { 
+0 0 move 270 240 -100 -150 turnsstart 
+0 0 transpose thick 2 div 0 360 arc
+}  def
+/hyphen { 10 dict begin /thin mediumthick def 
+0 350 move 200 350 lines 
+end } def
+/period { 0 0 dot } def
+/slash { 10 dict begin /thin mediumthick def 
+0 0 move 400 700 lines 
+end } def
+
+
+
+/zero  {  
+smallcapsfont {
+200 500 move 
+180 270 0 250 turnsstart 
+270 0 200 0 turnsend
+0 90 400 250 turnsstart
+90 180 200 500 turnsend
+} { 
+200 720 move 
+180 270 0 350 turnsstart 
+270 0 200 -20 turnsend
+0 90 400 350 turnsstart
+90 180 200 720 turnsend
+} ifelse
+} def
+
+
+/one  { 
+smallcapsfont {
+thin thick 100 350 400 500 400 0 corner
+270 400 0 hserif
+} { 
+monofont { 
+0 500 move 300 700 line 300 0 line
 200 0 move 400 0 line
-fill } def
-/num1smallcaps {  100 350 move
-400 500 line
-400 0 line
-fill } def
-/two  {  0 550 move 90 0 200 720 turn
-0 270 400 550 turn 
-270 225 200 200 turn
-0 0 line 400 0 line
-fill } def
-/num2smallcaps {  0 350 move 90 0 200 500 turn
-0 270 400 350 turn 
-270 225 200 0 turn
-0 -200 line 400 -200 line
-fill } def
-/three  { 0 550 move 90 0 200 720 turn
-0 270 400 525 turn 
-270 180 200 350 turn
-0 270 400 175 turn 
-270 180 200 -20 turn
-180 90 0 150 turn
-fill } def
-/num3smallcaps { 0 350 move 90 0 200 500 turn
-0 270 400 325 turn 
-270 180 200 150 turn
-0 270 400 -25 turn 
-270 180 200 -200 turn
-180 90 0 -50 turn
-fill } def
-/four {  300 700 move 0 200 line 400 200 line
-300 700 move 300 0 line
-fill } def
-/num4smallcaps {  300 500 move 0 0 line 400 000 line
-300 500 move 300 -200 line
-fill } def
-/five {  400 700 move 0 700 line
-0 400 line 200 400 line
-0 270 400 200 turn
-270 180 200 0 turn
-180 150 0 50 turn 
-fill } def
-/num5smallcaps {  400 500 move 0 500 line
-0 200 line 200 200 line
-0 270 400 0 turn
-270 180 200 -200 turn
-180 150 0 -150 turn 
-fill } def
-/six {  400 550 move 90 180 200 720 turn
-180 270 0 400 turn 0 200 line
-270 0 200 -20 turn
-0 90 400 200 turn 
-90 180 200 400 turn
-180 270 0 200 turn 
-fill } def
-/num6smallcaps {  10 dict begin
+} {	
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def  } if
+thin thick 50 500 350 700 350 0 corner
+90 350 0 hserif
+} ifelse 
+} ifelse } def
+
+
+/two  {  
+smallcapsfont { 
+0 350 move 90 0 200 500 turns
+0 270 400 350 turnsstart
+270 225 200 0 turnsend
+thin thick 200 0 0 -200 400 -200 corner
+} {
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def  } if
+0 550 move 90 0 200 720 turns
+0 270 400 550 turnsstart 
+270 225 200 200 turnsend
+thin thin 200 200 0 0 400 0 corner
+0 400 0 vtserif
+} ifelse } def
+
+
+/three  { 
+smallcapsfont {
+0 350 move 90 0 200 500 turns
+0 270 400 325 turnsstart 
+270 180 200 150 turnsend
+0 270 400 -25 turnsstart 
+270 180 200 -200 turnsend
+180 90 0 -50 turns
+} {
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def  } if
+0 550 move 90 0 200 720 turns
+0 270 400 525 turnsstart 
+270 180 200 350 turnsend
+0 270 400 175 turnsstart
+270 180 200 -20 turnsend
+180 90 0 150 turns
+} ifelse } def
+
+
+/four { 
+smallcapsfont {
+thin thick 300 500 0 0 400 0 corner
+thin thick 0 0 300 500 300 -200 corner
+270 300 -200 hserif	
+} {	
+	currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def  } if
+thin thin 300 700 0 300 400 300 corner
+thin thick 0 300 300 700 300 0 corner
+270 300 0 hserif
+} ifelse } def
+
+/five {  
+smallcapsfont {
+thick thin 400 500 0 500 0 200 corner
+thin thin 0 500 0 200 200 200 corner
+200 200 move 0 270 400 0 turnsstart
+270 180 200 -200 turnsend
+180 150 0 -150 turns 
+} {
+		currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def  } if
+
+thick thin 400 700 0 700 0 400 corner
+thin thin 0 700 0 400 200 400 corner
+200 400 move 0 270 400 200 turnsstart
+270 180 200 0 turnsend
+180 150 0 50 turns 
+} ifelse } def
+
+/six { 10 dict begin
+smallcapsfont {  10 dict begin
 /tangentx 135 cos 200 mul 200 add def
 /tangenty 135 sin 250 mul 250 add def
 tangentx 300 add tangenty 375 add move
-tangentx tangenty line
+currentserif { 225 270 0 250 turnsstart } { tangentx tangenty lines } ifelse
 end
-0 200 move
-270 0 200 0 turn
-0 90 400 250 turn 
-90 180 200 500 turn
-180 270 0 250 turn 
-fill } def
-/seven {  0 700 move 400 700 line 100 0 line
-fill } def
-/num7smallcaps {  0 500 move 400 500 line 100 -200 line
-fill } def
-/eight {  200 380 move 0 90 375 540 turn
-90 180 200 720 turn
-180 270 25 540 turn
+0 250 move
+270 0 200 0 turnsend
+0 90 400 250 turnsstart 
+90 180 200 500 turnsend
+180 270 0 250 turnsstart 	
+} {
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def  } if
+
+400 550 move 90 180 200 720 turns
+180 270 0 400 turnsstart 0 200 line
+270 0 200 -20 turnsend
+0 90 400 200 turnsstart 
+90 180 200 400 turnsend
+180 270 0 200 turnsstart 
+} ifelse end } def
+
+
+/seven {  
+smallcapsfont { thick thin 0 500 400 500 100 -200 corner }
+{
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def  } if
+thick thin 0 700 400 700 100 0 corner } ifelse
+} def
+
+/eight {  
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def  } if
+200 380 move 0 90 375 540 turns
+90 180 200 720 turns
+180 270 25 540 turnsstart
 270 0 200 380 turn
 0 270 400 190 turn
-270 180 200 -20 turn 
-180 90 0 190 turn 
-90 0 200 380 turn
-fill } def
-/num8smallcaps {  200 380 move 0 90 375 540 turn
-90 180 200 720 turn
-180 270 25 540 turn
-270 0 200 380 turn
-0 270 400 190 turn
-270 180 200 -20 turn 
-180 90 0 190 turn 
-90 0 200 380 turn
-fill } def
-/nine {  400 500 move
-90 180 200 720 turn
-180 270 0 500 turn
-270 0 200 300 turn
-0 90 400 500 turn
-400 300 line
-270 180 200 -20 turn
-180 90 0 150 turn
-fill } def
-/num9smallcaps {  400 300 move
-90 180 200 500 turn
-180 270 0 250 turn
-270 0 200 0 turn
-0 90 400 250 turn
+270 180 200 -20 turnsend 
+180 90 0 190 turns 
+90 0 200 380 turns
+} def
+
+
+/nine {  
+smallcapsfont {
+400 250 move
+90 180 200 500 turnsend
+180 270 0 250 turnsstart
+270 0 200 0 turnsend
+0 90 400 250 turnsstart
 10 dict begin
 /tangentx 315 cos 200 mul 200 add def
 /tangenty 315 sin 250 mul 250 add def
 tangentx 300 sub tangenty 375 sub move
-tangentx tangenty line
+currentserif { 45 90 400 250 turnsstart } { tangentx tangenty lines } ifelse
 end
-fill } def
+} {
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def  } if
+400 500 move
+90 180 200 720 turnsend
+180 270 0 500 turnsstart
+270 0 200 300 turnsend
+0 90 400 500 turnsstart
+400 300 line
+270 180 200 -20 turnsend
+180 90 0 150 turns
+} ifelse } def
+
+
 /colon { 0 0 dot 0 300 dot }  def
-/colonmono { 200 0 dot 200 300 dot }  def
-/semicolon { 0 0 move 270 240 -100 -150 turn 0 300 dot fill} def
-/semicolonmono { 200 0 move 270 240 100 -150 turn 200 300 dot fill} def
-/less { 400 450 move 0 350 line 400 250 line fill } def
-/equal { 0 450 move 400 450 line 0 250 move 400 250 line fill}  def
-/greater { 0 450 move 400 350 line 0 250 line fill }  def
-/question { 0 500 move 90 0 200 720 turn 0 270 400 500 turn
-270 180 250 350 turn
-180 270 200 300 turn  200 200 line
+/semicolon { 0 0 move 270 240 -100 -150 turnsend 
+0 0 transpose thick 2 div 0 360 arc
+0 300 dot
+fill} def
+/less { 10 dict begin /thin mediumthick def 
+400 450 move 0 350 lines 400 250 lines fill
+end } def
+
+/equal { 10 dict begin /thin mediumthick def 
+0 450 move 400 450 lines 0 250 move 400 250 lines 
+end}  def
+/greater { 10 dict begin /thin mediumthick def 
+0 450 move 400 350 lines 0 250 lines end }  def
+/question { 0 600 move 45 0 200 700 turns 0 270 400 600 turnsstart
+270 210 300 450 turnsend
+210 270 200 300 turns  270 270 200 150 turns
 200 0 dot
 fill}  def
-/A { 0 0 move 250 700 line 500 0 line
+/at { monofont { 500 700 div 1 compscale } if 10 dict begin /thick thick 110 min def
+500 350 move 
+90 180 325 550 turnsend
+180 270 150 350 turnsstart
+270 0 325 150 turnsend
+0 90 500 350 turnsstart
+500 500 move 
+500 300 line
+270 0 600 150 turnsend
+0 90 700 300 turns
+90 180 350 720 turns
+180 270 0 350 turns
+270 0 350 -20 turns
+0 30 500 25 turns 
+end}  def
+
+
+/A { 10 dict begin /propwidth 600 def 
+currentserif { /leftbearing 25 def /rightbearing 50 def } if
 250 0.3 mul 
 700 0.3 mul move 
 250 0.3 mul neg 500 add 
-700 0.3 mul line 
-fill } def
-/capAmono { 0 0 move 200 700 line 400 0 line
-200 0.3 mul 
-700 0.3 mul move 
-200 0.3 mul neg 400 add 
-700 0.3 mul line 
-fill } def
-/minAsmallcaps { 0 0 move 250 500 line 500 0 line
-250 0.3 mul 
-500 0.3 mul move 
-250 0.3 mul neg 500 add 
-500 0.3 mul line 
-fill } def
-/capAsmall { 0 0 move 250 600 line 500 0 line
-250 0.3 mul 
-600 0.3 mul move 
-250 0.3 mul neg 500 add 
-600 0.3 mul line 
-fill } def
-/capAmonosmall { 0 0 move 200 600 line 400 0 line
-250 0.3 mul 
-600 0.3 mul move 
-200 0.3 mul neg 400 add 
-600 0.3 mul line 
-fill } def
-/B { 0 700 moveto 0 0 line 
-0 700 move 300 700 line 0 270 450 550 turn
-270 180 300 400 turn 0 400 line
-300 400 move 0 270 500 200 turn 270 180 300 0 turn 0 0 line
-fill } def
-/capBmono { 0 700 moveto 0 0 line 
-0 700 move 200 700 line 0 270 350 550 turn
-270 180 200 400 turn 0 400 line
-200 400 move 0 270 400 200 turn 270 180 200 0 turn 0 0 line
-fill } def
-/minBsmallcaps { 0 500 moveto 0 0 line 
-0 500 move 300 500 line 0 270 450 400 turn
-270 180 300 300 turn 0 300 line
-300 300 move 0 270 500 150 turn 270 180 300 0 turn 0 0 line
-fill } def
-/C { 500 525 move 
-90 180 250 720 turn 180 270 0 350 turn
-270 0 250 -20 turn 0 90 500 175 turn 
-fill } def
-/capCmono { 400 525 move 
-90 180 200 720 turn 180 270 0 350 turn
-270 0 200 -20 turn 0 90 400 175 turn 
-fill } def
-/minCsmallcaps { 500 375 move 
-90 180 250 500 turn 180 270 0 250 turn
-270 0 250 0 turn 0 90 500 125 turn 
-fill } def
-/D { 0 700 move 0 0 line
-0 700 move 200 700 line 0 270 500 425 turn
-500 275 line 270 180 200 0 turn
-0 0 line 
-fill } def
-/capDmono { 0 700 move 0 0 line
-0 700 move 100 700 line 0 270 400 425 turn 
-400 275 line 270 180 100 0 turn
-0 0 line
-fill } def
-/minDsmallcaps { 0 500 move 0 0 line
-0 500 move 200 500 line 0 270 500 305 turn
-500 195 line 270 180 200 0 turn
-0 0 line
-fill } def
-/E { 0 700 move 0 0 line
-0 700 move 500 700 line
-0 350 move 350 350 line
-0 0 move 500 0 line
-fill } def
-/capEmono { 0 700 move 0 0 line
-0 700 move 400 700 line
-0 350 move 300 350 line
-0 0 move 400 0 line
-fill } def
-/minEsmallcaps { 0 500 move 0 0 line
-0 500 move 500 500 line
-0 250 move 350 250 line
-0 0 move 500 0 line
-fill } def
-/capEsmall { 0 600 move 0 0 line
-0 600 move 500 600 line
-0 300 move 350 300 line
-0 0 move 500 0 line
-fill } def
-/capEmonosmall { 0 600 move 0 0 line
-0 600 move 400 600 line
-0 300 move 300 300 line
-0 0 move 400 0 line
-fill } def
-/F { 0 700 move 0 0 line
-0 700 move 500 700 line
-0 350 move 350 350 line
-fill } def
-/capFmono { 0 700 move 0 0 line
-0 700 move 400 700 line
-0 350 move 300 350 line
-fill } def
-/minFsmallcaps { 0 500 move 0 0 line
-0 500 move 500 500 line
-0 250 move 350 250 line
-fill } def
-/G { 500 525 move
-90 180 250 720 turn
-180 270 0 350 turn
-270 0 250 -20 turn
-0 90 500 300 turn
-300 300 line 
-fill } def
-/capGmono { 400 525 move
-90 180 200 720 turn
-180 270 0 350 turn
-270 0 200 -20 turn
-0 90 400 300 turn
-240 300 line 
-fill } def
-/minGsmallcaps { 500 375 move
-90 180 250 500 turn
-180 270 0 250 turn
-270 0 250 0 turn
-0 90 500 205 turn
-300 205 line 
-fill } def
-/H { 0 700 move 0 0 line
+700 0.3 mul lines 
+thin thick 500 currentsans { thin } { 1 } ifelse sub 0 500 0 375 350 corner
+thick thin 500 0 250 700 0 0 cornercapped
+thin thin 125 350 0 0 currentsans { thin 2 div  } { 1 } ifelse 0 corner
+
+-700 -250 atan 0 0 hserif -700 250 atan 500 0 hserif 
+end } def
+
+/B { 10 dict begin /propwidth 600 def
+currentserif { /leftbearing 25 def } if
+thick thin 0 350 0 700 300 700 corner
+thick thin 0 350 0 0 300 0 corner 
+300 700 move 0 270 450 550 turnsstart
+270 180 300 400 turnsend 0 400 lines
+300 400 move 0 270 500 200 turnsstart 270 180 300 0 turnsend 0 0 lines
+90 0 700 hlserif 270 0 0 hrserif
+end} def
+
+/C { 10 dict begin /propwidth 600 def 
+500 550 move 
+90 180 250 720 turns 180 270 0 350 turnsstart
+270 0 250 -20 turnsend  
+0 90 500 150 turns
+0 500 600 vserif
+end} def
+
+/D { 10 dict begin  /propwidth 600 def
+currentserif { /leftbearing 25 def } if
+thick thin 0 350 0 700 200 700 corner
+thick thin 0 350 0 0 200 0 corner
+200 700 move 0 270 500 425 turnsstart
+500 275 line 270 180 200 0 turnsend
+0 0 lines 
+90 0 700 hlserif 270 0 0 hrserif
+end } def
+
+/E { 10 dict begin /propwidth 600 def
+currentserif { /leftbearing 25 def } if
+thick thin 0 350 0 700 500 700 corner
+thick thin 0 350 0 0 500 0 corner
+0 350 move 350 350 lines
+90 0 700 hlserif 270 0 0 hrserif 0 350 350 vserif 0 500 700 vbserif 0 500 0 vtserif
+end } def
+
+/F { 10 dict begin /propwidth 600 def
+currentserif { /leftbearing 25 def } if
+thick thin 0 0 0 700 500 700 corner
+thick thin 0 350 0 0 currentsans { thick 2 div } { 1 } ifelse 0 corner
+0 350 move 350 350 lines
+270 0 0 hserif 90 0 700 hlserif 0 500 700 vbserif 0 350 350 vserif
+end } def
+
+/G { 10 dict begin /propwidth 600 def
+currentserif { /leftbearing -25 def  /rightbearing 50 def } if
+500 550 move
+90 180 250 720 turns
+180 270 0 350 turnsstart
+270 0 250 -20 turnsend
+0 90 500 250 turnsstart
+500 300 line
+currentserif { 90 500 300 hserif } { thick thin 500 290 500 300 300 300 corner } ifelse
+0 500 600 vserif
+end } def
+
+/H { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def /propwidth 600 def
+currentserif { /leftbearing 25 def /rightbearing 25 def} if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+0 700 move 0 0 line
 500 700 move 500 0 line
-0 350 move 500 350 line
-fill } def
-/capHmono { 0 700 move 0 0 line
-400 700 move 400 0 line
-0 350 move 400 350 line
-fill } def
-/minHsmallcaps { 0 500 move 0 0 line
-500 500 move 500 0 line
-0 250 move 500 250 line
-fill } def
-/I { 0 700 move 0 0 line
-fill } def
-/capImono { 200 700 move 200 0 line
+0 350 move 500 350 lines
+90 0 700 hserif 90 500 700 hserif 270 0 0 hserif 270 500 0 hserif
+end } def
+
+/I { 10 dict begin
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+monofont { 
+200 700 move 200 0 line
 0 700 move 400 700 line
 0 0 move 400 0 line
-fill } def
-/minIsmallcaps { 0 500 move 0 0 line
-fill } def
-/capIsmall { 0 600 move 0 0 line
-fill } def
-/capImonosmall { 200 600 move 200 0 line
-0 600 move 400 600 line
-0 0 move 400 0 line
-fill } def
-/J { 400 700 move 400 200 line 
-270 180 200 0 turn
-180 90 0 175 turn 
-fill } def
-/minJsmallcaps { 400 500 move 400 150 line 
-270 180 200 0 turn
-180 90 0 125 turn 
-fill } def
-/K { 0 700 move 0 0 line
-0 350 move 500 700 line
-200 350 200 mul 500 div 350 add move 500 0 line
-fill } def
-/capKmono { 0 700 move 0 0 line
-0 350 move 400 700 line
-200 350 200 mul 400 div 350 add move 400 0 line
-fill } def
-/minKsmallcaps { 0 500 move 0 0 line
-0 250 move 500 500 line
-200 250 250 500 div 200 mul add move 500 0 line
-fill } def
-/L { 0 700 move 0 0 line 500 0 line
-fill } def
-/capLmono { 0 700 move 0 0 line 400 0 line
-fill } def
-/minLsmallcaps { 0 500 move 0 0 line 500 0 line
-fill } def
-/M { 0 0 move 0 700 line
-300 200 line 600 700 line 
-600 0 line
-fill } def
-/capMmono { 0 0 move 0 700 line
-200 200 line 400 700 line 
-400 0 line
-fill } def
-/minMsmallcaps { 0 0 move 0 500 line
-300 150 line 600 500 line 
-600 0 line
-fill } def
-/N { 0 0 move 0 700 line
-500 0 line 500 700 line
-fill } def
-/capNmono { 0 0 move 0 700 line
-400 0 line 400 700 line
-fill } def
-/minNsmallcaps { 0 0 move 0 500 line
-500 0 line 500 500 line
-fill } def
-/capNsmall { 0 0 move 0 600 line
-500 0 line 500 600 line
-fill } def
-/capNmonosmall { 0 0 move 0 600 line
-400 0 line 400 600 line
-fill } def
-/O  {  300 720 move 
-180 270 0 350 turn 
-270 0 300 -20 turn
-0 90 600 350 turn
-90 180 300 720 turn
-fill } def
-/capOmono {  200 720 move 
-180 270 0 350 turn 
-270 0 200 -20 turn
-0 90 400 350 turn
-90 180 200 720 turn
-fill } def
-/minOsmallcaps {  300 500 move 
-180 270 0 250 turn 
-270 0 300 0 turn
-0 90 600 250 turn
-90 180 300 500 turn
-fill } def
-/capOsmall {  300 600 move 
-180 270 0 300 turn 
-270 0 300 -20 turn
-0 90 600 300 turn
-90 180 300 600 turn
-fill } def
-/capOmonosmall {  200 600 move 
-180 270 0 300 turn 
-270 0 200 -20 turn
-0 90 400 300 turn
-90 180 200 600 turn
-fill } def
-/P  { 0 700 move 0 0 line 
-0 700 move 300 700 line
-0 270 500 525 turn
-270 180 300 350 turn 
-0 350 line
-fill } def
-/capPmono { 0 700 move 0 0 line 
-0 700 move 200 700 line
-0 270 400 525 turn
-270 180 200 350 turn 
-0 350 line
-fill } def
-/minPsmallcaps { 0 500 move 0 0 line 
-0 500 move 300 500 line
-0 270 500 375 turn
-270 180 300 250 turn 
-0 250 line
-fill } def
-/Q  {  300 720 move 
-180 270 0 350 turn 
-270 0 300 -20 turn
-0 90 600 350 turn
-90 180 300 720 turn
-400 200 move 600 0 line
-fill } def
-/capQmono {  200 720 move 
-180 270 0 350 turn 
-270 0 200 -20 turn
-0 90 400 350 turn
-90 180 200 720 turn
-200 200 move 400 0 line
-fill } def
-/minQsmallcaps {  300 500 move 
-180 270 0 250 turn 
-270 0 300 0 turn
-0 90 600 250 turn
-90 180 300 500 turn
-450 150 move 600 0 line
-fill } def
-/R  { 0 700 move 0 0 line
-0 700 move 250 700 line
-0 270 500 525 turn
-270 180 250 350 turn 
-0 350 line
-250 350 move 500 0 line
-fill } def
-/capRmono { 0 700 move 0 0 line
-0 700 move 200 700 line
-0 270 400 525 turn
-270 180 200 350 turn 
-0 270 line
-200 350 move 400 0 line
-fill } def
-/minRsmallcaps { 0 500 move 0 0 line
-0 500 move 250 500 line
-0 270 500 375 turn
-270 180 250 250 turn 
-0 250 line
-250 250 move 500 0 line
-fill } def
-/S  { 500 525 move 
-90 180 250 720 turn
-180 270 0 525 turn 
+} {
+/rightbearing 50 def
+currentserif { /leftbearing -25 def /rightbearing 125 def} if
+0 700 move 0 0 line
+90 0 700 hserif 270 0 0 hserif
+} ifelse
+end } def
+
+/J { 10 dict begin 
+currentserif { /leftbearing 25 def /rightbearing 50 def} if 
+400 700 move 400 200 line 
+270 180 200 0 turnsend
+180 90 0 175 turnsstart
+90 400 700 hserif
+90 0 175 hserif
+end } def
+
+
+/K { 10 dict begin /propwidth 600 def
+currentserif { /leftbearing 25 def /rightbearing 25 def} if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+0 700 move 0 0 line
+0 350 move 500 700 lines
+/x1 200 def
+/y1 350 200 mul 500 div 350 add def
+thick thin x1 y1 500 0 500 currentsans { thick 2 div } { 1 } ifelse add 0 corner
+90 0 700 hserif 270 0 0 hserif y1 neg 500 x1 sub atan 500 0 hserif 350 500 atan 500 700 hserif
+end } def
+
+/L { 10 dict begin  
+currentserif { /leftbearing 25 def /rightbearing 25 def } if
+thick thin 0 700 0 0 400 0 corner
+90 0 700 hserif 270 0 0 hrserif 0 400 0 vtserif
+end } def
+
+/M { 10 dict begin /propwidth 700 def
+currentserif { /leftbearing 25 def /rightbearing 25 def} if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+0 0 move 0 700 lines
+600 0 move 600 700 line
+currentserif currentsans or {
+	0 700 move 
+	thick thin 150 thick 4 div add 475 0 thick 2 div add 700 0 700 corner
+	thick thin 150 thick 4 div add 475 300 250 450 thick 4 div sub 475 corner
+	thin thin 600 700 600 thick 2 div sub 700 450 thick 4 div sub 475 corner
+	90 0 700 hlserif 270 0 0 hserif 90 600 700 hrserif 270 600 0 hserif	
+} {
+0 700 move
+300 250 line
+600 700 line
+} ifelse
+
+end } def
+
+
+/N { 10 dict begin  /propwidth 600 def
+currentserif { /leftbearing 25 def /rightbearing 25 def } if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+0 0 move 0 700 lines
+500 0 move 500 700 lines
+thin thick -1 700 0 700 250 350 corner
+thin thick 500 350 500 0 250 350 cornercapped
+270 0 0 hserif 90 0 700 hserif 90 500 700 hserif
+end } def
+
+/O  { 10 dict begin /propwidth 700 def
+300 720 move 
+180 270 0 350 turnsstart
+270 0 300 -20 turnsend
+0 90 600 350 turnsstart
+90 180 300 720 turnsend
+end } def
+
+/P  { 10 dict begin /hasleftserif 1 def /propwidth 600 def
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+currentserif { /leftbearing 25 def /rightbearing 25 def} if
+thick thin 0 0 0 700 300 700 corner 
+300 700 move
+0 270 500 525 turnsstart
+270 180 300 350 turnsend
+0 350 lines
+270 0 0 hserif 90 0 700 hlserif
+end } def
+
+/Q  { 10 dict begin /propwidth 700 def 
+300 720 move 
+180 270 0 350 turnsstart 
+270 0 300 -20 turnsend
+0 90 600 350 turnsstart
+90 180 300 720 turnsend
+currentserif {
+	300 0 move 270 0 600 -200 turnsend
+} {
+400 200 move 600 0 lines
+} ifelse
+end } def
+
+/R { 10 dict begin /propwidth 600 def
+currentserif { /leftbearing 25 def /rightbearing 25 def} if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+thick thin 0 0 0 700 250 700 corner 
+250 700 move
+0 270 500 525 turnsstart
+270 180 250 350 turnsend 
+0 350 lines
+thin thick 249 350 250 350 375 175 corner
+thick thin 375 175 500 0 501 0 corner
+270 0 0 hserif 90 0 700 hlserif -350 250 atan 500 0 hlserif 
+end } def
+
+/S  { 10 dict begin /propwidth 600 def
+500 525 move 
+90 180 250 720 turns
+180 270 0 525 turnsstart 
 270 0 240 370 turn 260 370 line
 0 270 500 175 turn
-270 180 250 -20 turn
-180 90 0 175 turn 
-fill } def
-/capSmono { 400 525 move 
-90 180 200 720 turn
-180 270 0 525 turn 
-270 0 190 370 turn 210 370 line
-0 270 400 175 turn
-270 180 200 -20 turn
-180 90 0 175 turn 
-fill } def
-/minSsmallcaps { 500 375 move 
-90 180 250 500 turn
-180 270 0 375 turn 
-270 0 240 265 turn 260 265 line
-0 270 500 125 turn
-270 180 250 0 turn
-180 90 0 125 turn 
-fill } def
-/T { 250 700 move 250 0 line
-500 700 move 0 700 line
-fill } def 
-/capTmono { 200 700 move 200 0 line
-400 700 move 0 700 line
-fill } def 
-/minTsmallcaps { 250 500 move 250 0 line
-500 500 move 0 500 line
-fill } def 
-/U { 0 700 move 0 250 line
-270 0 250 -20 turn
-0 90 500 250 turn
-500 700 line
-fill } def 
-/capUmono { 0 700 move 0 250 line
-270 0 200 -20 turn
-0 90 400 250 turn
-400 700 line
-fill } def 
-/minUsmallcaps { 0 500 move 0 175 line
-270 0 250 0 turn
-0 90 500 175 turn
-500 500 line
-fill } def 
-/capUsmall { 0 600 move 0 250 line
-270 0 250 -20 turn
-0 90 500 250 turn
-500 600 line
-fill } def 
-/capUmonosmall { 0 600 move 0 250 line
-270 0 200 -20 turn
-0 90 400 250 turn
-400 600 line
-fill } def 
-/V { 0 700 move 250 0 line 500 700 line
-fill } def 
-/capVmono { 0 700 move 200 0 line 400 700 line
-fill } def 
-/minVsmallcaps { 0 500 move 250 0 line 500 500 line
-fill } def 
-/W { 0 700 move 200 0 line 350 500 line
-500 0 line 700 700 line
-fill } def 
-/capWmono { 0 700 move 140 0 line 200 300 line
-260 0 line 400 700 line
-fill } def 
-/minWsmallcaps { 0 500 move 200 0 line 350 350 line
-500 0 line 700 500 line
-fill } def 
-/X { 0 700 move 500 0 line
-500 700 move 0 0 line 
-fill } def 
-/capXmono { 0 700 move 400 0 line
-400 700 move 0 0 line 
-fill } def 
-/minXsmallcaps { 0 500 move 500 0 line
-500 500 move 0 0 line 
-fill } def 
-/Y { 0 700 move 250 300 line 250 0 line
-250 300 move 500 700 line
-fill } def 
-/capYmono { 0 700 move 200 300 line 200 0 line
-200 300 move 400 700 line
-fill } def 
-/minYsmallcaps { 0 500 move 250 225 line 250 0 line
-250 225 move 500 500 line
-fill } def 
-/capYsmall { 0 600 move 250 260 line 250 0 line
-250 260 move 500 600 line
-fill } def 
-/capYmonosmall { 0 600 move 200 260 line 200 0 line
-200 260 move 400 600 line
-fill } def 
-/Z { 0 700 move 500 700 line
-0 0 line 500 0 line
-fill } def
-/capZmono { 0 700 move 400 700 line
-0 0 line 400 0 line
-fill } def
-/minZsmallcaps { 0 500 move 500 500 line
-0 0 line 500 0 line
-fill } def
-/bracketleft { 200 700 move 0 700 line 0 -100 line 200 -100 line fill }  def
-/openbracketmono { 300 800 move 100 800 line 100 -100 line 300 -100 line fill }  def
-/backslash  { 0 700 move 400 0 line fill } def
-/bracketright  { 0 700 move 200 700 line 200 -100 line 0 -100 line fill } def
-/closebracketmono  { 100 800 move 300 800 line 300 -100 line 100 -100 line fill } def
-/asciicircum  { 100 650 move 200 700 line 300 650 line fill } def
-/underscore    { 0 0 move 500 0 line fill } def
-/underlinemono  { 0 0 move 400 0 line fill } def
-/grave  { 100 700 move 300 650 line fill } def
-/a {
-currentslanted { 400 350 move 400 50 line 400 50 endswash
+270 180 250 -20 turnsend
+180 90 0 175 turns 
+180 0 125 vserif 0 500 600 vserif
+end } def
+
+/T { 10 dict begin /propwidth 600 def
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+0 700 move 500 700 lines
+thick thin 250 700 250 0 251 0 corner
+180 0 700 vbserif 0 500 700 vbserif 270 250 0 hserif 
+end } def 
+
+/U { 10 dict begin /propwidth 600 def
+currentserif { /leftbearing 25 def /rightbearing 25 def} if
+0 700 move 0 250 line
+270 0 250 -20 turnsend
+0 90 500 250 turns
+500 700 lines
+90 0 700 hserif 90 500 700 hsserif
+end } def 
+
+/V { 10 dict begin  /propwidth 600 def
+currentserif { /leftbearing 25 def /rightbearing 25 def} if
+thin thick -1 700 0 700 125 350 corner
+thick thin 125 350 250 0 375 350 cornercapped
+thin thin 375 350 500 700 501 700 corner
+700 -250 atan 0 700 hserif 700 250 atan 500 700 hsserif 
+end } def 
+
+/W { 10 dict begin  /propwidth 800 def
+currentserif { /leftbearing 25 def /rightbearing 25 def} if
+thin thick -1 700 0 700 100 350 corner
+thick thin 100 350 200 0 305 350 cornercapped
+thin thick 275 250 350 500 425 250 corner
+thick thin 395 350 500 0 600 350 cornercapped
+thin thin 600 350 700 700 701 700 corner
+700 -200 atan 0 700 hserif 700 200 atan 700 700 hsserif
+end } def 
+
+/X { 10 dict begin /propwidth 600 def
+currentserif { /leftbearing 25 def /rightbearing 25 def} if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+thin thick -1 700 0 700 250 350 corner
+thick thin 250 350 500 0 501 0 corner
+thin thin -1 0 0 0 250 350 corner
+thin thin 250 350 500 700 501 700 corner
+700 -500 atan 0 700 hserif -700 500 atan 500 0 hserif 
+-700 -500 atan 0 0 hsserif 700 500 atan 500 700 hsserif
+end } def 
+
+/Y { 10 dict begin /propwidth 600 def
+currentserif { /leftbearing 25 def /rightbearing 25 def} if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+thin thick -1 700 0 700 250 300 corner
+thick thick 125 500 250 300 250 0 corner
+thin thin 250 currentserif { thick 2 div add } if 300 500 700 501 700 corner
+400 -250 atan 0 700 hserif 400 250 atan 500 700 hsserif  270 250 0 hserif  
+end } def 
+
+/Z { 10 dict begin /propwidth 600 def
+0 700 move 250 700 lines
+thin thick 250 700 500 700 250 350 corner
+thick thin 250 350 0 0 250 0 corner
+250 0 move 500 0 lines
+180 0 700 vbserif 0 500 0 vtserif 
+end } def
+
+
+/bracketleft { thin thick 200 700 0 700 0 300 corner 
+thick thin 0 300 0 -100 200 -100 corner }  def
+/backslash  { 10 dict begin /thin mediumthick def  0 700 move 400 0 lines end } def
+/bracketright  { thin thick 0 700 200 700 200 300 corner 
+thick thin 200 300 200 -100 0 -100 corner } def
+/asciicircum  { 10 dict begin /thin mediumthick def  thin thin 50 650  200 700  350 650 corner end } def
+/underscore    { 10 dict begin /thin mediumthick def  0 0 move 500 0 lines end } def
+/grave  { 10 dict begin /thin mediumthick def  50 700 move 350 650 lines end  } def
+
+/a { 10 dict begin 
+currentserif { /rightbearing 25 def} if
+currentitalic { /rightbearing 50 def} if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /A get exec  } {
+currentitalic { 400 350 move 400 75 line 400 0 endswash
 400 350 move 
-90 180 200 500 turn
-180 270 0 200 turn
-270 0 200 0 turn
-0 90 400 200 turn }	
+90 180 200 500 turnsend
+180 270 0 200 turnsstart
+270 0 200 0 turnsend
+0 90 400 200 turns }	
 { 400 350 move
-270 180 200 250 turn
-180 270 0 125 turn
- 270 0 250 0 turn
-0 30 400 50 turn
-50 450 move
-30 0 200 500 turn
+270 180 200 250 turnsend
+180 270 0 125 turnsstart
+ 270 0 250 0 turnsend
+0 30 400 50 turns
+currentserif { 0 } { 50 } ifelse 450 move
+30 0 200 500 turns
 % 200 500 line
-0 270 400 350 turn 
-400 0 line } ifelse
-fill } def
-/b  {
+0 270 400 350 turnsstart 
+400 0 line
+270 400 0 hlserif
+ } ifelse
+} ifelse end } def
+
+/b  { 10 dict begin 
+currentserif { /leftbearing 25 def} if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /B get exec } {
 0 700 move
-0 0 line
-0 200 move 
-90 0 200 500 turn
-0 270 400 200 turn
-270 180 200 0 turn
-180 90 0 200 turn
-fill } def
+currentserif { 0 150 line 270 0 200 0 turnsend } { 0 0 line 0 250 move 270 0 200 0 turnsend } ifelse
+0 90 400 250 turnsstart
+90 180 200 500 turnsend
+180 270 0 250 turnsstart
+90 0 700 hlserif  
+} ifelse end } def
+
 /c  { 
-400 350 move
-90 180 200 500 turn 
-180 270 0 250 turn
-270 0 200 0 turn
-0 90 400 150 turn
- fill } def
-/d  { 400  700 move 
-currentslanted { 400 50 line 400 50 endswash } { 400 0 line } ifelse
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /C get exec  } {
+400 375 move
+90 180 200 500 turns
+180 270 0 250 turnsstart
+270 0 200 0 turnsend
+0 90 400 125 turns
+} ifelse } def
+ 
+/d { 10 dict begin 
+currentserif { /rightbearing 25 def} if
+currentitalic { /rightbearing 50 def} if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /D get exec } {
+400 700 move  
+currentitalic { 400 75 line 400 0 endswash } { 400 0 line  270 400 0 hlserif} ifelse
 400 350 move 
-90 180 200 500 turn
-180 270 0 200 turn
-270 0 200 0 turn
-0 90 400 200 turn
- fill } def
-/e  { 0 250 move 400 250 line
-90 180 200 500 turn
-180 270 0 250 turn
-270 0 200 0 turn
-0 45 400 100 turn
-fill } def
-/f { 
-300 650 move 150 180 200 700 turn
-180 270 100 550 turn
-currentslanted { 100 -50 line 270 180 -20 -200 turn } { 100 0 line } ifelse
-0 450 move 300 450 line
-fill } def
-/minFmono { 
-400 700 move
-180 270 150 550 turn
-150 0 line
-50 350 move 400 350 line
-fill } def
-/g { 400 400 move 
-150 180 200 500 turn
-180 270 0 250 turn
-270 0 200 0 turn 
-0 90 400 200 turn
+90 180 200 500 turnsend
+180 270 0 250 turnsstart
+270 0 200 0 turnsend
+0 90 400 250 turnsstart
+90 400 700 hlserif 
+} ifelse end } def
+
+/e  { 
+currentsans { /bottombearing thick 2 div neg def /topbearing thick 2 div neg def  } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /E get exec  } {
+thin thick 0 250 400 250 400 251 corner
+400 250 move 
+90 180 200 500 turnsend
+180 270 0 250 turnsstart
+270 0 200 0 turnsend
+0 30 400 50 turns
+} ifelse } def
+
+/f { 10 dict begin /propwidth 400 def
+currentserif { /leftbearing -50 def /rightbearing -25 def } if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /F get exec  } {
+400 670 move 150 180 250 700 turns
+180 270 100 550 turnsstart
+currentslanted { 100 -50 line 270 180 -50 -200 turnsend } { 100 0 line  270 100 0 hserif } ifelse
+0 400 move 300 400 lines
+} ifelse end } def
+
+/g { 10 dict begin 
+currentserif { /rightbearing 25 def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /G get exec  } {
+400 250 move 
+90 180 200 500 turnsend
+180 270 0 250 turnsstart
+270 0 200 0 turnsend 
+0 90 400 250 turns
 400 500 move 400 -50 line 
-270 180 200 -200 turn
-180 150 0 -150 turn 
-fill } def
-/h { 0 700 move 0 0 line
+270 180 200 -200 turnsend
+180 150 0 -150 turns 
+90 400 500 hrserif
+} ifelse end } def
+
+/h { 10 dict begin 
+currentserif { /leftbearing 25 def /rightbearing 25 def } if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+currentitalic { /rightbearing 50 def  } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /H get exec  } {
+0 700 move 0 0 line
 0 200 move 
-90 0 200 500 turn 
-0 270 400 250 turn
-currentslanted { 400 50 line 400 50 endswash } { 400 0 line } ifelse
-fill } def
-/i { 0 500 0 sub move
-currentslanted { 0 50 line 0 50 endswash } { 0 0 line } ifelse 
-0 700 dot 
-fill } def
-/minImono { 0 500 move 200 500 line 200 0 line 0 0 move 400 0 line 
-200 700 dot 
-fill } def
-/minIsmall { 0 500 0 sub move 0 0 line 
-fill } def
-/j { 100 500 move
-100 -50 line
-270 180 0 -200 turn 
-100 700 dot
-fill } def
-/minJmono { 200 500 move
-200 0 line
-270 180 0 -200 turn 
-200 700 dot
-fill } def
-/k { 0 700 move 0 0 line
-0 250 move 350 450 line
+90 0 220 500 turns 0 270 400 250 turnsstart
+currentitalic { 400 75 line 400 0 endswash } { 400 0 line 270 400 0 hserif } ifelse
+90 0 700 hlserif 270 0 0 hserif  
+} ifelse end } def
+
+/i { 10 dict begin  /propwidth 300 def
+currentserif { /leftbearing 25 def /rightbearing 10 def } if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+currentserif smallcapsfont and { /leftbearing 100 def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /I get exec  } {
+monofont {
+	125 0 move 125 500 line
+	50 0 move 200 0 line
+	50 500 move 125 500 line
+	125 700 dot
+}
+{
+currentitalic { 0 500 move 0 75 line 0 0 endswash 0 currentsans currentserif or { 600 } { 650 } ifelse  thick 2 div add dot }
+{ 50 500 move 50 0 line 50 currentsans currentserif or { 600 } { 650 } ifelse thick 2 div add dot 90 50 500 hlserif 270 50 0 hsserif  } ifelse 
+90 0 500 hlserif 
+} ifelse
+} ifelse end } def
+
+/j { 10 dict begin /propwidth 300 def
+currentserif { /leftbearing -50 def /rightbearing 25 def } if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+currentserif smallcapsfont and { /leftbearing 0 def /rightbearing 10 def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /J get exec  } {
+200 500 move
+200 0 line 
+270 180 50 -150 turnsend
+monofont { 50 -150 lines } { 0 -150 lines } ifelse
+200 currentsans currentserif or { 600 } { 650 } ifelse  thick 2 div add dot
+90 200 500 hlserif
+} ifelse end } def
+
+/k { 10 dict begin 
+currentserif { /leftbearing 25 def /rightbearing 25 def } if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+currentitalic { /rightbearing 50 def  } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /K get exec  } {
+0 700 move 0 0 line
+0 250 move 400 500 lines
 100 250 200 100 mul 350 div add move
 400 0 line 
-fill } def
-/l { 0 700 move 
-currentslanted { 0 50 line 0 50 endswash } { 0 0 line } ifelse
-fill } def
-/minLmono { 0 700 move 200 700 line 200 0 line 400 0 line
-fill } def
-/m { 0 500 move 0 0 line
-0 300 move
-90 0 150 500 turn
-0 270 300 300 turn
-300 0 line
-300 300 move
-90 0 450 500 turn
-0 270 600 300 turn
-currentslanted { 600 50 line 600 50 endswash } { 600 0 line } ifelse
-fill } def
-/minMmono { 0 500 move 0 0 line
-0 300 move
-90 0 100 500 turn
-0 270 200 300 turn
-200 0 line
-200 300 move
-90 0 300 500 turn
-0 270 400 300 turn
-400 0 line
-fill } def
-/n { 0 500 move 0 0 line
+90 0 700 hlserif 270 0 0 hserif 270 400 0 hserif 90 400 500 hserif
+} ifelse end  } def
+
+/l { 10 dict begin /propwidth 300 def
+currentserif { /leftbearing 25 def /rightbearing 10 def } if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+currentserif smallcapsfont and { /leftbearing 0 def /rightbearing 10 def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /L get exec  } {
+monofont {
+	75 0 move 75 700 line
+	0 0 move 150 0 line
+	0 700 move 75 700 line
+}
+{ 0 700 move currentitalic { 0 75 line 0 0 endswash } { 0 0 line 270 0 0 hserif } ifelse
+90 0 700 hlserif } ifelse
+} ifelse end  } def
+
+/m { 10 dict begin /propwidth 700 def /hasendswash 1 def
+currentserif { /leftbearing 25 def /rightbearing 50 def } if
+currentitalic { /rightbearing 50 def} if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /M get exec  } {
+0 500 move 0 0 line
+0 300 move 90 0 150 500 turns 0 270 300 350 turnsstart 300 0 line
+300 300 move 90 0 450 500 turns 0 270 600 350 turnsstart  currentitalic { 600 75 line 600 0 endswash } { 600 0 line 270 600 0 hserif } ifelse 
+90 0 500 hlserif 
+270 0 0  hserif 
+270 300 0 hserif 
+} ifelse end } def
+
+
+/n { 10 dict begin 
+currentserif { /leftbearing 25 def /rightbearing 50 def } if
+currentitalic { /rightbearing 50 def} if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /N get exec  } {
+0 500 move 0 0 line
+0 200 move 90 0 220 500 turns 0 270 400 350 turnsstart 
+currentitalic { 400 75 line 400 0 endswash } { 400 0 line 270 400 0 hsserif  } ifelse 
+90 0 500 hlserif 270 0 0 hsserif 
+} ifelse end } def
+
+/o { smallcapsfont { 400 500 div 500 700 div compscale CharacterDefs /O get exec  1 1 compscale } {
+currentserif smallcapsfont and { /leftbearing 0 def /rightbearing 10 def } if
+200 500 move 
+180 270 0 250 turnsstart
+270 0 200 0 turnsend
+0 90 400 250 turnsstart
+90 180 200 500 turnsend
+} ifelse } def
+
+/p { 10 dict begin 
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /P get exec  } {
+0 500 move 0 -200 line
 0 200 move 
-90 0 200 500 turn 
-0 270 400 250 turn
-currentslanted { 400 50 line 400 50 endswash } { 400 0 line } ifelse
-fill } def
-/o {  200 500 move 
-180 270 0 250 turn 
-270 0 200 0 turn
-0 90 400 250 turn
-90 180 200 500 turn
-fill } def
-/p { 0 500 move 0 -200 line
-0 200 move 
-90 0 200 500 turn
-0 270 400 200 turn
-270 180 200 0 turn
-180 90 0 200 turn
-fill } def
-/q { 400 500 move 400 -200 line
+90 0 200 500 turns
+0 270 400 250 turnsstart
+270 180 200 0 turnsend
+180 90 0 250 turns
+90 0 500 hlserif 270 0 -200 hserif
+} ifelse end } def
+
+/q { 10 dict begin 
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /Q get exec  } {	
+400 500 move 400 -200 line
 400 350 move 
-90 180 200 500 turn
-180 270 0 200 turn
-270 0 200 0 turn
-0 90 400 200 turn
-fill } def
-/r { 0 500 move 0 0 line
-0 250 move 90 0 300 500  turn
-fill } def
-/minRmono { 0 500 move 0 0 line
-0 250 move 90 0 400 500  turn
-fill } def
-/s { 400 400 move
-120 180 200 500 turn
-180 270 0 375 turn
+90 180 200 500 turns
+180 270 0 250 turnsstart
+270 0 200 0 turnsend
+0 90 400 250 turns
+90 400 500 hrserif 270 400 -200 hserif
+} ifelse end } def
+
+/r { 10 dict begin /propwidth 400 def
+currentserif { /leftbearing 25 def /rightbearing -25 def } if
+currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /R get exec  } {
+0 500 move 0 0 line
+0 250 move 90 0 250 500 turnsend 300 thick 2 div add 500 lines
+90 0 500 hlserif 270 0 0 hsserif
+} ifelse end } def
+
+
+/s { smallcapsfont { 400 500 div 500 700 div compscale CharacterDefs /S get exec  } {
+400 400 move
+120 180 200 500 turns
+180 270 0 375 turnsstart
 270 0 210 250 turn 240 250 line
 0 270 400 125 turn
-270 180 200 0 turn
-180 120 0 100 turn
-fill } def
-/t { 100 700 move 100 150 line
-270 0 250 0 turn 0 90 400 150 turn  
-0 450 move 300 450 line 
-fill } def
-/minTmono { 200 700 move 200 150 line
-270 0 400 0 turn
-50 500 move 350 500 line 
-fill } def
-/u { 0 500 move 0 200 line
-270 0 200 0 turn
-0 90 400 200 turn
-400 500 move
-currentslanted { 400 50 line 400 50 endswash } { 400 0 line } ifelse
-fill } def
-/v { 0 500 move 200 0 line
-currentslanted { 500 150 atan 90 400 500 turn } { 400 500 line } ifelse
-fill } def 
-/w { 0 500 move 150 0 line 300 500 line
-450 0 line 
-currentslanted { 500 150 atan 90 600 500 turn } { 600 500 line } ifelse
-fill } def
-/minWmono { 0 500 move 100 0 line 200 500 line
-300 0 line 400 500 line
-fill } def
-/x { 0 500 move 400 0 line
-0 0 move 400 500 line
-fill } def
-/y { 0 500 move 200 0 line 
-currentslanted 
-{ 100 -200 move 200 0 line 60 90 400 500 turn 
-} { 400 500 move
-% calculate line so that it does cross
-400 200 500 div 700 mul sub 
--200 line } ifelse
-fill } def
-/z { 0 500 move 400 500 line
-0 0 line 400 0 line
-fill } def
+270 180 200 0 turnsend
+180 120 0 100 turns
+180 0 75 vserif 0 400 425 vserif
+} ifelse } def
 
-/braceleft  { 300 700 move 180 270 150 600 turn 150 400 line 270 180 0 300 turn
-0 270 150 200 turn 150 0 line 270 0 300 -100 turn
-fill } def
-/opencurlymono  { 350 800 move 180 270 200 700 turn 200 450 line 270 180 50 350 turn
-0 270 200 250 turn 200 0 line 270 0 350 -100 turn
-fill } def
-/bar { 0 700 move 0 -100 line fill } def
-/pipemono  { 200 800 move 200 -100 line fill } def
-/braceright  { 0 700 move 0 270 150 600 turn 150 400 line 270 0 300 300 turn
-180 270 150 200 turn 150 0 line 270 180 0 -100 turn
-fill } def
-/closecurlymono  { 50 800 move 0 270 200 700 turn 200 450 line 270 0 350 350 turn
-180 270 200 250 turn 200 0 line 270 180 50 -100 turn
-fill } def
-/asciitilde  { 0 350 move 45 0 100 400 turn 0 315 200 350 turn 315 0 300 300 turn 0 45 400 350 turn
-fill } def
+/t {  10 dict begin 
+currentserif { /rightbearing -25 def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /T get exec  } {
+100 700 move 100 150 line 
+270 0 250 0 turnsend 0 90 400 150 turns 
+0 450 move 300 450 lines 
+90 100 700 hlserif
+} ifelse end } def
 
-/minacute { /accentoffset characterwidth 500 sub 2 div def
-accentoffset 0 translate
-/characterwidth 500 def 100 650 move 300 700 line fill 
-accentoffset neg 0 translate } def
-/capacute { /accentoffset characterwidth 600 sub 2 div def
-accentoffset 0 translate
-/characterwidth 600 def 150 750 move 350 800 line fill
-accentoffset neg 0 translate } def
-/capacutemono { /accentoffset characterwidth 500 sub 2 div def
-accentoffset 0 translate
-/characterwidth 500 def 100 750 move 300 800 line fill 
-accentoffset neg 0 translate } def
+/u { 10 dict begin 
+currentserif  { /leftbearing 25 def /rightbearing 25 def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /U get exec  } {
+0 500 move 0 200 line
+270 0 200 0 turnsend 0 90 400 200 turns 
+currentitalic { thin thick 399 500 400 500 400 75 corner 400 0 endswash } { 400 500 move 400 0 line 270 400 0 hlserif } ifelse 
+90 400 500 hlserif 
+90 0 500 hlserif 
+} ifelse end } def
 
-/mingrave { /accentoffset characterwidth 500 sub 2 div def 
-accentoffset 0 translate
-/characterwidth 500 def 100 700 move 300 650 line fill 
-accentoffset neg 0 translate } def
-/capgrave { /accentoffset characterwidth 600 sub 2 div def 
-accentoffset 0 translate
-/characterwidth 600 def 150 800 move 350 750 line fill
-accentoffset neg 0 translate } def
-/capgravemono { /accentoffset characterwidth 500 sub 2 div def 
-accentoffset 0 translate
-/characterwidth 500 def 100 800 move 300 750 line fill 
-accentoffset neg 0 translate } def
+/v { 10 dict begin 
+currentserif  { /leftbearing 25 def /rightbearing 25 def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /V get exec  } {
+thin thick -1 500 0 500 100 250 corner
+thick thin 100 250 200 0 currentitalic { 350 } { 300 } ifelse 250 cornercapped
+currentitalic { 350 250 move 500 150 atan 90 400 500 turns } { thin thin 300 250 400 500 401 500 corner } ifelse 
+90 0 500 hserif 90 400 500 hserif
+} ifelse end } def 
 
-/mincirc  { /accentoffset characterwidth 500 sub 2 div def 
-accentoffset 0 translate
-/characterwidth 500 def 100 650 move 200 700 line 300 650 line fill 
-accentoffset neg 0 translate } def
-/capcirc { /accentoffset characterwidth 600 sub 2 div def 
-accentoffset 0 translate
-/characterwidth 600 def 150 750 move 250 800 line 350 750 line fill 
-accentoffset neg 0 translate } def
-/capcircmono { accentoffset characterwidth 500 sub 2 div def 
-accentoffset 0 translate
-/characterwidth 500 def 100 750 move 200 800 line 300 750 line fill 
-accentoffset neg 0 translate } def
+/w { 10 dict begin /propwidth 700 def
+currentserif  { /leftbearing 25 def /rightbearing 25 def } if
 
-/minumlaut { /accentoffset characterwidth 500 sub 2 div def 
-accentoffset 0 translate
-/characterwidth 500 def 100 650 dot 300 650 dot fill 
-accentoffset neg 0 translate } def
-/capumlaut { /accentoffset characterwidth 600 sub 2 div def 
-accentoffset 0 translate
-/characterwidth 600 def 150 750 dot 350 750 dot fill 
-accentoffset neg 0 translate } def
-/capumlautmono { /accentoffset characterwidth 500 sub 2 div def 
-accentoffset 0 translate
-/characterwidth 500 def 100 750 dot 300 750 dot fill 
-accentoffset neg 0 translate } def
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /W get exec  } {
+thin thick -1 500 0 500 75 250 corner
+thick thin 75 250 150 0 225 250 cornercapped
+thin thick 225 250 300 500 375 250 cornercapped
+thick thin 375 250 450 0 currentitalic { 575 } { 525 } ifelse 250 cornercapped
+currentitalic { 575 250 move 500 150 atan 90 600 500 turns } { thin thin 525 250 600 500 601 500 corner } ifelse
+90 0 500 hserif 90 600 500 hserif
+} ifelse end } def
 
 
-/mincedille { /characterwidth 500 def 200 0 move 200 -50 line 0 270 300 -120 turn 270 180 200 -190 turn fill } def
-/capcedille { /characterwidth 600 def 250  -20 move 250 -50 line 0 270 300 -120 turn 270 180 250 -190 turn fill } def
-/capcedillemono { /characterwidth 500 def 200  -20 move 20 -50 line 0 270 300 -120 turn 270 180 250 -190 turn fill } def
+/x { 10 dict begin 
+currentserif  { /leftbearing 25 def /rightbearing 25 def } if
 
-/mintilde  { /accentoffset characterwidth 500 sub 2 div def 
-accentoffset 0 translate
- /characterwidth 500 def 0 700 move 45 0 100 750 turn 0 315 200 700 turn 315 0 300 650 turn 0 45 400 700 turn fill 
- accentoffset neg 0 translate } def
-/captilde { /accentoffset characterwidth 600 sub 2 div def 
-accentoffset 0 translate
-/characterwidth 600 def 50 750 move 45 0 150 800 turn 0 315 250 750 turn 315 0 350 700 turn 0 45 450 750 turn fill 
-accentoffset neg 0 translate } def
-/captildemono { /accentoffset characterwidth 500 sub 2 div def 
-accentoffset 0 translate
-/characterwidth 500 def 0 750 move 45 0 100 800 turn 0 315 200 750 turn 315 0 300 700 turn 0 45 400 750 turn fill 
-accentoffset neg 0 translate } def
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /X get exec  } {
+thin thick -1 500 0 500 200 250 corner
+thick thin 200 250 400 0 401 0 corner
+thin thin -1 0 0 0 200 250 corner
+thin thin 200 250 400 500 401 500 corner
+90 0 500 hserif 90 400 500 hserif 270 0 0 hserif 270 400 0 hserif
+} ifelse end } def
+
+/y { 10 dict begin 
+currentserif  { /leftbearing 25 def /rightbearing 25 def } if
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /Y get exec  } {
+thin thick -1 500 0 500 100 250 corner
+thick thin 100 250 200 0 currentslanted { 350 } { 300 } ifelse 250 corner
+currentslanted { 350 250 move 500 150 atan 90 400 500 turns  } { thin thin 300 250 400 500 401 500 corner } ifelse
+90 0 500 hserif 90 400 500 hserif
+200 0 move -250 -120 atan 180 0 -200 turns
+} ifelse end } def
+
+/z { 
+smallcapsfont {	400 500 div 500 700 div compscale CharacterDefs /Z get exec  } {
+thin thick 0 500 400 500 200 250 corner
+thick thin 200 250 0 0 400 0 corner 
+180 0 500 vbserif 0 400 0 vtserif	
+} ifelse } def
+
+/braceleft  { 300 700 move 180 270 150 600 turnsstart 150 400 line 270 180 0 300 turnsend
+0 270 150 200 turnsstart 150 0 line 270 0 300 -100 turnsend
+} def
+/bar { 10 dict begin /thin mediumthick def  0 700 move 0 -100 lines end} def
+/braceright  { 0 700 move 0 270 150 600 turnsstart 150 400 line 270 0 300 300 turnsend
+180 270 150 200 turnsstart 150 0 line 270 180 0 -100 turnsend
+} def
+/asciitilde  { 10 dict begin /thin mediumthick def  0 350 move 45 0 100 400 turns 0 315 200 350 turns 315 0 300 300 turns 0 45 400 350 turns
+end } def
+
+/minacute {  10 dict begin /characterwidth 500 def 1 1 compscale currentserif {50} {100} ifelse 650 move currentserif {350} {300} ifelse 700 lines end } def
+
+/capacute { 
+10 dict begin 
+monofont { /characterwidth 500 def 100 750 move 300 800 lines  } 
+{ /characterwidth 600 def currentserif {100} {150} ifelse 750 move currentserif {400} {350} ifelse 800 lines } ifelse
+end } def
+
+/mingrave {  10 dict begin /characterwidth 500 def 1 1 compscale currentserif {50} {100} ifelse 700 move currentserif {350} {300} ifelse 650 lines end } def
+
+/capgrave { 
+10 dict begin 
+monofont { /characterwidth 500 def 100 800 move 300 750 lines  } 
+{ /characterwidth 600 def currentserif {100} {150} ifelse 800 move currentserif {400} {350} ifelse 750 lines } ifelse
+end } def
+
+/mincirc {  10 dict begin /characterwidth 500 def 1 1 compscale currentserif {50 600} {100 650} ifelse move 200 700 lines currentserif {350 600} {300 650} ifelse lines end } def
+
+/capcirc { 
+10 dict begin 
+monofont { /characterwidth 500 def 100 750 move 200 800 lines 300 750 lines  } 
+{ /characterwidth 600 def currentserif {100} {150} ifelse 750 move 250 800 lines currentserif {400} {350} ifelse 750 lines } ifelse
+end } def
+
+/minumlaut { 10 dict begin /characterwidth 500 def 1 1 compscale 100 currentserif { 450 } { 500 } ifelse thick 2 mul add  dot 300 currentserif { 450 } { 500 } ifelse thick 2 mul add  dot end } def
+
+/capumlaut { 0 dict begin 
+monofont { /characterwidth 500 def 100 650 thick 2 mul add dot 300 650 thick 2 mul add  dot end } 
+{ /characterwidth 600 def 150 currentserif { 550 } { 650 } ifelse thick 2 mul add dot 350 currentserif { 550 } { 650 } ifelse thick 2 mul add  dot end } ifelse } def
+
+/mincedille { /characterwidth 500 def 200 0 move 200 -75 lines 0 270 300 -145 turns 270 180 200 -175 turns } def
+/capcedille { /characterwidth 600 def 250  -20 move 250 -75 lines 0 270 350 -145 turns 270 180 250 -175 turns } def
+
+/mintilde  { /characterwidth 500 def 0 675 move 45 0 100 725 turns 0 315 200 675 turns 315 0 300 625 turns 0 45 400 675 turns 
+} def
+/captilde { 
+monofont { /characterwidth 500 def 0 750 move 45 0 100 800 turn 0 315 200 750 turn 315 0 300 700 turn 0 45 400 750 turn }
+{ /characterwidth 600 def 50 750 move 45 0 150 800 turns 0 315 250 750 turns 315 0 350 700 turns 0 45 450 750 turns  } ifelse
+} def
 
 
- /Adieresis { CharacterDefs /capAsmall get exec CharacterDefs /capumlaut get exec } def
- /minAumlautsmallcaps { CharacterDefs /minAsmallcaps get exec CharacterDefs /minumlaut get exec } def
- /capAumlautmono { CharacterDefs /capAmonosmall get exec CharacterDefs /capumlautmono get exec } def
- /Aring { CharacterDefs /minAsmallcaps get exec  
- 250 800 move 180 270 150 700 turn 270 0 250 600 turn 0 90 350 700 turn 90 180 250 800 turn fill  
-   } def
- /minAodanishsmallcaps { CharacterDefs /minAsmallcaps get exec  
- 250 750 move 180 270 150 650 turn 270 0 250 550 turn 0 90 350 650 turn 90 180 250 750 turn fill  
-   } def
- /capAodanishmono { CharacterDefs /capAmonosmall get exec  
- 200 800 move 180 270 100 700 turn 270 0 200 600 turn 0 90 300 700 turn 90 180 200 800 turn fill  
-   } def
+ /Aacute { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ CharacterDefs /capacute get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /A get exec 
+ end } def
+ 
+ /Agrave { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ CharacterDefs /capgrave get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /A get exec 
+ end } def
+
+ /Acircumflex { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ CharacterDefs /capcirc get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /A get exec 
+ end } def
+
+ /Adieresis { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ CharacterDefs /capumlaut get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /A get exec 
+ end } def
+ 
+ /Atilde { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ CharacterDefs /captilde get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /A get exec 
+ end } def
+
+ /Aring {  10 dict begin /hasleftserif 1 def /hasrightserif 1 def 
+ monofont { -50 0 translate} if 
+ 250 800 move 180 270 150 700 turns 270 0 250 600 turns 0 90 350 700 turns 90 180 250 800 turns
+ monofont { 50 0 translate} if 
+ 500 500 div 600 700 div compscale 
+ CharacterDefs /A get exec  end  } def
+
+ /AE { 10 dict begin monofont { 400 700 div 1 compscale } if  0 0 move 250 700 lines 350 700 lines thick thin 350 700 350 0 351 0 corner
+250 0.3 mul 
+700 0.3 mul move 
+350  
+700 0.3 mul lines 
+250 700 move 700 700 lines
+350 350 move 550 350 lines
+350 0 move 700 0 lines 
+270 0 0 hserif 90 250 700 hlserif 0 700 700 vbserif 0 700 0 vtserif 0 550 350 vserif 
+end } def
+
  /Ccedilla { CharacterDefs /C get exec CharacterDefs /capcedille get exec } def
- /ccedillasmallcaps { CharacterDefs /minCsmallcaps get exec CharacterDefs /capcedille get exec } def
- /Ccedillamono { CharacterDefs /capCmono get exec CharacterDefs /capcedillemono get exec } def
- /Eacute { CharacterDefs /capEsmall get exec CharacterDefs /capacute get exec } def
- /eacutesmallcaps { CharacterDefs /minEsmallcaps get exec CharacterDefs /minacute get exec } def
- /capEacutemono { CharacterDefs /capEmonosmall get exec CharacterDefs /capacutemono get exec } def
- /Ntilde { CharacterDefs /capNsmall get exec CharacterDefs /captilde get exec } def
- /minNtildesmallcaps { CharacterDefs /minNsmallcaps get exec CharacterDefs /captilde get exec } def
- /capNtildemono { CharacterDefs /capNmonosmall get exec CharacterDefs /captildemono get exec } def
- /Odieresis { CharacterDefs /capOsmall get exec CharacterDefs /capumlaut get exec } def
- /minOumlautsmallcaps { CharacterDefs /minOsmallcaps get exec CharacterDefs /minumlaut get exec } def
- /capOumlautmono { CharacterDefs /capOmonosmall get exec CharacterDefs /capumlautmono get exec } def
- /Udieresis { CharacterDefs /capUsmall get exec CharacterDefs /capumlaut get exec } def
- /minUumlautsmallcaps { CharacterDefs /minUsmallcaps get exec CharacterDefs /minumlaut get exec } def
- /capUumlautmono { CharacterDefs /capUmonosmall get exec CharacterDefs /capumlautmono get exec } def
- /aacute { CharacterDefs /a get exec CharacterDefs /minacute get exec } def
- /agrave  { CharacterDefs /a get exec CharacterDefs /mingrave get exec } def
- /acircumflex  { CharacterDefs /a get exec CharacterDefs /mincirc get exec } def
- /adieresis { CharacterDefs /a get exec CharacterDefs /minumlaut get exec } def
- /atilde  { CharacterDefs /a get exec CharacterDefs /mintilde get exec } def
- /minAoe { CharacterDefs /a get exec  200 800 move 180 270 100 700 turn 270 0 200 600 turn 0 90 300 700 turn 90 180 200 800 turn fill   } def
+ 
+ /Eacute { 10 dict begin
+ CharacterDefs /capacute get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /E get exec 
+ end } def
+ 
+ /Egrave { 10 dict begin
+ CharacterDefs /capgrave get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /E get exec 
+ end } def
+
+ /Ecircumflex { 10 dict begin
+ CharacterDefs /capcirc get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /E get exec 
+ end } def
+
+ /Edieresis { 10 dict begin
+ CharacterDefs /capumlaut get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /E get exec 
+ end } def
+ 
+
+ /Iacute { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ monofont not { -200 0 translate } if  CharacterDefs /capacute get exec monofont not { 200 0 translate } if
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /I get exec 
+ end } def
+
+ /Igrave { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ monofont not { -200 0 translate } if  CharacterDefs /capgrave get exec monofont not { 200 0 translate } if
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /I get exec 
+ end } def
+
+ /Icircumflex { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ monofont not { -200 0 translate } if  CharacterDefs /capcirc get exec monofont not { 200 0 translate } if
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /I get exec 
+ end } def
+ 
+ /Idieresis { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ monofont not { -200 0 translate } if  CharacterDefs /capumlaut get exec monofont not { 200 0 translate } if
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /I get exec 
+ end } def
+ 
+ 
+ /Ntilde { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ CharacterDefs /captilde get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /N get exec 
+ end } def
+ 
+
+ /Oacute { 10 dict begin
+ monofont not { 50 0 translate } if CharacterDefs /capacute get exec monofont not { -50 0 translate } if
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /O get exec 
+ end } def
+
+/Ograve { 10 dict begin
+ monofont not { 50 0 translate } if CharacterDefs /capgrave get exec monofont not { -50 0 translate } if
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /O get exec 
+ end } def
+
+/Ocircumflex { 10 dict begin
+ monofont not { 50 0 translate } if CharacterDefs /capcirc get exec monofont not { -50 0 translate } if
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /O get exec 
+ end } def
+ 
+ /Odieresis { 10 dict begin
+ monofont not { 50 0 translate } if CharacterDefs /capumlaut get exec monofont not { -50 0 translate } if
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /O get exec 
+ end } def
+ 
+ /Otilde { 10 dict begin
+ monofont not { 50 0 translate } if CharacterDefs /captilde get exec monofont not { -50 0 translate } if
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /O get exec 
+ end } def
+
+ /Oslash  { 100 -50 move monofont { 300 } { 500 } ifelse 750 lines
+ CharacterDefs /O  get exec   } def
+
+ /OE { 10 dict begin monofont { 400 700 div 1 compscale } if 
+ 175 720 move 
+180 270 0 350 turns 
+270 0 175 -20 turns
+0 90 350 350 turnsstart
+90 180 175 720 turnsend
+350 700 move 350 0 line
+350 700 move 700 700 lines
+350 350 move 550 350 lines
+350 0 move 700 0 lines
+0 700 700 vbserif 0 700 0 vtserif 0 550 350 vserif
+end } def
+
+/oe { 10 dict begin monofont { 400 700 div 1 compscale } if 
+ 150 500 move
+180 270 0 250 turns
+270 0 150 0 turns
+0 90 300 250 turnsstart
+90 180 150 500 turnsend
+300 250 move 600 250 lines
+90 180 450 500 turns
+180 270 300 250 turnsstart
+270 0 450 0 turnsend
+0 45 600 100 turns
+end } def
+
+
+ 
+
+ 
+
+/uniF8FF {  } def
+
+ /Uacute { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ CharacterDefs /capacute get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /U get exec 
+ end } def
+ 
+ /Ugrave { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ CharacterDefs /capgrave get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /U get exec 
+ end } def
+
+ /Ucircumflex { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ CharacterDefs /capcirc get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /U get exec 
+ end } def
+
+ /Udieresis { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ CharacterDefs /capumlaut get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /U get exec 
+ end } def
+  
+ /Ydieresis { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ CharacterDefs /capumlaut get exec
+ 500 500 div 650 700 div compscale 
+ CharacterDefs /Y get exec 
+ end } def
+
+ /aacute { CharacterDefs /a get exec  CharacterDefs /minacute get exec } def
+ /agrave  { CharacterDefs /a get exec  CharacterDefs /mingrave get exec } def
+ /acircumflex  { CharacterDefs /a get exec  CharacterDefs /mincirc get exec } def
+ /adieresis { CharacterDefs /a get exec CharacterDefs /minumlaut get exec } def 
+ /atilde  { CharacterDefs /a get exec  CharacterDefs /mintilde get exec } def
+
+ /aring { CharacterDefs /a get exec 
+ smallcapsfont { 50 0 translate } if
+ 200 800 move 180 270 100 700 turns 270 0 200 600 turns 0 90 300 700 turns 90 180 200 800 turns 
+ smallcapsfont { -50 0 translate } if
+   } def
+ 
+ /ae { 10 dict begin monofont { 400 700 div 1 compscale } if 
+ 300 350 move
+270 180 150 250 turnsend
+180 270 0 125 turns
+270 0 170 0 turns
+0 30 300 75 turnsstart
+12 450 move
+30 0 150 500 turns
+% 200 500 line
+0 270 300 350 turnsstart 
+300 50 line
+300 250 move 600 250 lines
+90 180 450 500 turns
+180 270 300 250 turns
+270 0 450 0 turnsend
+0 45 600 100 turns
+end} def
+
  /ccedilla { CharacterDefs /c  get exec CharacterDefs /mincedille get exec } def
+
  /eacute { CharacterDefs /e  get exec CharacterDefs /minacute get exec } def
  /egrave { CharacterDefs /e  get exec CharacterDefs /mingrave get exec } def
  /ecircumflex { CharacterDefs /e  get exec CharacterDefs /mincirc get exec } def
  /edieresis { CharacterDefs /e  get exec CharacterDefs /minumlaut get exec } def
- /iacute { CharacterDefs /dotlessi get exec CharacterDefs /minacute get exec } def
- /iacutemono { CharacterDefs /minImono get exec CharacterDefs /minacute get exec } def
- /igrave { CharacterDefs /dotlessi get exec CharacterDefs /mingrave get exec } def
- /minIgravemono { CharacterDefs /minImono get exec CharacterDefs /mingrave get exec } def
- /icircumflex  { CharacterDefs /dotlessi get exec CharacterDefs /mincirc get exec } def
- /minIcircmono { CharacterDefs /minImono get exec CharacterDefs /mincirc get exec } def
- /idieresis { CharacterDefs /dotlessi get exec CharacterDefs /minumlaut get exec } def
- /minIumlautmono { CharacterDefs /minImono get exec CharacterDefs /minumlaut get exec } def
- /ntilde { CharacterDefs /n get exec  CharacterDefs /mintilde get exec } def
+ 
+ /dotlessi { 10 dict begin /hasendswash 1 def 
+ monofont { 200 0 translate } if
+ 0 500 move currentslanted { 0 75 line 0 0 endswash } {  0 0 line 270 0 0 hserif } ifelse 90 0 500 hlserif 
+ monofont { -200 0 translate } if
+ end } def
+
+
+/iacute { 
+smallcapsfont {
+CharacterDefs /I get exec -100 0 translate CharacterDefs /minacute get exec 100 0 translate
+} {
+CharacterDefs /dotlessi get exec monofont not { -150 0 translate } if  CharacterDefs /minacute get exec monofont not { 150 0 translate } if
+} ifelse } def
+
+/igrave { 
+smallcapsfont {
+CharacterDefs /I get exec -100 0 translate CharacterDefs /mingrave get exec 100 0 translate
+} {
+CharacterDefs /dotlessi get exec monofont not { -150 0 translate } if  CharacterDefs /mingrave get exec monofont not { 150 0 translate } if
+} ifelse } def
+
+/icircumflex { 
+smallcapsfont {
+CharacterDefs /I get exec -100 0 translate CharacterDefs /mincirc get exec 100 0 translate
+} {
+CharacterDefs /dotlessi get exec monofont not { -150 0 translate } if  CharacterDefs /mincirc get exec monofont not { 150 0 translate } if
+} ifelse } def
+
+/idieresis { 
+smallcapsfont {
+CharacterDefs /I get exec -100 0 translate CharacterDefs /minumlaut get exec 100 0 translate
+} {
+CharacterDefs /dotlessi get exec monofont not { -150 0 translate } if  CharacterDefs /minumlaut get exec monofont not { 150 0 translate } if
+} ifelse } def
+
+ /ntilde { CharacterDefs /n get exec CharacterDefs /mintilde get exec } def
+ 
  /oacute { CharacterDefs /o get exec CharacterDefs /minacute get exec } def
  /ograve  { CharacterDefs /o get exec CharacterDefs /mingrave get exec } def
  /ocircumflex   { CharacterDefs /o get exec CharacterDefs /mincirc get exec } def
  /odieresis {CharacterDefs /o get exec CharacterDefs /minumlaut get exec } def
  /otilde { CharacterDefs /o get exec CharacterDefs /mintilde get exec } def
+ /oslash  { 100 -50 move smallcapsfont {400} { 300 } ifelse 550 lines 
+ CharacterDefs /o get exec } def
+
  /uacute { CharacterDefs /u get exec CharacterDefs /minacute get exec } def
  /ugrave { CharacterDefs /u get exec CharacterDefs /mingrave get exec } def
  /ucircumflex   { CharacterDefs /u get exec CharacterDefs /mincirc get exec } def
  /udieresis  { CharacterDefs /u get exec CharacterDefs /minumlaut get exec } def
- /dagger { 200 700 move 200 0 line 0 500 move 400 500 line fill } def
+ 
+ /ydieresis { CharacterDefs /y get exec CharacterDefs /minumlaut get exec } def
+ 
+
+ 
+ /dagger { 10 dict begin /thin mediumthick def 200 700 move 200 0 line 0 500 move 400 500 line } def
  /degree { CharacterDefs /ring get exec } def
- /cent { CharacterDefs /c  get exec 200 -100 move 200 600 line fill } def
- /sterling { 400 600 moveto
- 150 180 275 700 turn
- 180 270 100 500 turn
- 100 0 line
- 400 0 line
- 0 350 move 200 350 line 
- fill } def
- /section { 300 650 move 120 180 200 700 turn 180 270 100 600 turn 270 0 200 500 turn
- 0 270 400 350 turn 270 180 200 200 turn 180 90 0 350 turn 90 0 200 500 turn
- 200 200 move 0 270 300 100 turn 270 180 200 0 turn 180 120 100 50 turn
- fill } def
- /bullet { 200 450 move 180 270 100 350 turn 270 0 200 250 turn 0 90 300 350 turn 90 180 200 450 move 200 450 dot 
- fill } def
- /paragraph { 200 700 move 200 0 line 400 700 move 400 0 line 
- 400 700 move 200 700 line 180 270 0 500 turn 270 0 200 300 turn 200 300 line
- fill  } def
- /germandbls { 0 0 move 0 550 line 90 0 200 700 turn 0 270 400 550 turn 270 180 200 400 turn
- 0 270 400 250 turn 400 150 line 270 180 200 0 turn
- fill } def
- /copyright { 
+ /cent { CharacterDefs /c  get exec 1 1 compscale 200 -100 move 200 600 lines } def
+ /sterling { 400 650 moveto
+ 150 180 275 700 turns
+ 180 270 100 500 turnsstart
+ thick thin 100 500 100 0 400 0 corner
+ 0 350 move  currentserif { 300 } { 200 } ifelse 350 lines 
+ 270 100 0 hserif
+ } def
+ 
+ /section { 350 650 move 120 180 250 700 turns 180 270 100 600 turnsstart 270 0 200 500 turnsend
+ 0 270 400 350 turnsstart 270 180 200 200 turnsend 180 90 0 350 turnsstart 90 0 200 500 turnsend
+ 200 200 move 0 270 300 100 turnsstart 270 180 150 0 turnsend 180 120 50 50 turns
+ } def
+ /bullet { 200 450 dot 
+ } def
+ /paragraph { 200 700 move 200 0 lines thin thin 399 700 400 700 400 0 corner
+ 400 700 move 200 700 lines 180 270 0 500 turns 270 0 200 300 turns  
+ 200 300 transpose moveto 200 700 transpose lineto 80 700 transpose 0 620 transpose 0 500 transpose curveto 
+ 0 380 transpose 80 300 transpose 200 300 transpose curveto closepath
+ 
+ } def
+ /germandbls { 0 0 move 0 550 line 90 0 200 700 turnsend 0 270 400 550 turnsstart 270 180 150 400 turnsend
+ 0 270 400 250 turnsstart 400 150 line 270 180 200 0 turnsend
+ 270 0 0 hserif
+ } def
+ /copyright { 10 dict begin /thin mediumthick def monofont { 500 700 div 1 compscale } if
 400 500 move 
-180 270 250 350 turn
-270 0 400 200 turn
-350 700 move 180 270 0 350 turn 
-270 0 350 0 turn 
-0 90 700 350 turn 
-90 180 350 700 turn
-fill  } def
- /copyrightmono { 
-400 7 div 4 mul 500 move 
-180 270 250 7 div 4 mul 350 turn
-270 0 400 7 div 4 mul 200 turn
-350 7 div 4 mul 700 move 
-180 270 0 7 div 4 mul 350 turn
-270 0 350 7 div 4 mul 0 turn 
-0 90 700 7 div 4 mul 350 turn 
-90 180 350 7 div 4 mul  700 turn
-fill  } def
-/registered {
-250 500 move 
-250 200 line
-250 500 move
-350 500 line
-0 270 450 400 turn
-270 180 350 350 turn 
-250 350 line
+180 270 250 350 turns
+270 0 400 200 turns
+350 700 move 180 270 0 350 turns
+270 0 350 0 turns 
+0 90 700 350 turns 
+90 180 350 700 turns
+monofont { 1 1 compscale } if
+end } def
+/registered { 10 dict begin /thin mediumthick def  monofont { 500 700 div 1 compscale } if
+thin thin 350 500 250 500 250 200 corner 
+350 500 move 0 270 450 425 turns
+270 180 350 350 turns 
+250 350 lines
 300 350 move 
-450 200 line
+450 200 lines
 350 700 move
-180 270 0 350 turn
-270 0 350 0 turn
-0 90 700 350 turn
-90 180 350 700 turn
-fill } def
-/registeredmono {
-250 7 div 4 mul 500 move 
-250 7 div 4 mul 200 line
-250 7 div 4 mul 500 move
-350 7 div 4 mul 500 line
-0 270 450 7 div 4 mul 400 turn
-270 180 350 7 div 4 mul 350 turn 
-250 7 div 4 mul 350 line
-300 7 div 4 mul 350 move 
-450 7 div 4 mul 200 line
-350 7 div 4 mul 700 move
-180 270 0 7 div 4 mul 350 turn
-270 0 350 7 div 4 mul 0 turn
-0 90 700 7 div 4 mul 350 turn
-90 180 350 7 div 4 mul 700 turn
-fill } def
-/trademark { 0 700 move 300 700 line 150 700 move 150 400 line 
- 400 400 move 400 700 line 500 650 line 600 700 line 600 400 line
-fill  } def
-/trademarkmono { 0 700 move 200 700 line 100 700 move 100 400 line 
- 266 400 move 266 700 line 333 650 line 400 700 line 400 400 line
-fill  } def
- /acute { 100 650 move 300 700 line fill } def
- /dieresis { 100 650 dot 300 650 dot fill } def
- /notequal { 0 450 move 400 450 line 0 250 move 400 250 line 50 150 move 350 550 line fill } def
- /AE { 0 0 move 250 700 line 350 700 line 350 0 line
-250 0.3 mul 
-700 0.3 mul move 
-350  
-700 0.3 mul line 
-250 700 move 700 700 line
-350 350 move 550 350 line
-350 0 move 700 0 line 
-fill
- } def
-/minAEsmallcaps { 0 0  7 div 5 mul move 250 700  7 div 5 mul line 350 700  7 div 5 mul line 350 0  7 div 5 mul line
-250 0.3 mul 
-700 0.3 mul 7 div 5 mul move 
-350  
-700 0.3 mul 7 div 5 mul line 
-250 700 7 div 5 mul move 700 700 7 div 5 mul line
-350 350 7 div 5 mul move 550 350 7 div 5 mul line
-350 0 7 div 5 mul move 700 0  7 div 5 mul line 
-fill
- } def
-/capAEmono { 0 0 move 250 7 div 4 mul 700 line 350  7 div 4 mul  700 line 350  7 div 4 mul  0 line
-250 0.3 mul  7 div 4 mul 
-700 0.3 mul move 
-350   7 div 4 mul 
-700 0.3 mul line 
-250 7 div 4 mul 700 move 700 7 div 4 mul 700 line
-350 7 div 4 mul 350 move 550 7 div 4 mul 350 line
-350 7 div 4 mul 0 move 700 7 div 4 mul 0 line 
-fill
- } def
+180 270 0 350 turns
+270 0 350 0 turns
+0 90 700 350 turns
+90 180 350 700 turns
+monofont { 1 1 compscale } if
+end } def
+/trademark { 10 dict begin /thin mediumthick def 0 700 move 300 700 lines 150 700 move 150 400 lines 
+thin thin 400 400 400 700 450 650 corner
+thin thin 459 650 500 675 550 650 corner
+thin thin 550 650 600 700 600 400 corner
+end  } def
 
- /Oslash  { CharacterDefs /O  get exec 100 0 move 500 700 line fill  } def
- /minOslashsmallcaps { CharacterDefs /minOsmallcaps get exec 100 0 move 400 500 line fill  } def
- /capOslashmono { CharacterDefs /capOmonosmall get exec 100 0 move 300 700 line fill  } def
- /infinity { 100 500 move 180 270 0 350 turn 270 0 100 200 turn 0 45 200 350 turn
- 45 0 300 500 turn 0 270 400 350 turn 270 180 300 200 turn 180 135 200 350 turn 
- 135 180 100 500 turn fill } def
- /plusminus { 0 450 move 400 450 line 0 250 move 400 250 line 
- 200 300 move 200 600 line fill } def
- /lessequal { 150 500 move 0 350 line 150 200 line 
- 250 450 move 400 450 line 250 250 move 400 250 line fill} def
- /greaterequal { 0 500 move 150 350 line 0 200 line 
- 250 450 move 400 450 line 250 250 move 400 250 line fill } def
- /yen { 0 700 move 200 400 line 200 0 line 
- 400 700 move 200 400 line
- 100 300 move 300 300 line
- 100 200 move 300 200 line
- fill  } def
- /mu { 0 -200 move 0 500 line 0 200 move 270 0 200 0 turn 0 90 400 200 turn 400 500 line fill } def
- /partialdiff { 400 650 move 150 180 200 700 turn 180 270 0 600 turn
- 270 0 200 450 turn 0 270 400 200 turn 270 180 200 0 turn
- 180 90 0 200 turn 90 0 200 450 turn
- fill   } def
- /summation { 500 700 move 0 700 line 350 350 line 0 0 line 500 0 line 
- fill } def
- /capSigmamono { 400 700 move 0 700 line 280 350 line 0 0 line 400 0 line 
- fill } def
- /product  { 0 700 move 500 700 line 100 700 move 100 0 line 400 700 move 400 0 line
- fill  } def
- /pi  { 0 0 move 0 500 line 300 500 line 300 100 line 270 0 400 0 turn
- fill } def
- /integral { 400 700 move 180 270 200 500 turn 200 200 line 270 180 0 0 turn fill } def
- /ordfeminine { 200 500 move 180 270 0 400 turn 270 0 200 300 turn 0 90 400 400 turn 90 180 200 500 turn
- 400 300 move 400 500 line 90 180 200 700 turn 180 210  0 650 turn  fill  } def
- /ordmasculine { 200 700 move 180 270 0 500 turn 270 0 200 300 turn 0 90 400 500 turn 90 180 200 700 turn fill } def
- /uni03A9 { 100 0 move 200 0 line 180 90 0 350 turn 90 0 300 720 turn 0 270 600 350 turn 270 180 400 0 turn 400 0 line fill } def
- /capOmegamono { 66 0 move 133 0 line 180 90 0 350 turn 90 0 200 720 turn 0 270 400 350 turn 270 180 266 0 turn 333 500 line fill } def
- /ae { 300 350 move
-270 180 150 250 turn
-180 270 0 125 turn
- 270 0 190 0 turn
-0 30 300 50 turn
-12 450 move
-30 0 150 500 turn
-% 200 500 line
-0 270 300 350 turn 
-300 50 line
-300 250 move 600 250 line
-90 180 450 500 turn
-180 270 300 250 turn
-270 0 450 0 turn
-0 45 600 100 turn
-fill } def
- /minAEmono { 200 350 move
-270 180 100 250 turn
-180 270 0 125 turn
-270 0 125 0 turn
-0 30 200 50 turn
-8 450 move
-30 0 100 500 turn
-% 200 500 line
-0 270 200 350 turn 
-200 50 line
-200 250 move 400 250 line
-90 180 300 500 turn
-180 270 200 250 turn
-270 0 300 0 turn
-0 45 400 100 turn
-fill } def
 
- /oslash  { CharacterDefs /o get exec 100 -100 move 300 600 line fill } def
+ /acute { 10 dict begin /thin mediumthick def 50 650 move 350 700 lines end } def
+ /dieresis { 100 650 dot 300 650 dot } def
+ /notequal { 10 dict begin /thin mediumthick def  
+ 0 400 move 400 400 lines 0 250 move 400 250 lines 50 100 move 350 525 lines 
+ end } def
+ /infinity { 100 500 move 180 270 0 350 turns 270 0 100 200 turns 0 45 200 350 turnsstart
+ 45 0 300 500 turnsend 0 270 400 350 turns 270 180 300 200 turns 180 135 200 350 turns 
+ 135 180 100 500 turnsend } def
+ /plusminus { 10 dict begin /thin mediumthick def 0 400 move 400 400 lines 0 150 move 400 150 lines 
+ 200 250 move 200 550 lines end } def
+ /lessequal { 10 dict begin /thin mediumthick def
+ thin thin 400 500 50 400 400 300 corner 
+ 0 150 move 400 150 lines 
+ end } def
+ /greaterequal { 10 dict begin /thin mediumthick def
+ thin thin 0 500 350 400 0 300 corner 
+ 0 150 move 400 150 lines 
+ end } def
+ /yen { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ thick thick 0 700 200 400 200 0 corner 
+ 400 700 move 200 400 lines
+ 50 300 move 350 300 lines
+ 50 200 move 350 200 lines
+ 270 200 0 hserif 90 0 700 hserif 90 400 700 hserif
+  end } def
+ /mu { 0 -200 move 0 500 line 0 200 move 270 0 125 0 turnsend 0 90 250 200 turnsstart 250 500 line 
+ 250 150 move 250 75 line 270 0 325 0 turnsend 0 90 400 150 turns } def
+
+ 
+ /partialdiff { 400 650 move 150 180 200 700 turns 180 270 0 600 turnsstart
+ 270 0 200 450 turnsend 0 270 400 200 turnsstart 270 180 200 0 turnsend
+ 180 90 0 200 turnsstart 90 0 200 450 turnsend
+   } def
+ /summation { thin thick 500 700 0 700 175 525 corner
+ thick thin 175 525 350 350 175 175 corner
+ thin thick 175 175 0 0 500 0 corner
+ 0 500 700 vbserif 0 500 0 vtserif
+ } def
+ /product  { 10 dict begin /hasleftserif 1 def /hasrightserif 1 def
+ 0 700 move 500 700 lines 100 700 move 100 0 line 400 700 move 400 0 line
+ 90 0 700 hserif 90 500 700 hserif 270 100 0 hserif 270 400 0 hserif
+ end } def
+ /pi  { 0 500 move 400 500 line 100 500 move 100 0 lines 300 500 move 300 100 lines 270 0 400 0 turns
+ } def
+ /integral { 400 700 move 90 180 300 800 turns 180 270 200 600 turnsstart 200 100 line 270 180 100 -100 turnsend 180 90 0 0 turns } def
+ /ordfeminine { 10 dict begin /thin mediumthick def
+200 500 move 180 270 0 400 turns 270 0 200 300 turns 0 90 400 400 turns 90 180 200 500 turns
+ 400 300 move 400 500 lines 90 180 200 700 turns 180 210  0 650 turns end } def
+ /ordmasculine { 10 dict begin /thin mediumthick def
+ 200 700 move 180 270 0 500 turns 270 0 200 300 turns 0 90 400 500 turns 90 180 200 700 turns end } def
+ /uni03A9 { 
+ %omega
+ 0 0 move 225 0 lines 180 90 0 350 turnsstart 90 0 300 720 turnsend 0 270 600 350 turnsstart 270 180 375 0 turnsend 600 0 lines } def
  /questiondown { 0 0 move 270 0 200 -220 turn 0 90 400 0 turn
 90 180 250 150 turn
 180 90 200 200 turn  200 400 line
 200 500 dot
-fill } def
-  /exclamdown { 0 -200 move 0 300 line 0 500 dot 
- fill } def
- /exclamationspanishmono { 200 -200 move 200 300 line 200 500 dot 
- fill } def
- /logicalnot { 0 350 move 400 350 line 400 200 line fill } def
- /radical { 0 350 move 100 0 line 200 700 line 400 700 line fill } def
- /florin { 400 600 move 90 180 300 700 turn 180 270 200 600 turn 200 100 line 270 180 100 0 turn
- 180 90 0 100 turn 100 350 move 300 350 line fill } def
- /approxequal { 0 450 move 45 0 100 500 turn 0 315 200 450 turn 315 0 300 400 turn 0 45 400 450 turn
- 0 250 move 45 0 100 300 turn 0 315 200 250 turn 315 0 300 200 turn 0 45 400 250 turn
-fill } def
+} def
 
- /Delta { 0 0 move 200 700 line 400 0 line 0 0 line fill } def
- /guillemotleft { 100 450 move 0 350 line 100 250 line 
- 300 450 move 200 350 line 300 250 line fill  } def
- /guillemotright { 0 450 move 100 350 line 0 250 line 
- 200 450 move 300 350 line 200 250 line fill } def
+/questiondown { 400 0 move 225 220 200 -100 turns 180 90 0 0 turnsstart
+90 30 100 150 turnsend
+30 90 200 300 turns  90 90 200 450 turns
+200 600 dot
+fill}  def
+
+ /exclamdown { 0 -100 move 90 90 0 400 turnsend 0 0 dot  
+0 600 dot
+}  def
+
+ /logicalnot { 10 dict begin /thin mediumthick def thin thin 0 350 400 350 400 200 corner end } def
+ /radical { thin thick -1 350 0 350 50 175 corner
+ thick thin 50 175 100 0 150 350 corner
+ thin thin 150 350 200 700 400 700 corner fill
+ 90 0 350 hserif } def
+ /florin { 400 600 move 90 180 300 700 turns 180 270 200 600 turnsstart 200 100 line 270 180 100 0 turnsend
+ 180 90 0 100 turns 50 350 move 350 350 lines } def
+ /approxequal { 10 dict begin /thin mediumthick def
+ 0 450 move 45 0 100 500 turns 0 315 200 450 turns 315 0 300 400 turns 0 45 400 450 turns
+ 0 250 move 45 0 100 300 turns 0 315 200 250 turns 315 0 300 200 turns 0 45 400 250 turns
+
+end} def
+ /Delta { thin thick 200 0 400 0 300 350 corner
+ thick thin 300 350 200 700 100 350 corner
+ thin thin 100 350 0 0 200 0 corner
+  } def
+ /guillemotleft { 10 dict begin /thin mediumthick def 
+ thin thin 100 450 0 350 100 250 corner
+ thin thin 300 450 200 350 300 250 corner end  } def
+ /guillemotright { 10 dict begin /thin mediumthick def 
+ thin thin 0 450 100 350 0 250 corner
+ thin thin 200 450 300 350 200 250 corner end } def
  /elipsis { 0 0 dot 150 0 dot 300 0 dot
- fill } def
+ } def
  /uni00A0 { } def
- /Agrave { CharacterDefs /capAsmall get exec CharacterDefs /capgrave get exec } def
- /minAgravesmallcaps { CharacterDefs /minAsmallcaps get exec CharacterDefs /mingrave get exec } def
- /capAgravemono { CharacterDefs /capAmonosmall get exec CharacterDefs /capgravemono get exec } def
- /Atilde { CharacterDefs /capAsmall get exec CharacterDefs /captilde get exec } def
- /minAtildesmallcaps { CharacterDefs /minAsmallaps get exec CharacterDefs /mintilde get exec } def
- /Atildemono { CharacterDefs /capAmonosmall get exec CharacterDefs /captildemono get exec } def
- /Otilde { CharacterDefs /capOsmall get exec CharacterDefs /captilde get exec } def
- /minOtildesmallcaps { CharacterDefs /minOsmallcaps get exec CharacterDefs /mintilde get exec } def
- /capOtildemono { CharacterDefs /capOmonosmall get exec CharacterDefs /captildemono get exec } def
- /OE { 175 720 move 
-180 270 0 350 turn 
-270 0 175 -20 turn
-0 90 350 350 turn
-90 180 175 720 turn
-350 700 move 350 0 line
-350 700 move 700 700 line
-350 350 move 550 350 line
-350 0 move 700 0 line
-fill } def
- /minOEsmallcaps { 175 720 7 div 5 mul move 
-180 270 0 350 7 div 5 mul turn 
-270 0 175 -20 7 div 5 mul turn
-0 90 350 350 7 div 5 mul turn
-90 180 175 720 7 div 5 mul turn
-350 700 7 div 5 mul move 350 0 7 div 5 mul line
-350 700 7 div 5 mul move 700 700 7 div 5 mul line
-350 350 7 div 5 mul move 550 350 7 div 5 mul line
-350 0 move 700 0 line
-fill } def
- /capOEmono { 175 7 div 4 mul 720 move 
-180 270 0 7 div 4 mul 350 turn 
-270 0 175 7 div 4 mul -20 turn
-0 90 350 7 div 4 mul 350 turn
-90 180 175 7 div 4 mul 720 turn
-350 7 div 4 mul 700 move 350 7 div 4 mul 0 line
-350 7 div 4 mul 700 move 700 7 div 4 mul 700 line
-350 7 div 4 mul 350 move 550 7 div 4 mul 350 line
-350 7 div 4 mul 0 move 700 7 div 4 mul 0 line
-fill } def
- /oe {  150 500 move
-180 270 0 250 turn
-270 0 150 0 turn
-0 90 300 250 turn
-90 180 150 500 turn
-300 250 move 600 250 line
-90 180 450 500 turn
-180 270 300 250 turn
-270 0 450 0 turn
-0 45 600 100 turn
-fill } def
- /minOEmono {  100 500 move
-180 270 0 250 turn
-270 0 100 0 turn
-0 90 200 250 turn
-90 180 100 500 turn
-200 250 move 400 250 line
-90 180 300 500 turn
-180 270 200 250 turn
-270 0 300 0 turn
-0 45 400 100 turn
-fill } def
- /endash { 0 350 move 400 350 line fill } def
- /ndashmono { 0 350 move 300 350 line fill } def
- /emdash { 0 350 move 600 350 line fill } def
- /mdashmono { 0 350 move 400 350 line fill } def
- /quotedblleft { 100 700 move 100 600 line 270 240 0 450 turn
- 300 700 move 300 600 line 270 240 200 450 turn fill } def
- /quotedblright {  0 450 move 0 550 line 90 60 100 700 turn
- 200 450 move 200 550 line 90 60 300 700 turn fill } def
- /quoteleft {  100 700 move 100 600 line 270 240 0 450 turn
- fill } def
- /singleopentopquotemono {  200 700 move 200 600 line 270 240 100 450 turn
- fill } def
- /quoteright { 0 450 move 0 550 line 90 60 100 700 turn fill } def
- /singleclosetopquotemono { 100 450 move 100 550 line 90 60 200 700 turn fill } def
- /divide { 0 350 move 400 350 line 200 500 dot 200 200 dot fill } def
- /lozenge { 200 500 move 0 250 line 200 0 line 400 250 line 200 500 line fill } def
- /ydieresis { CharacterDefs /y get exec CharacterDefs /minumlaut get exec } def
- /Ydieresis { CharacterDefs /capYsmall get exec CharacterDefs /capumlaut get exec } def
- /minYumlautsmallcaps { CharacterDefs /minYsmallcaps get exec CharacterDefs /capumlaut get exec } def
- /capYumlautmono { CharacterDefs /capYmonosmall get exec CharacterDefs /capumlaut get exec } def
- /fraction { CharacterDefs /e  get exec CharacterDefs /mincirc get exec } def
+
+ /endash { 10 dict begin /thin mediumthick def 0 350 move 400 350 lines end } def
+ /emdash { 10 dict begin /thin mediumthick def 0 350 move 600 350 lines end } def
+
+ /quotedblleft { 100 700 move 100 600 line 270 240 0 450 turnsend
+ 300 700 move 300 600 line 270 240 200 450 turnsend fill
+ 100 700 transpose thick 2 div 0 360 arc
+ 300 700 transpose thick 2 div 0 360 arc
+  } def
+ /quotedblright {  0 450 move 0 550 line 90 60 100 700 turnsend
+ 200 450 move 200 550 line 90 60 300 700 turnsend 
+ 0 450 transpose thick 2 div 0 360 arc
+ 200 450 transpose thick 2 div 0 360 arc
+ } def
+ /quoteleft {  100 700 move 100 600 line 270 240 0 450 turnsend
+ 100 700 transpose thick 2 div 0 360 arc
+ } def
+ /quoteright { 0 450 move 0 550 line 90 60 100 700 turnsend fill
+ 0 450 transpose thick 2 div 0 360 arc } def
+ /divide { 10 dict begin /thin mediumthick def  0 350 move 400 350 lines 200 500 dot 200 200 dot end } def
+ /lozenge { 10 dict begin /thin mediumthick def  
+ thin thin 100 125 200 0 300 125 corner
+ thin thin 300 125 400 250 300 375 corner
+ thin thin 300 375 200 500 100 375 corner
+ thin thin 100 375 0 240 100 125 corner 
+ end } def
+ /fraction { 10 dict begin /thin mediumthick def 
+	 0 0 move 500 500 lines 
+ end  } def
  /euro { 500 600 move 
-120 180 275 720 turn 180 270 100 350 turn
-270 0 275 -20 turn 0 30 500 100 turn 
-0 450 move 300 450 line
-0 250 move 300 250 line
-fill  } def
+120 180 275 720 turns 180 270 100 350 turnsstart
+270 0 275 -20 turnsend 0 30 500 100 turns 
+0 450 move 300 450 lines
+0 250 move 300 250 lines
+ } def
+
  /euromono { 400 600 move 
 120 180 275 720 turn 180 270 80 350 turn
 270 0 220 -20 turn 0 30 400 100 turn 
 0 450 move 400 450 line
 0 250 move 400 250 line
-fill  } def
- /quilsinglleft { 100 450 move 0 350 line 100 250 line fill } def
- /singleopenquotemono { 200 450 move 100 350 line 200 250 line fill } def
- /quilsinglright  { 0 450 move 100 350 line 0 250 line fill } def
- /quilsinglright  { 100 450 move 200 350 line 100 250 line fill } def
+ } def
+/quilsinglleft { 10 dict begin /thin mediumthick def thin thin 100 450 0 350 100 250 corner end } def
+/quilsinglright  { 10 dict begin /thin mediumthick def thin thin 0 450 100 350 0 250 corner end  } def
+ 
+
  /uniFB01 { CharacterDefs /f get exec gsave 300 0 translate CharacterDefs /dotlessi get exec grestore } def
  /uniFB02 { CharacterDefs /f get exec gsave 300 0 translate CharacterDefs /l get exec grestore } def
- /daggerdbl { 200 700 move 200 0 line
-  0 500 move 400 500 line
-  0 200 move 400 200 line
-   fill  } def
- /periodcentered { 200 350 dot fill } def
- /quotesinglbase { 100 100 move 100 0 line 270 240 0 -150 turn fill } def
- /singleopenbottomquotemono { 200 100 move 200 0 line 270 240 100 -150 turn fill } def
- /quotedblbase { 100 100 move 100 0 line 270 240 0 -150 turn 
- 300 100 move 300 0 line 270 240 200 -150 turn fill } def
+ /daggerdbl { 0 dict begin /thin mediumthick def 200 700 move 200 0 lines
+  0 500 move 400 500 lines
+  0 200 move 400 200 lines
+    end } def
+ /periodcentered { 100 350 transpose thick 2 div 0 360 arc } def
+ /quotesinglbase { 
+ 100 100 move 100 0 line 270 240 0 -150 turnsend
+ 100 100 transpose thick 2 div 0 360 arc
+ } def
+ /quotedblbase { 
+ 100 100 move 100 0 line 270 240 0 -150 turn 
+ 300 100 move 300 0 line 270 240 200 -150 turn
+ 100 100 transpose thick 2 div 0 360 arc
+ 300 100 transpose thick 2 div 0 360 arc
+  } def
  
- /perthousand { 600 700 move 0 0 line
-250 575 move 90 180 125 700 turn 180 270 0 575 turn
-270 0 125 425 turn 0 90 250 575 turn
-350 125 move 90 0 475 250 turn 0 270 600 125 turn
-270 180 475 0 turn 180 90 350 125 turn
-700 125 move 90 0 825 250 turn 0 270 950 125 turn
-270 180 825 0 turn 180 90 700 125 turn
-fill } def
- /permillemono { 400 700 move 0 0 line
-165 575 move 90 180 85 700 turn 180 270 0 575 turn
-270 0 85 425 turn 0 90 165 575 turn
-220 125 move 90 0 280 250 turn 0 270 320 125 turn
-270 180 280 0 turn 180 90 220 125 turn
-300 125 move 90 0 350 250 turn 0 270 400 125 turn
-270 180 350 0 turn 180 90 300 125 turn
-fill } def
- /Acircumflex  { CharacterDefs /capAsmall get exec CharacterDefs /capcirc get exec } def
- /minAcircsmallcaps { CharacterDefs /minAsmallcaps get exec CharacterDefs /mincirc get exec } def
- /capAcircmono { CharacterDefs /capAmonosmall get exec CharacterDefs /capcircmono get exec } def
- /Ecircumflex { CharacterDefs /capEsmall get exec CharacterDefs /capcirc get exec } def
- /minEcircsmallcaps { CharacterDefs /minEsmallcaps get exec CharacterDefs /mincirc get exec } def
- /capEcircmono { CharacterDefs /capEmonosmall get exec CharacterDefs /capcircmono get exec } def
- /Aacute { CharacterDefs /capAsmall get exec CharacterDefs /capacute get exec } def
- /aacutesmallcaps { CharacterDefs /minAsmallcaps get exec CharacterDefs /minacute get exec } def
- /capAacutemono { CharacterDefs /capEmonosmall get exec CharacterDefs /capacutemono get exec } def
- /Edieresis { CharacterDefs /capEsmall get exec CharacterDefs /capumlaut get exec } def
- /minEumlautsmallcaps { CharacterDefs /minEsmallcaps get exec CharacterDefs /minumlaut get exec } def
- /capEumlautmono { CharacterDefs /capEmonosmall get exec CharacterDefs /capumlautmono get exec } def
- /Egrave  { CharacterDefs /capEsmall get exec CharacterDefs /capgrave get exec } def
- /minEgravesmallcaps { CharacterDefs /minEsmallcaps get exec CharacterDefs /mingrave get exec } def
- /capEgravemono { CharacterDefs /capEmonosmall get exec CharacterDefs /capgravemono get exec } def
- /Iacute { CharacterDefs /capIsmall get exec CharacterDefs /capacute get exec } def
- /iacutesmallcaps { CharacterDefs /minIsmallcaps get exec CharacterDefs /minacute get exec } def
- /Iacutemono { CharacterDefs /capImonosmall get exec CharacterDefs /capacutemono get exec } def
- /Icircumflex { CharacterDefs /capIsmall get exec CharacterDefs /capcirc get exec } def
- /minIcircsmallcaps { CharacterDefs /minIsmallcaps get exec CharacterDefs /mincirc get exec } def
- /capIcircmono { CharacterDefs /capImonosmall get exec CharacterDefs /capcircmono get exec } def
- /Idieresis { CharacterDefs /capIsmall get exec CharacterDefs /capumlaut get exec } def
- /minIumlautsmallcaps { CharacterDefs /minIsmallcaps get exec CharacterDefs /minumlaut get exec } def
- /capIumlautmono { CharacterDefs /capImonosmall get exec CharacterDefs /capumlautmono get exec } def
- /Igrave  { CharacterDefs /capIsmall get exec CharacterDefs /capgrave get exec } def
- /minIgravesmallcaps { CharacterDefs /minIsmallcaps get exec CharacterDefs /mingrave get exec } def
- /capIgravemono { CharacterDefs /capImonosmall get exec CharacterDefs /capgravemono get exec } def
- /Oacute { CharacterDefs /capOsmall get exec CharacterDefs /capacute get exec } def
- /minOacutesmallcaps { CharacterDefs /minOsmallcaps get exec CharacterDefs /minacute get exec } def
- /capOacutemono { CharacterDefs /capOmonosmall get exec CharacterDefs /capacutemono get exec } def
- /Ocircumflex { CharacterDefs /capOsmall get exec CharacterDefs /capcirc get exec } def
- /minOcircsmallcaps { CharacterDefs /minOsmallcaps get exec CharacterDefs /mincirc get exec } def
- /capOcircmono { CharacterDefs /capOmonosmall get exec CharacterDefs /capcircmono get exec } def
- /uniF8FF {  } def
- /Ograve  { CharacterDefs /capOsmall get exec CharacterDefs /capgrave get exec } def
- /minOgravesmallcaps { CharacterDefs /minOsmallcaps get exec CharacterDefs /mingrave get exec } def
- /capOgravemono { CharacterDefs /capOmonosmall get exec CharacterDefs /capgravemono get exec } def
- /Uacute { CharacterDefs /capUsmall get exec CharacterDefs /capacute get exec } def
- /uacutesmallcaps { CharacterDefs /minUsmallcaps get exec CharacterDefs /minacute get exec } def
- /Uacutemono { CharacterDefs /capUmonosmall get exec CharacterDefs /capacutemono get exec } def
- /Ucircumflex  { CharacterDefs /capUsmall get exec CharacterDefs /capcirc get exec } def
- /minUcircsmallcaps { CharacterDefs /minUsmallcaps get exec CharacterDefs /mincirc get exec } def
- /capUcircmono { CharacterDefs /capUmonosmall get exec CharacterDefs /capcircmono get exec } def
- /Ugrave { CharacterDefs /capUsmall get exec CharacterDefs /capgrave get exec } def
- /minUgravesmallcaps { CharacterDefs /minUsmallcaps get exec CharacterDefs /mingrave get exec } def
- /capUgravemono { CharacterDefs /capUmonosmall get exec CharacterDefs /capgravemono get exec } def
- /dotlessi { 
- currentslanted { 0 50 endswash 0 50 move } { 0 0 move } ifelse
- 0 500 line fill } def
- /circumlfex { CharacterDefs /asciicircum  get exec  } def
- /tilde { CharacterDefs /asciitilde get exec } def
- /macron { 100 700 move 300 700 line fill } def
- /breve { 100 700 move 270 0 200 650 turn 0 90 300 700 turn fill } def
- /dotaccent { 200 700 dot fill } def
- /ring { 200 800 move 180 270 100 700 turn 270 0 200 600 turn 0 90 300 700 turn 90 180 200 800 turn fill } def
- /cedilla { CharacterDefs /mincedille get } def
- /hungarumlaut { 50 650 move 150 750 line 250 650 move 350 750 line fill  } def
- /ogonek { /characterwidth 500 def 200 0 move 200 -50 line 400 270 100 -120 turn 130 180 200 -190 turn fill } def
- /caron { 100 700 move 200 650 line 300 700 line fill } def
+ /perthousand { 600 700 move 0 0 line monofont { 500 950 div 1 compscale } if
+250 575 move 90 180 125 700 turnsend 180 270 0 575 turnsstart
+270 0 125 425 turnsend 0 90 250 575 turnsstart
+350 125 move 90 0 475 250 turnsend 0 270 600 125 turnsstart
+270 180 475 0 turnsend 180 90 350 125 turnsstart
+700 125 move 90 0 825 250 turnsend 0 270 950 125 turnsstart
+270 180 825 0 turnsend 180 90 700 125 turnsstart
+1 1 compscale 
+} def
+ 
+ /circumlfex { 10 dict begin /thin mediumthick def CharacterDefs /asciicircum  get exec end } def
+ /tilde { 10 dict begin /thin mediumthick def CharacterDefs /asciitilde get exec end } def
+ /macron { 10 dict begin /thin mediumthick def 100 700 move 300 700 lines end } def
+ /breve { 10 dict begin /thin mediumthick def 100 700 move 270 0 200 650 turns 0 90 300 700 turns } def
+ /dotaccent { 200 700 dot } def
+ /ring { 10 dict begin /thin mediumthick def 200 800 move 180 270 100 700 turns 270 0 200 600 turns 0 90 300 700 turns 90 180 200 800 turns end } def
+ /cedilla {  CharacterDefs /mincedille get } def
+ /hungarumlaut { 10 dict begin /thin mediumthick def 50 650 move 150 750 lines 250 650 move 350 750 lines  } def
+ /ogonek { 10 dict begin /thin mediumthick def 200 0 move 200 -50 lines 400 270 100 -120 turns 130 180 200 -190 turns } def
+ /caron { 10 dict begin /thin mediumthick def 100 700 move 200 650 lines 300 700 lines } def
 
 end
 
@@ -2289,10 +1956,28 @@ end
 x1 y1 moveto
 end } def
 
+/compscale { /compyscale exch def /compxscale exch def
+} def
+
 /transpose { 10 dict begin /y exch def /x exch def
-/x characterweight 2 div x characterwidth characterweight sub mul characterwidth div add def
-/y characterweight 2 div y 700 characterweight sub mul 700 div add def 
+
+/cwx thick def
+/lb /leftbearing where { /leftbearing get } { 0 } ifelse def
+/rb /rightbearing where { /rightbearing get } { 0 } ifelse def
+/bb /bottombearing where { /bottombearing get } { 0 } ifelse def
+/tb /topbearing where { /topbearing get } { 0 } ifelse def
+currentsans { /lb lb 15 sub def /bb bb thick 4 div sub def /tb tb thick 4 div sub def  } if
+
+/x characterwidth /compxscale where { /compxscale get mul } if cwx sub lb sub rb sub characterwidth div x mul cwx 2 div add lb add def
+
+monofont { /propwidth where { pop /x x characterwidth propwidth div mul def} if } if
+
+
+/cwy currentserif { thin } { thick } ifelse def
+/y 700 /compyscale where { /compyscale get mul } if cwy sub bb sub tb sub 700 div y mul cwy 2 div bb add add def 
+
 /x x currentslanted y mul add def
+
 x y
 end } def
 
@@ -2303,28 +1988,57 @@ currentpoint /y1 exch def /x1 exch def
 /y20 y2 def
  x2 y2 transpose /y2 exch def /x2 exch def
  x1 y1 transpose /y1 exch def /x1 exch def
-/c characterweight 2 div def
-/a y2 y1 sub x2 x1 sub atan def
-c { x1 y1 moveto x1 y1 c 0 360 arc } if
+/c thick 2 div def
+/a y2 y1 sub x2 x1 sub atan 360 add 360 mod def
+c currentserif currentsans or not and { x1 c add y1 moveto x1 y1 c 0 360 arc } if
 x1 a 90 sub cos c mul add y1 a 90 sub sin c mul add moveto 
 x2 a 90 sub cos c mul add y2 a 90 sub sin c mul add lineto 
 c {
 x2 a 90 sub cos c mul sub y2 a 90 sub sin c mul sub lineto 
 x1 a 90 sub cos c mul sub y1 a 90 sub sin c mul sub lineto  
-x2 y2 moveto x2 y2 c 0 360 arc } if
+closepath
+currentserif currentsans or not ( x2 c add y2 moveto x2 y2 c 0 360 arc ) if
+} if
+x20 y20 moveto
+end } def
+
+
+
+% thin line if serif
+/lines { 10 dict begin /y2 exch def /x2 exch def
+currentpoint /y1 exch def /x1 exch def
+%slanted
+/x20 x2 def
+/y20 y2 def
+ x2 y2 transpose /y2 exch def /x2 exch def
+ x1 y1 transpose /y1 exch def /x1 exch def
+/c thick 2 div def
+/a y2 y1 sub x2 x1 sub atan 360 add 360 mod def
+/c currentserif currentsans or { thin 2 div } { c } ifelse def
+c currentserif currentsans or not and { x1 c add y1 moveto x1 y1 c 0 360 arc } if
+x1 a 90 sub cos c mul add y1 a 90 sub sin c mul add moveto 
+x2 a 90 sub cos c mul add y2 a 90 sub sin c mul add lineto 
+c {
+x2 a 90 sub cos c mul sub y2 a 90 sub sin c mul sub lineto 
+x1 a 90 sub cos c mul sub y1 a 90 sub sin c mul sub lineto  
+closepath
+currentserif currentsans or not ( x2 c add y2 moveto x2 y2 c 0 360 arc ) if
+} if
 x20 y20 moveto
 end } def
 
 /dot { 10 dict begin /y exch def /x exch def
-/c characterweight def
+/c currentserif { thick thin add 2 div 1.2 mul } { thick thin add 2 div 1.4 mul } ifelse  def
 c 0 eq { /c 40 def } if
  x y transpose /y exch def /x exch def
  x c 0.625 mul add y move x y c 0.625 mul 0 360 arc closepath
 end } def
 
+
+
 /curve { 10 dict begin /y4 exch def /x4 exch def /y3 exch def /x3 exch def /y2 exch def /x2 exch def
 currentpoint /y1 exch def /x1 exch def
-/c characterweight 2 div def
+/c thick 2 div def
 
 %slanted
 /x40 x4 def
@@ -2335,17 +2049,76 @@ currentpoint /y1 exch def /x1 exch def
  x3 y3 transpose /y3 exch def /x3 exch def
  x4 y4 transpose /y4 exch def /x4 exch def
 
-/a1 y2 y1 sub x2 x1 sub atan def
-/a4 y4 y3 sub x4 x3 sub atan def
-c { x1 y1 moveto x1 y1 c 0 360 arc } if
-/x1r x1 a1 90 sub cos c mul add def
-/y1r y1 a1 90 sub sin c mul add def
-/x4r x4 a4 90 sub cos c mul add def
-/y4r y4 a4 90 sub sin c mul add def
-/x1l x1 a1 90 sub cos c mul sub def
-/y1l y1 a1 90 sub sin c mul sub def
-/x4l x4 a4 90 sub cos c mul sub def
-/y4l y4 a4 90 sub sin c mul sub def
+/a1 y2 y1 sub x2 x1 sub atan 360 add 360 mod def
+/a4 y4 y3 sub x4 x3 sub atan 360 add 360 mod def
+
+/c1 c def
+/c4 c def
+
+c currentserif currentsans or not and { x1 c1 add y1 moveto x1 y1 c1 0 360 arc } if
+
+/x1r x1 a1 90 sub cos c1 mul add def
+/y1r y1 a1 90 sub sin c1 mul add def
+/x4r x4 a4 90 sub cos c4 mul add def
+/y4r y4 a4 90 sub sin c4 mul add def
+/x1l x1 a1 90 sub cos c1 mul sub def
+/y1l y1 a1 90 sub sin c1 mul sub def
+/x4l x4 a4 90 sub cos c4 mul sub def
+/y4l y4 a4 90 sub sin c4 mul sub def
+
+/d x4 x1 sub dup mul y4 y1 sub dup mul add sqrt def
+/dr x4r x1r sub dup mul y4r y1r sub dup mul add sqrt def
+/dl x4l x1l sub dup mul y4l y1l sub dup mul add sqrt def
+
+/x2r x2 x1 sub d div dr mul x1r add def
+/x2l x2 x1 sub d div dl mul x1l add def
+/x3r x3 x4 sub d div dr mul x4r add def
+/x3l x3 x4 sub d div dl mul x4l add def
+/y2r y2 y1 sub d div dr mul y1r add def
+/y2l y2 y1 sub d div dl mul y1l add def
+/y3r y3 y4 sub d div dr mul y4r add def
+/y3l y3 y4 sub d div dl mul y4l add def
+
+x1r y1r moveto 
+x2r y2r x3r y3r x4r y4r curveto
+c {
+x4l y4l lineto 
+x3l y3l x2l y2l x1l y1l curveto
+currentserif currentsans or not { x4 c4 add y4 moveto x4 y4 c4 0 360 arc } if 
+} if
+x40 y40 moveto
+end } def
+
+/curves { 10 dict begin /y4 exch def /x4 exch def /y3 exch def /x3 exch def /y2 exch def /x2 exch def
+currentpoint /y1 exch def /x1 exch def /s4 exch def /s1 exch def
+/c thick 2 div def
+
+%slanted
+/x40 x4 def
+/y40 y4 def
+
+ x2 y2 transpose /y2 exch def /x2 exch def
+ x1 y1 transpose /y1 exch def /x1 exch def
+ x3 y3 transpose /y3 exch def /x3 exch def
+ x4 y4 transpose /y4 exch def /x4 exch def
+
+/a1 y2 y1 sub x2 x1 sub atan 360 add 360 mod def
+/a4 y4 y3 sub x4 x3 sub atan 360 add 360 mod def
+
+/c1 currentserif currentsans or s1 and { thin 2 div } { c } ifelse def
+/c4 currentserif currentsans or s4 and { thin 2 div } { c } ifelse def
+
+
+
+c currentserif currentsans or not and { x1 c1 add y1 moveto x1 y1 c1 0 360 arc } if
+/x1r x1 a1 90 sub cos c1 mul add def
+/y1r y1 a1 90 sub sin c1 mul add def
+/x4r x4 a4 90 sub cos c4 mul add def
+/y4r y4 a4 90 sub sin c4 mul add def
+/x1l x1 a1 90 sub cos c1 mul sub def
+/y1l y1 a1 90 sub sin c1 mul sub def
+/x4l x4 a4 90 sub cos c4 mul sub def
+/y4l y4 a4 90 sub sin c4 mul sub def
 /d x4 x1 sub dup mul y4 y1 sub dup mul add sqrt def
 /dr x4r x1r sub dup mul y4r y1r sub dup mul add sqrt def
 /dl x4l x1l sub dup mul y4l y1l sub dup mul add sqrt def
@@ -2364,9 +2137,11 @@ x2r y2r x3r y3r x4r y4r curveto
 c {
 x4l y4l lineto 
 x3l y3l x2l y2l x1l y1l curveto
-x4 y4 moveto x4 y4 c 0 360 arc } if
+currentserif currentsans or not { x4 c4 add y4 moveto x4 y4 c4 0 360 arc } if } if
 x40 y40 moveto
 end } def
+
+
 
 
 /turn { 10 dict begin /y4 exch def /x4 exch def /a2 exch def /a1 exch def
@@ -2380,17 +2155,274 @@ currentpoint /y1 exch def /x1 exch def
 x2 y2 x3 y3 x4 y4 curve
 end } def
 
-/endswash { 10 dict begin /y exch def /x exch def
-x y move 
-270 0 x 75 add y 50 sub turn
-0 90 x 150 add y turn 
+/turnsend {  currentserif currentsans or { 10 dict begin /y4 exch def /x4 exch def /a2 exch def /a1 exch def
+currentpoint /y1 exch def /x1 exch def
+/d y4 y1 sub dup mul x4 x1 sub dup mul add sqrt def
+
+/y2 y1 a1 sin 0.3905 mul d mul add def
+/x2 x1 a1 cos 0.3905 mul d mul add def
+/y3 y4 a2 sin 0.3905 mul d mul sub def
+/x3 x4 a2 cos 0.3905 mul d mul sub def
+0 1 x2 y2 x3 y3 x4 y4 curves
+end } { turn } ifelse } def
+
+/turnsstart { currentserif currentsans or { 10 dict begin /y4 exch def /x4 exch def /a2 exch def /a1 exch def
+currentpoint /y1 exch def /x1 exch def
+/d y4 y1 sub dup mul x4 x1 sub dup mul add sqrt def
+
+/y2 y1 a1 sin 0.3905 mul d mul add def
+/x2 x1 a1 cos 0.3905 mul d mul add def
+/y3 y4 a2 sin 0.3905 mul d mul sub def
+/x3 x4 a2 cos 0.3905 mul d mul sub def
+1 0 x2 y2 x3 y3 x4 y4 curves
+end } { turn } ifelse } def
+
+/turns { currentserif currentsans or { 10 dict begin /y4 exch def /x4 exch def /a2 exch def /a1 exch def
+currentpoint /y1 exch def /x1 exch def
+/d y4 y1 sub dup mul x4 x1 sub dup mul add sqrt def
+
+/y2 y1 a1 sin 0.3905 mul d mul add def
+/x2 x1 a1 cos 0.3905 mul d mul add def
+/y3 y4 a2 sin 0.3905 mul d mul sub def
+/x3 x4 a2 cos 0.3905 mul d mul sub def
+1 1 x2 y2 x3 y3 x4 y4 curves
+end } { turn } ifelse } def
+
+
+/endswash { currentslanted { 10 dict begin /y exch def /x exch def
+% x y transpose /y exch def /x exch def
+x y 75 add move 
+270 0 x 75 add thick 4 div add y turnsend
+0 45 x 150 add thick 2 div add y 75 add turns 
+end } { pop pop } ifelse } def
+
+/startswash { currentslanted { 10 dict begin /y exch def /x exch def
+% x y transpose /y exch def /x exch def
+x y 75 add move 
+90 180 x 75 sub y turnsend
+180 270 x 150 sub y 75 add turns 
+end } { pop pop } ifelse } def
+
+/hserifcoordinates { /cw exch def
+/y exch def /x exch def /a exch def
+/flip a 360 add 360 mod 180 lt { {} } { {neg} } ifelse def
+x y transpose /y exch def /x exch def
+/x0 x def 
+/y0 y thin 2 div flip add def
+/x8 x thin 2 mul flip add def
+/y8 y thin 2 div flip add def
+/x1 x thin 2 mul flip sub def
+/y1 y thin 2 div flip sub def 
+/x4 x cw 2 div a sin mul thin a 90 add sin mul add sub def
+/y4 y thin a sin mul cw 2 div a 90 add sin mul sub sub def
+/x5 x cw 2 div a sin mul thin a 90 sub sin mul add add def
+/y5 y thin a sin mul cw 2 div a 90 sub sin mul sub sub def
+/x45 x4 x5 add 2 div def
+/y45 y4 y5 add 2 div def
+/x08 x0 x8 add 2 div def
+/x01 x0 x1 add 2 div def
+
+/x2 x x1 x sub 0.6 mul add def
+/y2 y1 def 
+/x3 x4 a cos thin mul 2 div add def
+/y3 y4 a sin thin mul 2 div add def
+/x6 x5 a cos thin mul 2 div add def
+/y6 y5 a sin thin mul 2 div add def
+/x7 x x8 x sub 0.6 mul add def
+/y7 y1 def
+} def
+
+/hserif { currentserif { 20 dict begin 
+thick hserifcoordinates
+x8 y8 moveto
+x1 y8 lineto
+x1 y1 lineto
+% x2 y2 x3 y3 x4 y4 curveto
+% x5 y5 lineto
+% x6 y6 x7 y7 x8 y1 curveto
+x8 y1 lineto
+x8 y8 lineto 
+closepath
+end  } { pop pop pop } ifelse } def
+
+/hsserif { currentserif {20 dict begin 
+thin hserifcoordinates
+x8 y8 moveto
+x1 y8 lineto
+x1 y1 lineto
+% x2 y2 x3 y3 x4 y4 curveto
+% x5 y5 lineto
+% x6 y6 x7 y7 x8 y1 curveto
+x8 y1 lineto
+x8 y8 lineto 
+closepath
+end  } { pop pop pop } ifelse  } def
+
+
+/hlserif { currentserif { 20 dict begin 
+thick hserifcoordinates
+x0 y0 moveto
+x1 y8 lineto
+x1 y1 lineto
+% x2 y2 x3 y3 x4 y4 curveto
+% x5 y5 lineto
+x08 y1 lineto
+x08 y0 lineto
+closepath
+end  } { pop pop pop } ifelse  } def
+
+/hrserif { currentserif { 20 dict begin 
+thick hserifcoordinates
+x01 y0 moveto
+x01 y1 lineto
+% x4 y4 lineto
+% x5 y5 lineto
+% x6 y6 x7 y7 x8 y1 curveto
+x8 y1 lineto
+x8 y8 lineto 
+x0 y0 lineto
+closepath
+end  } { pop pop pop } ifelse  } def
+
+
+
+
+
+/vserif { currentserif { 10 dict begin /y exch def /x exch def /a exch def
+x y transpose /y exch def /x exch def
+x thin 2 div sub thick currentslanted mul sub y thick sub moveto
+thin 0 rlineto
+thick 2 mul currentslanted mul thick 2 mul rlineto
+thin neg 0 rlineto
+closepath
+end  } { pop pop pop } ifelse } def
+
+
+
+/vtserif { currentserif { 10 dict begin /y exch def /x exch def /a exch def
+x y transpose /y exch def /x exch def
+x thin 2 div sub thin currentslanted mul sub y thin 2 div sub moveto
+thin 0 rlineto
+thin 2 div thick add currentslanted mul thin 2 div thick add rlineto
+thin neg 0 rlineto
+closepath
+end  } { pop pop pop } ifelse  } def
+
+
+/vbserif { currentserif { 10 dict begin /y exch def /x exch def /a exch def
+x y transpose /y exch def /x exch def
+x thin 2 div sub thick currentslanted mul sub y thick sub moveto
+thin 0 rlineto
+thick thin 2 div add currentslanted mul thick thin 2 div add rlineto
+thin neg 0 rlineto
+closepath
+end  } { pop pop pop } ifelse  } def
+
+/cornercoordinates {
+/y2 exch def /x2 exch def /y1 exch def /x1 exch def /y0 exch def /x0 exch def
+/s2 exch def /s0 exch def
+x0 y0 transpose /y0 exch def /x0 exch def
+x1 y1 transpose /y1 exch def /x1 exch def
+x2 y2 transpose /y2 exch def /x2 exch def
+
+
+/a0 y1 y0 sub x1 x0 sub atan 360 add 360 mod def
+/a2 y1 y2 sub x1 x2 sub atan 360 add 360 mod def
+
+% test angle and reverse if necessary
+a0 a2 sub 360 add 360 mod 180 gt {
+	x0 y0 x2 y2 /y0 exch def /x0 exch def /y2 exch def /x2 exch def
+	a0 a2 /a0 exch def /a2 exch def
+	s0 s2 /s0 exch def /s2 exch def
+} if
+
+
+% find outer crossing
+/x0r x0 s0 2 div a0 90 sub cos mul add def
+/y0r y0 s0 2 div a0 90 sub sin mul add def
+/x2l x2 s2 2 div a2 90 add cos mul add def
+/y2l y2 s2 2 div a2 90 add sin mul add def
+
+/d0 y1 y0 sub x1 x0 sub div def
+/d2 y1 y2 sub x1 x2 sub div def
+% y0r + d0*(xouter-x0r) = y2l + d2*(xouter-x2l)
+% d0*xouter  = y2l + d2*(xouter-x2l) - y0r + d0*x0r
+% d0*xouter - d2*xouter = y2l - d2*x2l - y0r + d0*x0r
+% xouter = ( y2l - d2*x2l - y0r + d0*x0r ) / ( d0 - d2 )
+% youter = y0r + d0 * (xouter-x0r) 
+/xouter y2l d2 x2l mul sub y0r sub d0 x0r mul add d0 d2 sub div def
+/youter y2l d2 xouter x2l sub mul add def
+x1 x0 eq { /xouter x0r def /youter y2l d2 xouter x2l sub mul add def } if 
+x1 x2 eq { /xouter x2l def /youter y0r d0 xouter x0r sub mul add def } if
+% (d0) print d0 print (d2) print d2 print (xouter) print xouter print (youter) print youter print
+% find inner crossing
+/x2r x2 s2 2 div a2 90 sub cos mul add def
+/y2r y2 s2 2 div a2 90 sub sin mul add def
+/x0l x0 s0 2 div a0 90 add cos mul add def
+/y0l y0 s0 2 div a0 90 add sin mul add def
+
+/xinner y2r d2 x2r mul sub y0l sub d0 x0l mul add d0 d2 sub div def
+/yinner y2r d2 xinner x2r sub mul add def
+x1 x0 eq { /xinner x0l def /yinner y2r d2 xinner x2r sub mul add def } if 
+x1 x2 eq { /xinner x2r def /yinner y0l d0 xinner x0l sub mul add def } if
+% (xinner) print xinner print (yinner) print yinner print
+} def
+ 
+/corner { 32 dict begin
+currentserif currentsans or { 
+cornercoordinates
+x0r y0r moveto
+xouter youter lineto
+x2l y2l lineto
+x2 s2 2 div a2 90 add cos mul sub
+y2 s2 2 div a2 90 add sin mul sub lineto
+xinner yinner lineto
+x0 s0 2 div a0 90 sub cos mul sub 
+y0 s0 2 div a0 90 sub sin mul sub lineto
+closepath } { 
+/y2 exch def /x2 exch def /y1 exch def /x1 exch def /y0 exch def /x0 exch def pop pop
+x0 y0 move
+x1 y1 line
+x2 y2 line	
+}	ifelse
+end  
+} def
+
+/cornercapped { 32 dict begin
+currentserif currentsans or { 
+cornercoordinates
+% y0r + d0 * (xouterr - x0r) = youter
+% d0 * xouterr = youter - y0r + d0 * x0r
+% xouterr = (youter - y0r + d0 * x0r ) / d0
+
+/youter y1 thin 2 div y1 y0 gt { add } { sub } ifelse  def
+/xouterr youter y0r sub d0 x0r mul add d0 div def
+x1 x0 eq { /xouterr x0l def } if 
+x1 x2 eq { /xouterr x2r def } if
+/xouterl youter y0l sub d2 x2l mul add d2 div def
+x1 x0 eq { /xouterl x0r def } if 
+x1 x2 eq { /xouterl x2l def } if
+
+%(youter) print youter print (xouterr) print xouterr print (xouterl) print xouterl print
+
+x0r y0r moveto
+xouterr youter lineto
+xouterl youter lineto
+x2l y2l lineto
+x2 s2 2 div a2 90 add cos mul sub
+y2 s2 2 div a2 90 add sin mul sub lineto
+xinner yinner lineto
+x0 s0 2 div a0 90 sub cos mul sub 
+y0 s0 2 div a0 90 sub sin mul sub lineto
+closepath	 } { 
+/y2 exch def /x2 exch def /y1 exch def /x1 exch def /y0 exch def /x0 exch def pop pop
+x0 y0 move
+x1 y1 line
+x2 y2 line	
+}	ifelse 
+
 end } def
 
-/startswash { 10 dict begin /y exch def /x exch def
-x y move 
-90 180 x 75 sub y 50 add turn
-180 270 x 150 sub y turn 
-end } def
 
 
 /BuildChar { 5 dict begin
@@ -2399,14 +2431,29 @@ end } def
    
  fontdict begin 
    % gsave
+    
      % charname print fontdict /FontName get print
 	 /characterwidth Metrics charname get def  
-	 /characterweight ${kugiweight} def
-	 /currentslanted ${kugislant} def
-     Metrics charname get 0 BBox charname get aload pop 
+%	 /thick ${kugiweight} def
+%	 /thin 50 def
+%	 /mediumthick thick thin add 2 div def
+%	 /currentslanted ${kugislant} def
+%	 /currentserif ${kugiserif} def
+ %    Metrics charname get 0 BBox charname get aload pop 
+     Metrics charname get 0 [-100 -200 1100 800] aload pop 
      setcachedevice 
-     characterweight 0 eq { /fill { stroke } def } if
+  %   thick 0 eq { /{ stroke } def } if
+     
+     
+     gsave
+     % 0 0 1 setrgbcolor newpath 0 0 25 0 360 arc fill
+     grestore
+     
      CharacterDefs charname get exec 
+     
+     thick 0 eq { stroke } { fill } ifelse 
+     
+
      % fontdict /FontName get print
    % grestore
  end

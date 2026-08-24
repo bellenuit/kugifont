@@ -102,11 +102,15 @@ Sometimes it is difficult to get it right. Make variants but don't stay too much
 
 ## Style variation
 
-For **italic**, I first created only oblique fonts. For this, I defined **currentslanted** which the tranpose operator uses to create the deformation. But then, I decided to create a real cursive, so I addded conditional code in some characters (like a, v, w, y) and added swashes to some other lowercase characters (a, b, i, l...). However I did not touch the uppercase characters. The swashes made some character largers. This is something I may change in a next step.
+For **italic**, I first created only oblique fonts. For this, I defined **currentslanted** which the tranpose operator uses to create the deformation. But then, I decided to create a real cursive, so I addded conditional code in some characters (like a, v, w, y) and added swashes to some other lowercase characters (a, b, i, l...). However I did not touch the uppercase characters. The swashes made some character largers. This is something I may change in a next step. Kugi Sounded, Mono and Sans are oblique, Kugi Serif is italic. 
 
 For **smallcaps** I created a separate font that has smaller capital variants for lowercase characters. It has also lowercase numbers.
 
 For **monospace** I created variants for characters that are not 500 width. It helps if there are not too many to do this.
+
+For **serif** variant, the pen width variates (**thick** depending on font weight and **thin** constant) and there are serifs in egyptienne style. Using variable width, joining is not as easy as with the rounded font in corners. Therefore i needed also a **corner** operator that can join thin and thick lines.
+
+For **sans** the pen width variates, but there are no serifs.
 
 I created also a **stroke** variant for a plotter font. For this, we modify the line, curve and dot operators, so that the stroke a line instead creating an outline.
 
@@ -138,7 +142,11 @@ https://bellenuit.github.io/kugifont.html
 
 ## State of the project
 
-Version 0.1
+Version 0.2 2026-08-25
+
+Refactored code, reworked glyphs, added Serif style and very uncomplete **currentsans** style. **currentslanted** is now independent of **currentitalic**
+
+Version 0.1 2026-07-27
 
 This is the first version of the TrueType fonts. The glyphs are not perfect yet, but the font technically works. I will now use it with programs, identify the flaws and correct then the glyphs.
 
