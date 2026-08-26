@@ -134,13 +134,33 @@ Then I used https://cloudconvert.com/svg-to-ttf to convert the SVG to TrueType. 
 
 However, we still need to postprocess the TrueType font. As I explained earlier, the outlines are overlapping particularly with the circles at the end of each segment. This works as long as the font is only used to fill. But if you try to outline it, making a border for subitles for example, you would see the overlapping path.
 
-So we make a roundtrip with **FontForge**. We open the Truetype font, select all glyphs, then we call the menu **Element/Overlap/Remove Overlap**, save the font and then generate the TrueType font, ignoring the warnings.
+So we make a roundtrip with **FontForge**. We open the Truetype font
+
+- open the TTF font and safe it as .sfd font
+- select all glyphs, then we call the menu **Element/Overlap/Remove Overlap** (or just type command-A, command-shift-O)
+- File preferences, PS hint tab: enable HintBoundingBoxes, HintDiagonalEnds, HintDiagonalInter, DetextDiagonalStems
+- select all glyps, **Hint/Autohint** (command-A, command-shift-H)
+- **Element/FontInfo/PS Private** (command-shift-F) add **BlueValues**, **OtherBlues**, **StemSnapH**, **StdHW**, **StemSnapV** and **StdVW** with default values
+- repeat AutoHint
+- **Element/AutoInstruct**
+- **Element/FontInfo/PS Names**  add entry for Copyright and check the names and weight,
+
+- save the font and then generate the TrueType font (cmmand-shiftG), ignoring the warnings.
+
+## Reset Font Cache (Mac)
+
+sudo atsutil databases -remove
+or restart in Safe Mode
 
 ## Sample page
 
 https://bellenuit.github.io/kugifont.html
 
 ## State of the project
+
+Version 0.3 2026-08-26
+
+Added Hinting
 
 Version 0.2 2026-08-25
 
