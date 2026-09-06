@@ -158,6 +158,13 @@ https://bellenuit.github.io/kugifont.html
 
 ## State of the project
 
+Version 1.1 2026-09-06
+
+Cleaned Regular family
+Cleaned Mono
+New Italic
+New Subtitle and Subtitle Oblique 
+
 Version 0.3 2026-08-26
 
 Added Hinting
