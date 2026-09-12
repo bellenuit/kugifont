@@ -351,12 +351,12 @@ pop
 /o 500 def
 /p 500 currentserif { 50 add } if def
 /q 500 currentserif { 50 add } if def
-/r smallcapsfont { 500 } { 400  currentserif { 50 add } if } ifelse def 
+/r monofont { 500 } { smallcapsfont { 500 } { 400  currentserif { 50 add } if } ifelse } ifelse  def 
 /s 500 def
 /t 500 def 
 /u currentitalic { 600 } { 500 currentserif { 50 add } if  } ifelse def
 /v 500 currentserif { 50 add } if def
-/w 700 currentserif { 50 add } if def 
+/w monofont { 500 }  { 700 currentserif { 50 add } if } ifelse def 
 /x 500 currentserif { 50 add } if def
 /y 500 currentserif { 50 add } if def
 /z 500 currentserif { 50 add } if def
@@ -521,8 +521,8 @@ end
 0 0 dot
 }  def
 /quotedbl { 0 700 move 270 270 0 550 turnsend 200 700 move 270 270 200 550 turnsend 
-0 700 transpose thick 2 div 0 360 arc
-200 700 transpose thick 2 div 0 360 arc
+0 700 transpose thick 2 div thin max 0 360 arc
+200 700 transpose thick 2 div thin max 0 360 arc
 }  def
 /numbersign { 10 dict begin /thin mediumthick def
 25 450 move 425 450 lines 0 200 move 400 200 lines
@@ -551,7 +551,7 @@ end }  def
 270 315 250 250 turn 500 0 line
 end}  def
 /quotesingle { 0 700 move 270 270 0 550 turnsend 
-0 700 transpose thick 2 div 0 360 arc
+0 700 transpose thick 2 div thin max 0 360 arc
 fill}  def
 /parenleft  { 200 700 move 210 270 0 300 turnsstart 270 330 200 -100 turnsend } def
 /parenright { 0 700 move 330 270 200 300 turnsstart 270 210 0 -100 turnsend } def
@@ -566,7 +566,7 @@ end }  def
 end }  def
 /comma { 
 0 0 move 0 -75 lines 270 180 -100 -200 turns
-0 0 transpose thick 2 div 0 360 arc
+0 0 transpose thick 2 div thin max 0 360 arc
 }  def
 /hyphen { 10 dict begin /thin mediumthick def 
 0 350 move 200 350 lines 
@@ -747,7 +747,7 @@ currentsans { /bottombearing thick 4 div neg def /topbearing thick 4 div neg def
 
 /colon { 0 0 dot 0 400 dot }  def
 /semicolon { 0 0 move 0 -75 lines 270 180 -100 -200 turns
-0 0 transpose thick 2 div 0 360 arc
+0 0 transpose thick 2 div thin max 0 360 arc
 0 400 dot
 fill} def
 /less { 10 dict begin /thin mediumthick def 
@@ -766,7 +766,7 @@ end}  def
 200 0 dot
 fill}  def
 
-/at { monofont { 500 700 div 1 compscale } if 10 dict begin /thick thick 110 min def
+/at { 10 dict begin monofont { 500 700 div 1 compscale } if  /thick thick 110 min def
 500 350 move 
 90 180 325 550 turnsend
 180 270 150 350 turnsstart
@@ -1991,16 +1991,16 @@ end} def
   0 500 move 400 500 lines
   0 200 move 400 200 lines
     end } def
- /periodcentered { 100 350 transpose thick 2 div 0 360 arc } def
+ /periodcentered { 100 350 transpose thick 2 div thin max 0 360 arc } def
  /quotesinglbase { 
  100 100 move 100 0 line 270 240 0 -150 turnsend
- 100 100 transpose thick 2 div 0 360 arc
+ 100 100 transpose thick 2 div thin max 0 360 arc
  } def
  /quotedblbase { 
  100 100 move 100 0 line 270 240 0 -150 turn 
  300 100 move 300 0 line 270 240 200 -150 turn
- 100 100 transpose thick 2 div 0 360 arc
- 300 100 transpose thick 2 div 0 360 arc
+ 100 100 transpose thick 2 div thin max 0 360 arc
+ 300 100 transpose thick 2 div thin max 0 360 arc
   } def
  
  /perthousand { 600 700 move 0 0 line monofont { 500 950 div 1 compscale } if

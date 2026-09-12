@@ -1,0 +1,14 @@
+[
+    {
+        "type": "wiki",
+        "id": "5559",
+        "hash": "1940139665",
+        "source": "==Adding new fonts==\n\nFont files are provided in an array because JavaScript cannot include files other than Javascript files.\n\nIf you want to add a font, you need to convert the file to a data URL and add it to the fonts in fonts.js or add it as Javascript cell.\n\nThe following code allows you to convert a file to a data URL.\n\nClick on Run. An Open link lets you select a file which you can convert into a Data URL. "
+    },
+    {
+        "type": "js",
+        "id": "418158",
+        "hash": "725779285",
+        "source": "createDataURL = function() {\n    const input = document.createElement('input');\n    input.type = 'file';\n\tinput.onchange = _ => {\n        const files = Array.from(input.files);\n        const reader = new FileReader();\n        reader.onload = function(){ \n\t\t    var binary = '';\n\t\t\tvar bytes = new Uint8Array( reader.result );\n\t\t\tvar len = bytes.byteLength;\n\t\t\tfor (var i = 0; i < len; i++) {\n\t\t\t\tbinary += String.fromCharCode( bytes[ i ] );\n\t\t\t}\n\t\t    filetype = \"application/octet-stream\"\n            result = \"data:\"+filetype+\";base64,\"+btoa(binary);\n\t\t\toutput = document.getElementById('dataurl');\n\t\t\toutput.innerHTML = result;\n\t\t\toutput.outerHTML = output.outerHTML+\" \";\n\t\t\toutput.addEventListener(\"click\", function() {\n        this.style.height = \"auto\";\n        this.style.height = Math.max(this.scrollHeight, 16) + \"px\";\n    });\n        };\n        reader.readAsArrayBuffer(input.files[0]);\n    }\n    input.click();\n// sinput.remove();    \n  };\n\necho('<button onclick=\"createDataURL()\">Open</button><div class=\"cell edit><textarea class=\"cellsource\" id=\"dataurl\"></textarea><div>')"
+    }
+]
